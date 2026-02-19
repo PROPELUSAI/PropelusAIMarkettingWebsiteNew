@@ -55,7 +55,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${dmSans.variable} ${dmMono.variable}`}>
       <head>
-        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="icon" type="image/png" href="/propelus-faviocn-removebg-preview.png" />
+        <link rel="icon" type="image/png" sizes="512x512" href="/propelus-faviocn-removebg-preview-512.png" />
+        <link rel="apple-touch-icon" href="/propelus-faviocn-removebg-preview-512.png" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{

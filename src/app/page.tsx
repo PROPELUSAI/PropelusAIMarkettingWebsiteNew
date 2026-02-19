@@ -125,6 +125,26 @@ function Marquee() {
     </section>
   );
 }
+function Marquee2() {
+  const items = [
+    'LinkedIn Advertising', 'Content Engine', 'CRM Development', 'Meta Ads',
+    'Website Building', 'Mobile Apps', 'Lead Generation', 'Marketing Automation',
+    'Cold Calling', 'Cybersecurity', 'Funnel Analytics', 'Brand Identity',
+  ];
+
+  return (
+    <section className="py-8 bg-[#f5f5f7] border-y border-surface-200 overflow-hidden">
+      <div className="marquee-track">
+        {[...items, ...items].map((item, i) => (
+          <span key={i} className="flex items-center gap-6 px-6 text-sm text-brand-500 font-medium whitespace-nowrap">
+            {item}
+            <span className="w-1.5 h-1.5 rounded-full bg-brand-400/40" />
+          </span>
+        ))}
+      </div>
+    </section>
+  );
+}
 
 function Pathways() {
   const productFeatures = ['LinkedIn Ads', 'Content Engine', 'CRM Subscription', 'Lead Scoring', 'Meta Ads', 'Funnel Analytics'];
@@ -329,6 +349,7 @@ export default function HomePage() {
       <Hero />
       <StatsBar />
       <Marquee />
+      {/* <Marquee2 /> */}
       <Pathways />
       <Features />
       <TestimonialHighlight />
