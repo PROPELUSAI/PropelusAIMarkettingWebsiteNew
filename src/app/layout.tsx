@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { DM_Sans, DM_Mono } from 'next/font/google';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import LeadPopup from '@/components/LeadPopup';
 import './globals.css';
 
 const dmSans = DM_Sans({
@@ -93,6 +94,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Navbar />
         <main className="min-h-screen">{children}</main>
         <Footer />
+        <LeadPopup />
       </body>
     </html>
   );
