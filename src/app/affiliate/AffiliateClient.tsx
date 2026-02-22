@@ -5,6 +5,7 @@ import Image from 'next/image';
 import PageHero from '@/components/PageHero';
 import AnimatedSection, { StaggerContainer, StaggerItem } from '@/components/AnimatedSection';
 import { HiOutlineBanknotes, HiOutlineRocketLaunch, HiOutlineUserGroup } from 'react-icons/hi2';
+import { useSubmitAffiliateMutation } from '@/store';
 
 const perks = [
   { icon: HiOutlineBanknotes, title: 'Competitive Commissions', desc: 'Earn attractive commissions on every successful referral and recurring revenue from long-term clients.' },
@@ -13,13 +14,23 @@ const perks = [
 ];
 
 export default function AffiliateClient() {
-  const [formData, setFormData] = useState({ name: '', email: '', phone: '', interest: '' });
-  const [submitted, setSubmitted] = useState(false);
+  const [formData, setFormData] = useState({ name: '', email: '', phone: '', description: '' });
+  const [submitAffiliate, { isLoading, isSuccess, isError, error }] = useSubmitAffiliateMutation();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
-    setTimeout(() => { setSubmitted(false); setFormData({ name: '', email: '', phone: '', interest: '' }); }, 3000);
+    try {
+      await submitAffiliate({
+        full_name: formData.name,
+        email: formData.email,
+        mobile_number: formData.phone,
+        description: formData.description,
+      }).unwrap();
+      
+      setFormData({ name: '', email: '', phone: '', description: '' });
+    } catch (err) {
+      console.error('Affiliate submission failed:', err);
+    }
   };
 
   return (
@@ -47,7 +58,7 @@ export default function AffiliateClient() {
             ))}
           </StaggerContainer>
 
-          {/* Registration — Image Left, Form Right */}
+          {/* Registration */}
           <AnimatedSection className="text-center max-w-2xl mx-auto mb-10">
             <span className="tag mb-4 inline-flex">Join Our Program</span>
             <h2 className="mb-3">Affiliate Registration</h2>
@@ -55,47 +66,64 @@ export default function AffiliateClient() {
           </AnimatedSection>
 
           <div className="grid lg:grid-cols-2 gap-8 max-w-5xl mx-auto items-center">
-            {/* Image — Left */}
             <AnimatedSection delay={0.1}>
               <div className="relative rounded-2xl overflow-hidden aspect-[4/3] bg-surface-100">
-                <Image
-                  src="/affiliate.png"
-                  alt="Affiliate partnership"
-                  fill
-                  className="object-cover"
-                />
+                <Image src="/affiliate.png" alt="Affiliate partnership" fill className="object-cover" />
               </div>
             </AnimatedSection>
 
-            {/* Form — Right */}
             <AnimatedSection delay={0.2}>
-              <form onSubmit={handleSubmit} className="space-y-3">
-                <input type="text" placeholder="Full Name *" required value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} className="form-input" />
-                <input type="email" placeholder="Email Address *" required value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} className="form-input" />
-                <input type="tel" placeholder="Mobile Number *" required value={formData.phone} onChange={(e) => setFormData({ ...formData, phone: e.target.value })} className="form-input" />
-                <textarea
-                  placeholder="Tell Us About Your Affiliate Interest *"
-                  required
-                  rows={4}
-                  minLength={50}
-                  maxLength={500}
-                  value={formData.interest}
-                  onChange={(e) => setFormData({ ...formData, interest: e.target.value })}
-                  className="form-input resize-none"
-                />
-                <div className="flex items-center justify-between">
-                  <p className="text-xs text-surface-400">{formData.interest.length}/500</p>
-                  <button type="submit" className="btn-primary" disabled={submitted}>
-                    {submitted ? 'Application Submitted!' : 'Submit Registration'}
-                  </button>
+              {isSuccess ? (
+                <div className="card bg-brand-50 border-brand-100 text-center py-12">
+                  <div className="text-4xl mb-4">🎉</div>
+                  <h3 className="text-lg font-medium text-brand-700 mb-2">Application Submitted!</h3>
+                  <p className="text-brand-600 text-sm">We&apos;ll review your application and get back to you shortly.</p>
                 </div>
-              </form>
+              ) : (
+                <form onSubmit={handleSubmit} className="space-y-3">
+                  {isError && (
+                    <div className="p-3 bg-red-50 border border-red-200 rounded-lg text-red-600 text-sm">
+                      {(error as { data?: { message?: string } })?.data?.message || 'Failed to submit. Please try again.'}
+                    </div>
+                  )}
+                  <input type="text" placeholder="Full Name *" required value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} className="form-input" disabled={isLoading} />
+                  <input type="email" placeholder="Email Address *" required value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} className="form-input" disabled={isLoading} />
+                  <input type="tel" placeholder="Mobile Number *" required value={formData.phone} onChange={(e) => setFormData({ ...formData, phone: e.target.value })} className="form-input" disabled={isLoading} />
+                  <textarea
+                    placeholder="Tell Us About Your Affiliate Interest * (min 50 characters)"
+                    required
+                    rows={4}
+                    minLength={50}
+                    maxLength={500}
+                    value={formData.description}
+                    onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+                    className="form-input resize-none"
+                    disabled={isLoading}
+                  />
+                  <div className="flex items-center justify-between">
+                    <p className="text-xs text-surface-400">{formData.description.length}/500</p>
+                    <button type="submit" className="btn-primary" disabled={isLoading}>
+                      {isLoading ? (
+                        <>
+                          <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                          </svg>
+                          Submitting...
+                        </>
+                      ) : (
+                        'Submit Registration'
+                      )}
+                    </button>
+                  </div>
+                </form>
+              )}
             </AnimatedSection>
           </div>
         </div>
       </section>
 
-      {/* Why Partner Section */}
+      {/* Why Partner */}
       <section className="section-padding section-dark">
         <AnimatedSection className="container-main text-center max-w-2xl mx-auto">
           <span className="tag tag-dark mb-5 inline-flex">Why Partner With Us?</span>

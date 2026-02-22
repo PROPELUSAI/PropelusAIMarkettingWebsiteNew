@@ -4,6 +4,7 @@ import { useState } from 'react';
 import PageHero from '@/components/PageHero';
 import AnimatedSection, { StaggerContainer, StaggerItem } from '@/components/AnimatedSection';
 import { siteConfig } from '@/lib/data';
+import { useSubmitContactMutation } from '@/store';
 
 const contactInfo = [
   { icon: '📩', label: 'Email', value: siteConfig.email },
@@ -18,19 +19,44 @@ const reasons = [
   { title: 'Global Support', desc: 'Handle clients worldwide' },
 ];
 
+// Generate a default scheduled_time 48 hours from now (meets 24h minimum)
+function getDefaultScheduledTime(): string {
+  const date = new Date(Date.now() + 48 * 60 * 60 * 1000);
+  // Format as YYYY-MM-DDTHH:mm for datetime-local input
+  return date.toISOString().slice(0, 16);
+}
+
+// Get minimum allowed time (24h from now) for the input
+function getMinScheduledTime(): string {
+  const date = new Date(Date.now() + 25 * 60 * 60 * 1000); // 25h to be safe
+  return date.toISOString().slice(0, 16);
+}
+
 export default function ContactClient() {
   const [formData, setFormData] = useState({
     name: '', company: '', email: '', phone: '', country: '', promo: '', description: '',
+    scheduledTime: getDefaultScheduledTime(),
   });
-  const [submitted, setSubmitted] = useState(false);
+  const [submitContact, { isLoading, isSuccess, isError, error }] = useSubmitContactMutation();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
-    setTimeout(() => {
-      setSubmitted(false);
-      setFormData({ name: '', company: '', email: '', phone: '', country: '', promo: '', description: '' });
-    }, 4000);
+    try {
+      await submitContact({
+        full_name: formData.name,
+        email: formData.email,
+        country: formData.country,
+        scheduled_time: new Date(formData.scheduledTime).toISOString(),
+        mobile_number: formData.phone || null,
+        company_name: formData.company || null,
+        description: formData.description || null,
+        affiliate_code: formData.promo || null,
+      }).unwrap();
+      
+      setFormData({ name: '', company: '', email: '', phone: '', country: '', promo: '', description: '', scheduledTime: getDefaultScheduledTime() });
+    } catch (err) {
+      console.error('Contact submission failed:', err);
+    }
   };
 
   const update = (field: string, value: string) => setFormData((p) => ({ ...p, [field]: value }));
@@ -50,7 +76,7 @@ export default function ContactClient() {
             <div className="lg:col-span-3">
               <AnimatedSection>
                 <h2 className="text-xl font-medium mb-6">Tell Us About Your Project</h2>
-                {submitted ? (
+                {isSuccess ? (
                   <div className="card bg-brand-50 border-brand-100 text-center py-12">
                     <div className="text-4xl mb-4">✅</div>
                     <h3 className="text-lg font-medium text-brand-700 mb-2">Thank you!</h3>
@@ -58,17 +84,35 @@ export default function ContactClient() {
                   </div>
                 ) : (
                   <form onSubmit={handleSubmit} className="space-y-4">
+                    {isError && (
+                      <div className="p-3 bg-red-50 border border-red-200 rounded-lg text-red-600 text-sm">
+                        {(error as { data?: { message?: string } })?.data?.message || 'Failed to submit. Please try again.'}
+                      </div>
+                    )}
                     <div className="grid sm:grid-cols-2 gap-4">
-                      <input type="text" placeholder="Full Name *" required value={formData.name} onChange={(e) => update('name', e.target.value)} className="form-input" />
-                      <input type="text" placeholder="Company Name (Optional)" value={formData.company} onChange={(e) => update('company', e.target.value)} className="form-input" />
+                      <input type="text" placeholder="Full Name *" required value={formData.name} onChange={(e) => update('name', e.target.value)} className="form-input" disabled={isLoading} />
+                      <input type="text" placeholder="Company Name (Optional)" value={formData.company} onChange={(e) => update('company', e.target.value)} className="form-input" disabled={isLoading} />
                     </div>
                     <div className="grid sm:grid-cols-2 gap-4">
-                      <input type="email" placeholder="Email *" required value={formData.email} onChange={(e) => update('email', e.target.value)} className="form-input" />
-                      <input type="tel" placeholder="Mobile Number (Optional)" value={formData.phone} onChange={(e) => update('phone', e.target.value)} className="form-input" />
+                      <input type="email" placeholder="Email *" required value={formData.email} onChange={(e) => update('email', e.target.value)} className="form-input" disabled={isLoading} />
+                      <input type="tel" placeholder="Mobile Number (Optional)" value={formData.phone} onChange={(e) => update('phone', e.target.value)} className="form-input" disabled={isLoading} />
                     </div>
                     <div className="grid sm:grid-cols-2 gap-4">
-                      <input type="text" placeholder="Country *" required value={formData.country} onChange={(e) => update('country', e.target.value)} className="form-input" />
-                      <input type="text" placeholder="Promo Code (Optional)" value={formData.promo} onChange={(e) => update('promo', e.target.value)} className="form-input" />
+                      <input type="text" placeholder="Country *" required value={formData.country} onChange={(e) => update('country', e.target.value)} className="form-input" disabled={isLoading} />
+                      <input type="text" placeholder="Promo Code (Optional)" value={formData.promo} onChange={(e) => update('promo', e.target.value)} className="form-input" disabled={isLoading} />
+                    </div>
+                    <div>
+                      <label className="block text-sm text-surface-500 mb-1.5">Preferred Consultation Time *</label>
+                      <input
+                        type="datetime-local"
+                        required
+                        value={formData.scheduledTime}
+                        min={getMinScheduledTime()}
+                        onChange={(e) => update('scheduledTime', e.target.value)}
+                        className="form-input"
+                        disabled={isLoading}
+                      />
+                      <p className="text-xs text-surface-400 mt-1">Must be at least 24 hours from now</p>
                     </div>
                     <textarea
                       placeholder="Tell us about your project (Optional)"
@@ -76,11 +120,24 @@ export default function ContactClient() {
                       value={formData.description}
                       onChange={(e) => update('description', e.target.value)}
                       className="form-input resize-none"
+                      disabled={isLoading}
                     />
                     <p className="text-xs text-surface-400">By submitting, you agree to our privacy policy.</p>
-                    <button type="submit" className="btn-primary w-full sm:w-auto justify-center">
-                      Get Started
-                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M3 8h10M9 4l4 4-4 4" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                    <button type="submit" className="btn-primary w-full sm:w-auto justify-center" disabled={isLoading}>
+                      {isLoading ? (
+                        <>
+                          <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                          </svg>
+                          Submitting...
+                        </>
+                      ) : (
+                        <>
+                          Get Started
+                          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M3 8h10M9 4l4 4-4 4" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                        </>
+                      )}
                     </button>
                   </form>
                 )}

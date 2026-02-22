@@ -2,6 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { siteConfig, footerLinks } from '@/lib/data';
 import { SiLinkedin, SiInstagram, SiFacebook, SiThreads, SiPinterest, SiYoutube, SiBluesky } from 'react-icons/si';
+import NewsletterSection from './NewsletterSection';
 
 const socials = [
   { label: 'LinkedIn', href: 'https://www.linkedin.com/company/propelusai/', icon: SiLinkedin },
@@ -17,6 +18,9 @@ export default function Footer() {
   return (
     <footer className="bg-surface-950 text-white">
       <div className="container-main py-10 lg:py-12">
+        {/* Newsletter Section */}
+        <NewsletterSection />
+
         {/* Top Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-6">
           {/* Brand Col */}

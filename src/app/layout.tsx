@@ -3,6 +3,8 @@ import { DM_Sans, DM_Mono } from 'next/font/google';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import LeadPopup from '@/components/LeadPopup';
+import AIChatbot from '@/components/AIChatbot';
+import { StoreProvider } from '@/store/provider';
 import './globals.css';
 
 const dmSans = DM_Sans({
@@ -91,10 +93,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body className="font-sans antialiased">
-        <Navbar />
-        <main className="min-h-screen">{children}</main>
-        <Footer />
-        <LeadPopup />
+        <StoreProvider>
+          <Navbar />
+          <main className="min-h-screen">{children}</main>
+          <Footer />
+          <LeadPopup />
+          <AIChatbot />
+        </StoreProvider>
       </body>
     </html>
   );

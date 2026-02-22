@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useSubmitLeadMutation } from '@/store';
 
 const POPUP_DELAY_MS = 18000; // 18 seconds
 const SESSION_KEY = 'propelusai_popup_dismissed';
@@ -28,7 +29,8 @@ export default function LeadPopup() {
     phone: '',
     interest: '',
   });
-  const [submitted, setSubmitted] = useState(false);
+  
+  const [submitLead, { isLoading, isSuccess }] = useSubmitLeadMutation();
 
   useEffect(() => {
     // Check sessionStorage — persists across refreshes, clears on browser close
@@ -49,14 +51,30 @@ export default function LeadPopup() {
     sessionStorage.setItem(SESSION_KEY, 'true');
   }, []);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
-    sessionStorage.setItem(SESSION_KEY, 'true');
-    setTimeout(() => {
-      setIsVisible(false);
-      document.body.style.overflow = '';
-    }, 3000);
+    try {
+      // Generate scheduled_time 48h from now (backend requires it)
+      const scheduledTime = new Date(Date.now() + 48 * 60 * 60 * 1000).toISOString();
+      
+      await submitLead({
+        full_name: formData.name,
+        email: formData.email,
+        country: 'Not specified',
+        scheduled_time: scheduledTime,
+        company_name: formData.company || null,
+        mobile_number: formData.phone || null,
+        description: formData.interest ? `Interest: ${formData.interest}` : null,
+      }).unwrap();
+      
+      sessionStorage.setItem(SESSION_KEY, 'true');
+      setTimeout(() => {
+        setIsVisible(false);
+        document.body.style.overflow = '';
+      }, 3000);
+    } catch (err) {
+      console.error('Lead submission failed:', err);
+    }
   };
 
   const update = (field: string, value: string) =>
@@ -237,7 +255,7 @@ export default function LeadPopup() {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5, delay: 0.3 }}
               >
-                {submitted ? (
+                {isSuccess ? (
                   <motion.div
                     className="flex flex-col items-center justify-center h-full text-center py-8"
                     initial={{ opacity: 0, scale: 0.9 }}
@@ -284,6 +302,7 @@ export default function LeadPopup() {
                         value={formData.name}
                         onChange={(e) => update('name', e.target.value)}
                         className="form-input"
+                        disabled={isLoading}
                       />
                       <input
                         type="email"
@@ -292,6 +311,7 @@ export default function LeadPopup() {
                         value={formData.email}
                         onChange={(e) => update('email', e.target.value)}
                         className="form-input"
+                        disabled={isLoading}
                       />
                       <input
                         type="text"
@@ -299,6 +319,7 @@ export default function LeadPopup() {
                         value={formData.company}
                         onChange={(e) => update('company', e.target.value)}
                         className="form-input"
+                        disabled={isLoading}
                       />
                       <input
                         type="tel"
@@ -306,11 +327,13 @@ export default function LeadPopup() {
                         value={formData.phone}
                         onChange={(e) => update('phone', e.target.value)}
                         className="form-input"
+                        disabled={isLoading}
                       />
                       <select
                         value={formData.interest}
                         onChange={(e) => update('interest', e.target.value)}
                         className="form-input text-surface-500"
+                        disabled={isLoading}
                       >
                         <option value="">What are you interested in?</option>
                         <option value="ai-website">AI-Powered Website</option>
@@ -326,22 +349,35 @@ export default function LeadPopup() {
                       <button
                         type="submit"
                         className="btn-primary w-full justify-center mt-2"
+                        disabled={isLoading}
                       >
-                        Get Your Custom Proposal
-                        <svg
-                          width="16"
-                          height="16"
-                          viewBox="0 0 16 16"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="1.5"
-                        >
-                          <path
-                            d="M3 8h10M9 4l4 4-4 4"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          />
-                        </svg>
+                        {isLoading ? (
+                          <>
+                            <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                            </svg>
+                            Submitting...
+                          </>
+                        ) : (
+                          <>
+                            Get Your Custom Proposal
+                            <svg
+                              width="16"
+                              height="16"
+                              viewBox="0 0 16 16"
+                              fill="none"
+                              stroke="currentColor"
+                              strokeWidth="1.5"
+                            >
+                              <path
+                                d="M3 8h10M9 4l4 4-4 4"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                              />
+                            </svg>
+                          </>
+                        )}
                       </button>
                     </form>
 
