@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import Image from 'next/image';
 import PageHero from '@/components/PageHero';
 import AnimatedSection from '@/components/AnimatedSection';
@@ -18,7 +18,8 @@ const avatarColors = [
   'bg-teal-500/15 text-teal-600',
 ];
 
-function getInitials(name: string) {
+function getInitials(name?: string) {
+  if (!name) return '?';
   return name.split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase();
 }
 
@@ -27,14 +28,24 @@ export default function TestimonialsClient() {
   const [showAll, setShowAll] = useState(false);
   
   const { data: apiTestimonials, isLoading: isFetching } = useGetTestimonialsQuery();
-  const [submitTestimonial, { isLoading: isSubmitting, isSuccess, isError, error }] = useSubmitTestimonialMutation();
+  const [submitTestimonial, { isLoading: isSubmitting, isSuccess, isError, error, reset: resetMutation }] = useSubmitTestimonialMutation();
+
+  // Auto-reset form after 5 seconds on success
+  useEffect(() => {
+    if (!isSuccess) return;
+    const timer = setTimeout(() => {
+      resetMutation();
+    }, 5000);
+    return () => clearTimeout(timer);
+  }, [isSuccess, resetMutation]);
 
   // Merge API testimonials with static ones
   const allTestimonials = useMemo(() => {
     const apiData = apiTestimonials?.data || [];
     const formattedApiData = apiData.map((t: Testimonial) => ({
-      quote: t.testimonial,
-      role: t.fullName,
+      quote: t.testimonial || '',
+      role: t.fullName || 'Anonymous',
+      company: '',
       industry: 'Business',
     }));
     return [...formattedApiData, ...staticTestimonials];
@@ -58,12 +69,18 @@ export default function TestimonialsClient() {
 
   const visibleTestimonials = showAll ? allTestimonials : allTestimonials.slice(0, 8);
 
+  const label = (text: string, required?: boolean) => (
+    <label className="block text-xs font-medium text-surface-600 mb-1">
+      {text}{required && <span className="text-red-500 ml-0.5">*</span>}
+    </label>
+  );
+
   return (
     <>
       <PageHero
         tag="Trust, Proven"
         title="What Global Teams Say About PropelusAI"
-        description="Real outcomes. Real experiences. AI-powered success stories from businesses across industries."
+        description="Real outcomes. Real experiences. AI-powered success stories. We support businesses globally with premium AI systems built for measurable growth."
       />
 
       {/* Testimonials Grid */}
@@ -88,10 +105,10 @@ export default function TestimonialsClient() {
                         </div>
                         <div className="min-w-0 flex-1">
                           <div className="flex items-center justify-between gap-2">
-                            <p className="text-sm font-medium text-surface-800 truncate">{t.role.split(',')[0]}</p>
-                            <span className="text-[0.6875rem] px-2 py-0.5 rounded-full bg-surface-50 text-surface-400 shrink-0">{t.industry}</span>
+                            <p className="text-sm font-medium text-surface-800 truncate">{(t.role ?? '').split(',')[0] || t.role}</p>
+                            <span className="text-[0.6875rem] px-2 py-0.5 rounded-full bg-surface-50 text-surface-400 shrink-0">{t.industry ?? ''}</span>
                           </div>
-                          <p className="text-xs text-surface-400">{t.role.split(',').slice(1).join(',').trim()}</p>
+                          <p className="text-xs text-surface-400">{(t.role ?? '').split(',').slice(1).join(',').trim()}</p>
                         </div>
                       </div>
                       <blockquote className="text-sm leading-relaxed text-surface-600">
@@ -133,7 +150,7 @@ export default function TestimonialsClient() {
             <AnimatedSection delay={0.2}>
               {isSuccess ? (
                 <div className="card bg-brand-50 border-brand-100 text-center py-12">
-                  <div className="text-4xl mb-4">✅</div>
+                  <div className="text-4xl mb-4"></div>
                   <h3 className="text-lg font-medium text-brand-700 mb-2">Thank you!</h3>
                   <p className="text-brand-600 text-sm">Your testimonial has been submitted for review.</p>
                 </div>
@@ -144,10 +161,22 @@ export default function TestimonialsClient() {
                       {(error as { data?: { message?: string } })?.data?.message || 'Failed to submit. Please try again.'}
                     </div>
                   )}
-                  <input type="text" placeholder="Full Name *" required value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} className="form-input" disabled={isSubmitting} />
-                  <input type="email" placeholder="Email Address *" required value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} className="form-input" disabled={isSubmitting} />
-                  <input type="tel" placeholder="Mobile Number (Optional)" value={formData.phone} onChange={(e) => setFormData({ ...formData, phone: e.target.value })} className="form-input" disabled={isSubmitting} />
-                  <textarea placeholder="Your Testimonial * (min 20 characters)" required rows={4} minLength={20} maxLength={350} value={formData.testimonial} onChange={(e) => setFormData({ ...formData, testimonial: e.target.value })} className="form-input resize-none" disabled={isSubmitting} />
+                  <div>
+                    {label('Full Name', true)}
+                    <input type="text" placeholder="John Smith" required value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} className="form-input" disabled={isSubmitting} />
+                  </div>
+                  <div>
+                    {label('Email Address', true)}
+                    <input type="email" placeholder="john@company.com" required value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} className="form-input" disabled={isSubmitting} />
+                  </div>
+                  <div>
+                    {label('Mobile Number')}
+                    <input type="tel" placeholder="+1 (555) 000-0000 (Optional)" value={formData.phone} onChange={(e) => setFormData({ ...formData, phone: e.target.value })} className="form-input" disabled={isSubmitting} />
+                  </div>
+                  <div>
+                    {label('Your Testimonial', true)}
+                    <textarea placeholder="Share your experience working with PropelusAI... (min 20 characters)" required rows={4} minLength={20} maxLength={350} value={formData.testimonial} onChange={(e) => setFormData({ ...formData, testimonial: e.target.value })} className="form-input resize-none" disabled={isSubmitting} />
+                  </div>
                   <div className="flex items-center justify-between">
                     <p className="text-xs text-surface-400">{formData.testimonial.length}/350</p>
                     <button type="submit" className="btn-primary" disabled={isSubmitting}>

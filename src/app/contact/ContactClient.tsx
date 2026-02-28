@@ -1,9 +1,13 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import PhoneInput from 'react-phone-number-input';
+import 'react-phone-number-input/style.css';
 import PageHero from '@/components/PageHero';
-import AnimatedSection, { StaggerContainer, StaggerItem } from '@/components/AnimatedSection';
+import AnimatedSection from '@/components/AnimatedSection';
+import EmbeddedCalendar from '@/components/EmbeddedCalendar';
 import { siteConfig } from '@/lib/data';
+import { countries } from '@/lib/countries';
 import { useSubmitContactMutation } from '@/store';
 
 const contactInfo = [
@@ -19,54 +23,83 @@ const reasons = [
   { title: 'Global Support', desc: 'Handle clients worldwide' },
 ];
 
-// Generate a default scheduled_time 48 hours from now (meets 24h minimum)
-function getDefaultScheduledTime(): string {
-  const date = new Date(Date.now() + 48 * 60 * 60 * 1000);
-  // Format as YYYY-MM-DDTHH:mm for datetime-local input
-  return date.toISOString().slice(0, 16);
-}
-
-// Get minimum allowed time (24h from now) for the input
-function getMinScheduledTime(): string {
-  const date = new Date(Date.now() + 25 * 60 * 60 * 1000); // 25h to be safe
-  return date.toISOString().slice(0, 16);
-}
-
 export default function ContactClient() {
   const [formData, setFormData] = useState({
-    name: '', company: '', email: '', phone: '', country: '', promo: '', description: '',
-    scheduledTime: getDefaultScheduledTime(),
+    name: '', company: '', email: '', country: '', interest: '', otherInterest: '', promo: '', description: '',
+    scheduledTime: '',
   });
-  const [submitContact, { isLoading, isSuccess, isError, error }] = useSubmitContactMutation();
+  const [phone, setPhone] = useState<string | undefined>('');
+  const [calendarKey, setCalendarKey] = useState(0);
+  const [calendarError, setCalendarError] = useState('');
+  const [submitContact, { isLoading, isSuccess, isError, error, reset: resetMutation }] = useSubmitContactMutation();
+
+  // Auto-reset form after 5 seconds on success
+  useEffect(() => {
+    if (!isSuccess) return;
+    const timer = setTimeout(() => {
+      resetMutation();
+    }, 5000);
+    return () => clearTimeout(timer);
+  }, [isSuccess, resetMutation]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (!formData.scheduledTime) {
+      setCalendarError('Please select a preferred date & time');
+      return;
+    }
+    const selected = new Date(formData.scheduledTime);
+    if (selected < new Date(Date.now() + 24 * 60 * 60 * 1000)) {
+      setCalendarError('Selected time must be at least 24 hours from now');
+      return;
+    }
+    setCalendarError('');
+
     try {
+      // Combine description with "other" interest notes if present
+      const fullDescription = [
+        formData.interest === 'other' && formData.otherInterest ? `[Interest: ${formData.otherInterest}]` : '',
+        formData.description || '',
+      ].filter(Boolean).join(' — ') || null;
+
       await submitContact({
         full_name: formData.name,
         email: formData.email,
         country: formData.country,
+        mobile_number: phone || null,
+        interest: formData.interest || null,
         scheduled_time: new Date(formData.scheduledTime).toISOString(),
-        mobile_number: formData.phone || null,
         company_name: formData.company || null,
-        description: formData.description || null,
-        affiliate_code: formData.promo || null,
+        description: fullDescription,
+        promo_code: formData.promo || null,
       }).unwrap();
-      
-      setFormData({ name: '', company: '', email: '', phone: '', country: '', promo: '', description: '', scheduledTime: getDefaultScheduledTime() });
+
+      setFormData({ name: '', company: '', email: '', country: '', interest: '', otherInterest: '', promo: '', description: '', scheduledTime: '' });
+      setPhone('');
+      setCalendarKey((k) => k + 1);
     } catch (err) {
       console.error('Contact submission failed:', err);
     }
   };
 
-  const update = (field: string, value: string) => setFormData((p) => ({ ...p, [field]: value }));
+  const update = (field: string, value: string) => {
+    setFormData((p) => ({ ...p, [field]: value }));
+    if (field === 'scheduledTime' && calendarError) setCalendarError('');
+  };
+
+  const label = (text: string, required?: boolean) => (
+    <label className="block text-xs font-medium text-surface-600 mb-1">
+      {text}{required && <span className="text-red-500 ml-0.5">*</span>}
+    </label>
+  );
 
   return (
     <>
       <PageHero
         tag="Let's Build Something Extraordinary"
         title="Start Your AI Powered Growth Journey"
-        description="Ready to transform your business with AI? Whether you're launching a website, building a CRM, or scaling with AI-driven ads, it starts with a conversation."
+        description="Ready to transform your business with AI? Whether you're launching a new website, building a CRM, automating operations, or scaling with AI-driven ads, it starts with a conversation. Our global team responds within 24 hours (or within 4 hours for enterprise clients)."
       />
 
       <section className="section-padding section-light">
@@ -89,39 +122,96 @@ export default function ContactClient() {
                         {(error as { data?: { message?: string } })?.data?.message || 'Failed to submit. Please try again.'}
                       </div>
                     )}
+
                     <div className="grid sm:grid-cols-2 gap-4">
-                      <input type="text" placeholder="Full Name *" required value={formData.name} onChange={(e) => update('name', e.target.value)} className="form-input" disabled={isLoading} />
-                      <input type="text" placeholder="Company Name (Optional)" value={formData.company} onChange={(e) => update('company', e.target.value)} className="form-input" disabled={isLoading} />
+                      <div>
+                        {label('Full Name', true)}
+                        <input type="text" placeholder="John Smith" required value={formData.name} onChange={(e) => update('name', e.target.value)} className="form-input" disabled={isLoading} />
+                      </div>
+                      <div>
+                        {label('Company Name')}
+                        <input type="text" placeholder="Acme Inc. (optional)" value={formData.company} onChange={(e) => update('company', e.target.value)} className="form-input" disabled={isLoading} />
+                      </div>
                     </div>
+
                     <div className="grid sm:grid-cols-2 gap-4">
-                      <input type="email" placeholder="Email *" required value={formData.email} onChange={(e) => update('email', e.target.value)} className="form-input" disabled={isLoading} />
-                      <input type="tel" placeholder="Mobile Number (Optional)" value={formData.phone} onChange={(e) => update('phone', e.target.value)} className="form-input" disabled={isLoading} />
+                      <div>
+                        {label('Email Address', true)}
+                        <input type="email" placeholder="john@company.com" required value={formData.email} onChange={(e) => update('email', e.target.value)} className="form-input" disabled={isLoading} />
+                      </div>
+                      <div>
+                        {label('Country', true)}
+                        <select required value={formData.country} onChange={(e) => update('country', e.target.value)} className="form-input" disabled={isLoading}>
+                          <option value="">Select country...</option>
+                          {countries.map((c) => (
+                            <option key={c} value={c}>{c}</option>
+                          ))}
+                        </select>
+                      </div>
                     </div>
-                    <div className="grid sm:grid-cols-2 gap-4">
-                      <input type="text" placeholder="Country *" required value={formData.country} onChange={(e) => update('country', e.target.value)} className="form-input" disabled={isLoading} />
-                      <input type="text" placeholder="Promo Code (Optional)" value={formData.promo} onChange={(e) => update('promo', e.target.value)} className="form-input" disabled={isLoading} />
-                    </div>
+
                     <div>
-                      <label className="block text-sm text-surface-500 mb-1.5">Preferred Consultation Time *</label>
-                      <input
-                        type="datetime-local"
-                        required
-                        value={formData.scheduledTime}
-                        min={getMinScheduledTime()}
-                        onChange={(e) => update('scheduledTime', e.target.value)}
-                        className="form-input"
+                      {label('Phone Number')}
+                      <PhoneInput
+                        international
+                        defaultCountry="US"
+                        value={phone}
+                        onChange={setPhone}
                         disabled={isLoading}
+                        className="phone-input-wrapper"
                       />
-                      <p className="text-xs text-surface-400 mt-1">Must be at least 24 hours from now</p>
                     </div>
-                    <textarea
-                      placeholder="Tell us about your project (Optional)"
-                      rows={5}
-                      value={formData.description}
-                      onChange={(e) => update('description', e.target.value)}
-                      className="form-input resize-none"
+
+                    <div>
+                      {label('What are you interested in?')}
+                      <select value={formData.interest} onChange={(e) => update('interest', e.target.value)} className="form-input" disabled={isLoading}>
+                        <option value="">Select a service...</option>
+                        <option value="ai-website">AI-Powered Website</option>
+                        <option value="crm">CRM & Lead Management</option>
+                        <option value="linkedin-ads">LinkedIn Advertising</option>
+                        <option value="meta-google-ads">Meta & Google Ads</option>
+                        <option value="content-marketing">Content Marketing</option>
+                        <option value="automation">Marketing Automation</option>
+                        <option value="full-suite">Full AI Growth Suite</option>
+                        <option value="other">Other / Not Sure Yet</option>
+                      </select>
+                    </div>
+
+                    {formData.interest === 'other' && (
+                      <div>
+                        {label('Please describe what you\'re looking for')}
+                        <textarea placeholder="Tell us what you have in mind — specific goals, challenges, or ideas..." rows={3} value={formData.otherInterest} onChange={(e) => update('otherInterest', e.target.value)} className="form-input resize-none" disabled={isLoading} />
+                      </div>
+                    )}
+
+                    <div>
+                      {label('Promo Code')}
+                      <input type="text" placeholder="Enter promo or affiliate code (optional)" value={formData.promo} onChange={(e) => update('promo', e.target.value)} className="form-input" disabled={isLoading} />
+                    </div>
+
+                    {/* Calendar date & time picker */}
+                    <EmbeddedCalendar
+                      key={calendarKey}
+                      label="Preferred Consultation Date & Time"
+                      required
+                      value={formData.scheduledTime}
+                      onChange={(v) => update('scheduledTime', v)}
+                      error={calendarError}
                       disabled={isLoading}
                     />
+
+                    <div>
+                      {label('Project Description')}
+                      <textarea
+                        placeholder="Tell us about your project, goals, or any questions..."
+                        rows={5}
+                        value={formData.description}
+                        onChange={(e) => update('description', e.target.value)}
+                        className="form-input resize-none"
+                        disabled={isLoading}
+                      />
+                    </div>
+
                     <p className="text-xs text-surface-400">By submitting, you agree to our privacy policy.</p>
                     <button type="submit" className="btn-primary w-full sm:w-auto justify-center" disabled={isLoading}>
                       {isLoading ? (
@@ -162,7 +252,7 @@ export default function ContactClient() {
 
                 <h3 className="text-base font-medium mb-5">Global Offices</h3>
                 <div className="space-y-3 mb-10">
-                  <div className="text-sm"><span className="text-surface-700 font-medium">United States</span> — Huntersville, NC</div>
+                  <div className="text-sm"><span className="text-surface-700 font-medium">United States</span> — West Hide Trail, Phoenix, AZ 85085</div>
                   <div className="text-sm"><span className="text-surface-700 font-medium">India</span> — Surat, Gujarat & Kolkata, West Bengal</div>
                 </div>
 

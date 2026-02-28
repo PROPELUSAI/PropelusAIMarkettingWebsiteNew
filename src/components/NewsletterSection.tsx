@@ -1,11 +1,20 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useSubscribeNewsletterMutation } from '@/store';
 
 export default function NewsletterSection() {
   const [email, setEmail] = useState('');
-  const [subscribeNewsletter, { isLoading, isSuccess, isError, error }] = useSubscribeNewsletterMutation();
+  const [subscribeNewsletter, { isLoading, isSuccess, isError, error, reset: resetMutation }] = useSubscribeNewsletterMutation();
+
+  // Auto-reset form after 5 seconds on success
+  useEffect(() => {
+    if (!isSuccess) return;
+    const timer = setTimeout(() => {
+      resetMutation();
+    }, 5000);
+    return () => clearTimeout(timer);
+  }, [isSuccess, resetMutation]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

@@ -5,6 +5,7 @@ export const sendMessageSchema = z.object({
   sessionId: z.string().min(1, 'Session ID is required').optional(),
   message: z.string().min(1, 'Message is required').max(2000, 'Message too long'),
   userName: z.string().max(255).optional(),
+  userEmail: z.string().email().optional(),
 }).refine(data => data.session_id || data.sessionId, {
   message: 'Session ID is required (session_id or sessionId)',
 });

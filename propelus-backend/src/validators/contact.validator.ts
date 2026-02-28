@@ -5,6 +5,8 @@ export const submitContactSchema = z.object({
   company_name: z.string().max(255).optional().nullable(),
   email: z.string().email('Invalid email format'),
   country: z.string().min(1, 'Country is required').max(100),
+  mobile_number: z.string().max(50).optional().nullable(),
+  interest: z.string().max(100).optional().nullable(),
   scheduled_time: z.string().refine(
     (val) => {
       const date = new Date(val);
@@ -15,7 +17,7 @@ export const submitContactSchema = z.object({
     { message: 'Scheduled time must be a valid date at least 24 hours from now' }
   ),
   description: z.string().max(5000).optional().nullable(),
-  mobile_number: z.string().max(50).optional().nullable(),
+  promo_code: z.string().max(50).optional().nullable(),
   affiliate_code: z.string().max(50).optional().nullable(),
 });
 

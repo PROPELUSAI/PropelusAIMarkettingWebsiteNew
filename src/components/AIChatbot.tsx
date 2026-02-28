@@ -156,6 +156,7 @@ export default function AIChatbot() {
         message: userMessage,
         sessionId,
         userName: chatUser.name.split(' ')[0], // Send first name
+        userEmail: chatUser.email, // Send email for conversation tracking
       }).unwrap();
 
       // Add assistant response

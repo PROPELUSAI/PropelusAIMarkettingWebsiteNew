@@ -5,9 +5,11 @@ export interface IContactSubmission extends Document {
   companyName?: string | null;
   email: string;
   country: string;
+  mobileNumber?: string | null;
+  interest?: string | null;
   scheduledTime: Date;
   description?: string | null;
-  mobileNumber?: string | null;
+  promoCode?: string | null;
   affiliateCode?: string | null;
   leadStatus: string;
   priority: string;
@@ -29,9 +31,11 @@ const contactSubmissionSchema = new Schema<IContactSubmission>(
     companyName: { type: String, default: null },
     email: { type: String, required: true },
     country: { type: String, required: true },
+    mobileNumber: { type: String, default: null },
+    interest: { type: String, default: null },
     scheduledTime: { type: Date, required: true },
     description: { type: String, default: null },
-    mobileNumber: { type: String, default: null },
+    promoCode: { type: String, default: null },
     affiliateCode: { type: String, default: null },
     leadStatus: { type: String, default: 'open', index: true },
     priority: { type: String, default: 'medium', index: true },

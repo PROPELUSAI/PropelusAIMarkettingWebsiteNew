@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import PageHero from '@/components/PageHero';
 import AnimatedSection, { StaggerContainer, StaggerItem } from '@/components/AnimatedSection';
@@ -15,7 +15,22 @@ const perks = [
 
 export default function AffiliateClient() {
   const [formData, setFormData] = useState({ name: '', email: '', phone: '', description: '' });
-  const [submitAffiliate, { isLoading, isSuccess, isError, error }] = useSubmitAffiliateMutation();
+  const [submitAffiliate, { isLoading, isSuccess, isError, error, reset: resetMutation }] = useSubmitAffiliateMutation();
+
+  // Auto-reset form after 5 seconds on success
+  useEffect(() => {
+    if (!isSuccess) return;
+    const timer = setTimeout(() => {
+      resetMutation();
+    }, 5000);
+    return () => clearTimeout(timer);
+  }, [isSuccess, resetMutation]);
+
+  const label = (text: string, required?: boolean) => (
+    <label className="block text-xs font-medium text-surface-600 mb-1">
+      {text}{required && <span className="text-red-500 ml-0.5">*</span>}
+    </label>
+  );
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -86,20 +101,32 @@ export default function AffiliateClient() {
                       {(error as { data?: { message?: string } })?.data?.message || 'Failed to submit. Please try again.'}
                     </div>
                   )}
-                  <input type="text" placeholder="Full Name *" required value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} className="form-input" disabled={isLoading} />
-                  <input type="email" placeholder="Email Address *" required value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} className="form-input" disabled={isLoading} />
-                  <input type="tel" placeholder="Mobile Number *" required value={formData.phone} onChange={(e) => setFormData({ ...formData, phone: e.target.value })} className="form-input" disabled={isLoading} />
-                  <textarea
-                    placeholder="Tell Us About Your Affiliate Interest * (min 50 characters)"
-                    required
-                    rows={4}
-                    minLength={50}
-                    maxLength={500}
-                    value={formData.description}
-                    onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                    className="form-input resize-none"
-                    disabled={isLoading}
-                  />
+                  <div>
+                    {label('Full Name', true)}
+                    <input type="text" placeholder="John Smith" required value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} className="form-input" disabled={isLoading} />
+                  </div>
+                  <div>
+                    {label('Email Address', true)}
+                    <input type="email" placeholder="john@company.com" required value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} className="form-input" disabled={isLoading} />
+                  </div>
+                  <div>
+                    {label('Mobile Number', true)}
+                    <input type="tel" placeholder="+1 (555) 000-0000" required value={formData.phone} onChange={(e) => setFormData({ ...formData, phone: e.target.value })} className="form-input" disabled={isLoading} />
+                  </div>
+                  <div>
+                    {label('Affiliate Interest', true)}
+                    <textarea
+                      placeholder="Tell us about your affiliate interest and how you plan to promote PropelusAI... (min 50 characters)"
+                      required
+                      rows={4}
+                      minLength={50}
+                      maxLength={500}
+                      value={formData.description}
+                      onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+                      className="form-input resize-none"
+                      disabled={isLoading}
+                    />
+                  </div>
                   <div className="flex items-center justify-between">
                     <p className="text-xs text-surface-400">{formData.description.length}/500</p>
                     <button type="submit" className="btn-primary" disabled={isLoading}>
@@ -128,10 +155,13 @@ export default function AffiliateClient() {
         <AnimatedSection className="container-main text-center max-w-2xl mx-auto">
           <span className="tag tag-dark mb-5 inline-flex">Why Partner With Us?</span>
           <h2 className="mb-5 text-white">PropelusAI delivers real results that make selling easy.</h2>
-          <p className="text-surface-400 leading-relaxed">
+          <p className="text-surface-400 leading-relaxed mb-4">
             Our clients see measurable transformations — from 3× pipeline growth to 78% efficiency improvements.
             When you promote PropelusAI, you&apos;re offering proven AI solutions backed by real success stories across
             industries like SaaS, healthcare, manufacturing, and e-commerce.
+          </p>
+          <p className="text-surface-500 text-sm leading-relaxed">
+            Join a network of affiliates who are helping businesses worldwide embrace AI-powered growth and digital transformation.
           </p>
         </AnimatedSection>
       </section>

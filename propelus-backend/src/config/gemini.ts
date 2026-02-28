@@ -11,7 +11,7 @@ if (env.GEMINI_API_KEY) {
     model: 'gemini-2.0-flash',
     generationConfig: {
       temperature: 0.7,
-      maxOutputTokens: 500,
+      maxOutputTokens: 800,
       topP: 0.9,
       topK: 40,
     },

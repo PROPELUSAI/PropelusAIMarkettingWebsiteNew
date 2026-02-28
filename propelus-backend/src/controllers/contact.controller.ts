@@ -11,16 +11,18 @@ import { analyticsService } from '../services/analytics.service';
  * Submit a new contact form (public)
  */
 export const submitContact = asyncHandler(async (req: Request, res: Response) => {
-  const { full_name, company_name, email, country, scheduled_time, description, mobile_number, affiliate_code } = req.body;
+  const { full_name, company_name, email, country, mobile_number, interest, scheduled_time, description, promo_code, affiliate_code } = req.body;
 
   const submission = await ContactSubmission.create({
     fullName: full_name,
     companyName: company_name || null,
     email,
     country,
+    mobileNumber: mobile_number || null,
+    interest: interest || null,
     scheduledTime: new Date(scheduled_time),
     description: description || null,
-    mobileNumber: mobile_number || null,
+    promoCode: promo_code || null,
     affiliateCode: affiliate_code || null,
   });
 

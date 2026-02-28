@@ -11,10 +11,10 @@ import { logger } from '../utils/logger';
  * Send a chatbot message (public)
  */
 export const sendMessage = asyncHandler(async (req: Request, res: Response) => {
-  const { session_id, sessionId: sessionIdAlt, message, userName } = req.body;
+  const { session_id, sessionId: sessionIdAlt, message, userName, userEmail } = req.body;
   const resolvedSessionId = session_id || sessionIdAlt;
 
-  const result = await chatbotService.handleMessage(resolvedSessionId, message, userName || undefined);
+  const result = await chatbotService.handleMessage(resolvedSessionId, message, userName || undefined, userEmail || undefined);
 
   // Map 'response' to 'reply' to match frontend expectations
   ApiResponse.success(res, {

@@ -6,6 +6,7 @@ import newsletterRoutes from './newsletter.routes';
 import adminRoutes from './admin.routes';
 import chatbotRoutes from './chatbot.routes';
 import analyticsRoutes from './analytics.routes';
+import blogRoutes from './blog.routes';
 import { healthCheck } from '../controllers/health.controller';
 
 const router = Router();
@@ -28,6 +29,7 @@ router.get('/', (_req, res) => {
       admin: '/api/v1/admin',
       chatbot: '/api/v1/chatbot',
       analytics: '/api/v1/analytics',
+      blogs: '/api/v1/blogs',
     },
   });
 });
@@ -43,5 +45,6 @@ router.use('/api/v1/newsletter', newsletterRoutes);
 router.use('/api/v1/admin', adminRoutes);
 router.use('/api/v1/chatbot', chatbotRoutes);
 router.use('/api/v1/analytics', analyticsRoutes);
+router.use('/api/v1/blogs', blogRoutes);
 
 export default router;

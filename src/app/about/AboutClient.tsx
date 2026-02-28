@@ -11,8 +11,8 @@ export default function AboutClient() {
     <>
       <PageHero
         tag="Who We Are"
-        title="About PropelusAI — AI Powered Growth"
-        description="Design-first. AI-native. Globally trusted. We combine product thinking, enterprise-grade engineering, and disciplined design to deliver measurable growth."
+        title="About PropelusAI - AI Powered Growth"
+        description="Design-first. AI-native. Globally trusted."
       />
 
       {/* Story */}
@@ -30,7 +30,7 @@ export default function AboutClient() {
               across industries.
             </p>
             <p className="text-surface-500 leading-relaxed">
-              Today we operate globally providing 24/5 coverage for long-term partnerships.
+              Today we business globally providing 24/5 coverage for long term partnership.
             </p>
           </AnimatedSection>
         </div>
@@ -88,28 +88,33 @@ export default function AboutClient() {
       <section className="section-padding section-warm">
         <div className="container-main">
           <AnimatedSection className="text-center mb-12">
-            <h2 className="mb-3">Global Offices & Contact</h2>
+            <h2 className="mb-3">Global Offices & Contact Information</h2>
+            <p className="text-surface-500">We operate with offices in the US and IN only:</p>
           </AnimatedSection>
           <div className="grid md:grid-cols-3 gap-6 max-w-3xl mx-auto">
             <AnimatedSection delay={0.1}>
               <div className="card text-center h-full">
-                <h3 className="text-base font-medium mb-2">North Carolina, USA</h3>
+                <h3 className="text-base font-medium mb-2">Arizona, USA</h3>
                 <p className="text-sm text-surface-500">BETH and friends LLC</p>
-                <p className="text-sm text-surface-400">Huntersville, NC</p>
+                <p className="text-sm text-surface-400">West Hide Trail, Phoenix, AZ 85085</p>
               </div>
             </AnimatedSection>
             <AnimatedSection delay={0.15}>
               <div className="card text-center h-full">
                 <h3 className="text-base font-medium mb-2">Gujarat & West Bengal, India</h3>
-                <p className="text-sm text-surface-500">RBSS VENTURES</p>
+                <p className="text-sm text-surface-500">RBSS VENTURES (Propelus by RBSS)</p>
                 <p className="text-sm text-surface-400">Surat & Kolkata</p>
+                <p className="text-xs text-surface-400 mt-1">GSTIN: 19ABMFR6144D1ZZ</p>
               </div>
             </AnimatedSection>
             <AnimatedSection delay={0.2}>
               <div className="card text-center h-full">
-                <h3 className="text-base font-medium mb-2">Contact</h3>
+                <h3 className="text-base font-medium mb-2">Contact Information</h3>
                 <p className="text-sm text-surface-500">{siteConfig.email}</p>
-                <p className="text-sm text-surface-400 mt-1">24/5 Global Support</p>
+                <p className="text-sm text-surface-400 mt-1">WhatsApp IN: {siteConfig.whatsapp.in}</p>
+                <p className="text-sm text-surface-400">WhatsApp US: {siteConfig.whatsapp.us}</p>
+                <p className="text-sm text-surface-400 mt-2">24/5 Global Support</p>
+                <p className="text-xs text-surface-400">Enterprise clients: 4-hour response</p>
               </div>
             </AnimatedSection>
           </div>
@@ -119,8 +124,9 @@ export default function AboutClient() {
       <CTASection
         tag="Ready to build?"
         title="Ready to build the AI-powered future of your business?"
+        description="Whether you need a one-time transformation or ongoing AI-driven growth, PropelusAI will architect the system that takes your business to the next level."
         primaryLabel="Start Your Project"
-        secondaryLabel="Explore Products"
+        secondaryLabel="Explore AI Products"
         secondaryHref="/products"
       />
     </>

@@ -6,10 +6,12 @@ export interface ContactFormData {
   full_name: string;
   email: string;
   country: string;
+  mobile_number?: string | null;
+  interest?: string | null;
   scheduled_time: string;
   company_name?: string | null;
-  mobile_number?: string | null;
   description?: string | null;
+  promo_code?: string | null;
   affiliate_code?: string | null;
 }
 
@@ -56,6 +58,7 @@ export interface ChatRequest {
   message: string;
   sessionId: string;
   userName?: string;
+  userEmail?: string;
 }
 
 export interface ChatResponse {
@@ -71,10 +74,12 @@ export interface LeadFormData {
   full_name: string;
   email: string;
   country: string;
+  mobile_number?: string | null;
+  interest?: string | null;
   scheduled_time: string;
   company_name?: string | null;
-  mobile_number?: string | null;
   description?: string | null;
+  promo_code?: string | null;
   affiliate_code?: string | null;
 }
 

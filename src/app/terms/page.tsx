@@ -3,7 +3,13 @@ import PageHero from '@/components/PageHero';
 
 export const metadata: Metadata = {
   title: 'Terms of Service',
-  description: 'Terms of Service for PropelusAI. Read about account terms, service delivery, payment, intellectual property, and more.',
+  description:
+    'Terms of Service for PropelusAI\'s AI-powered business solutions and services. Read about account terms, service delivery, payment, intellectual property, and more.',
+  openGraph: {
+    title: 'Terms of Service - PropelusAI',
+    description:
+      'Terms of Service for PropelusAI\'s AI-powered business solutions and services.',
+  },
   alternates: { canonical: 'https://www.propelusai.com/terms' },
 };
 
@@ -65,7 +71,7 @@ const sections = [
 export default function TermsPage() {
   return (
     <>
-      <PageHero title="Terms of Service" description="By using our services, you agree to these Terms of Service." />
+      <PageHero title="Terms of Service" description="Thank you for choosing PropelusAI! By using our services, you agree to these Terms of Service." />
 
       <section className="section-padding section-light">
         <div className="container-main max-w-3xl">

@@ -8,7 +8,8 @@ import { logger } from '../utils/logger';
 export async function handleMessage(
   sessionId: string,
   userMessage: string,
-  userName?: string
+  userName?: string,
+  userEmail?: string
 ): Promise<{ response: string; sessionId: string; leadScore: string | null }> {
   // Find or create conversation
   let conversation = await ChatConversation.findOne({ sessionId });
@@ -17,11 +18,17 @@ export async function handleMessage(
     conversation = new ChatConversation({
       sessionId,
       messages: [],
-      metadata: { userName: userName || null },
+      metadata: {
+        userName: userName || null,
+        userEmail: userEmail || null,
+      },
     });
-  } else if (userName && !conversation.metadata?.userName) {
-    // Store the name if not already stored
-    conversation.metadata = { ...conversation.metadata, userName };
+  } else {
+    // Update metadata with any new info
+    const meta = conversation.metadata || {};
+    if (userName && !meta.userName) meta.userName = userName;
+    if (userEmail && !meta.userEmail) meta.userEmail = userEmail;
+    conversation.metadata = meta;
   }
 
   // Resolve name from metadata if not provided in this request
