@@ -9,7 +9,7 @@ import { useSubmitAffiliateMutation } from '@/store';
 
 const perks = [
   { icon: HiOutlineBanknotes, title: 'Competitive Commissions', desc: 'Earn attractive commissions on every successful referral and recurring revenue from long-term clients.' },
-  { icon: HiOutlineRocketLaunch, title: 'Premium AI Solutions', desc: 'Promote cutting-edge AI services including automation, CRM builds, websites, and growth strategies.' },
+  { icon: HiOutlineRocketLaunch, title: 'Premium AI Solutions', desc: 'Promote cutting edge AI services including automation, CRM builds, websites, and growth strategies.' },
   { icon: HiOutlineUserGroup, title: 'Dedicated Support', desc: 'Get access to marketing materials and dedicated support to help you succeed.' },
 ];
 
@@ -156,12 +156,12 @@ export default function AffiliateClient() {
           <span className="tag tag-dark mb-5 inline-flex">Why Partner With Us?</span>
           <h2 className="mb-5 text-white">PropelusAI delivers real results that make selling easy.</h2>
           <p className="text-surface-400 leading-relaxed mb-4">
-            Our clients see measurable transformations — from 3× pipeline growth to 78% efficiency improvements.
+            Our clients see measurable transformations, from 3× pipeline growth to 78% efficiency improvements.
             When you promote PropelusAI, you&apos;re offering proven AI solutions backed by real success stories across
             industries like SaaS, healthcare, manufacturing, and e-commerce.
           </p>
           <p className="text-surface-500 text-sm leading-relaxed">
-            Join a network of affiliates who are helping businesses worldwide embrace AI-powered growth and digital transformation.
+            Join a network of affiliates who are helping businesses worldwide embrace AI powered growth and digital transformation.
           </p>
         </AnimatedSection>
       </section>

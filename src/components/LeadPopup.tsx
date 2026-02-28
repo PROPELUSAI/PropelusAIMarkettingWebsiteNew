@@ -18,10 +18,10 @@ const stats = [
 ];
 
 const highlights = [
-  'AI-native engineering across every solution',
-  'Enterprise-grade websites, CRMs & automation',
-  'Full-funnel marketing — LinkedIn, Meta & Google Ads',
-  'Outcome-first approach with measurable ROI',
+  'AI native engineering across every solution',
+  'Enterprise grade websites, CRMs & automation',
+  'Full funnel marketing. LinkedIn, Meta & Google Ads',
+  'Outcome first approach with measurable ROI',
 ];
 
 export default function LeadPopup() {
@@ -68,7 +68,7 @@ export default function LeadPopup() {
       const fullDescription = [
         formData.interest === 'other' && formData.otherInterest ? `[Interest: ${formData.otherInterest}]` : '',
         formData.description || '',
-      ].filter(Boolean).join(' — ') || null;
+      ].filter(Boolean).join(' | ') || null;
 
       await submitLead({
         full_name: formData.name,
@@ -161,7 +161,7 @@ export default function LeadPopup() {
                     className="text-2xl sm:text-[1.7rem] font-semibold leading-tight mb-3 text-white"
                     initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4, delay: 0.4 }}
                   >
-                    Unlock AI-Powered<br />
+                    Unlock AI Powered<br />
                     <span className="bg-gradient-to-r from-brand-300 to-brand-100 bg-clip-text text-transparent">
                       Growth for Your Business
                     </span>
@@ -170,7 +170,7 @@ export default function LeadPopup() {
                     className="text-sm text-white/60 leading-relaxed mb-6"
                     initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4, delay: 0.45 }}
                   >
-                    Join industry leaders achieving measurable results with our AI-first solutions. Get a custom growth roadmap — tailored to your business goals.
+                    Join industry leaders achieving measurable results with our AI first solutions. Get a custom growth roadmap tailored to your business goals.
                   </motion.p>
                   <motion.div
                     className="grid grid-cols-3 gap-3 mb-6"
@@ -274,7 +274,7 @@ export default function LeadPopup() {
                         {lbl('What are you interested in?')}
                         <select value={formData.interest} onChange={(e) => update('interest', e.target.value)} className="form-input !py-2.5" disabled={isLoading}>
                           <option value="">Select a service...</option>
-                          <option value="ai-website">AI-Powered Website</option>
+                          <option value="ai-website">AI Powered Website</option>
                           <option value="crm">CRM &amp; Lead Management</option>
                           <option value="linkedin-ads">LinkedIn Advertising</option>
                           <option value="meta-google-ads">Meta &amp; Google Ads</option>
@@ -288,7 +288,7 @@ export default function LeadPopup() {
                       {formData.interest === 'other' && (
                         <div>
                           {lbl('Please describe what you\'re looking for')}
-                          <textarea placeholder="Tell us what you have in mind — specific goals, challenges, or ideas..." rows={3} value={formData.otherInterest} onChange={(e) => update('otherInterest', e.target.value)} className="form-input resize-none !py-2.5" disabled={isLoading} />
+                          <textarea placeholder="Tell us what you have in mind. Specific goals, challenges, or ideas..." rows={3} value={formData.otherInterest} onChange={(e) => update('otherInterest', e.target.value)} className="form-input resize-none !py-2.5" disabled={isLoading} />
                         </div>
                       )}
 
@@ -332,7 +332,7 @@ export default function LeadPopup() {
 
                     <p className="text-[0.7rem] text-surface-400 mt-3 text-center leading-relaxed">
                       By submitting, you agree to our{' '}
-                      <a href="/privacy" className="text-brand-500 hover:underline">privacy policy</a>. No spam — ever.
+                      <a href="/privacy" className="text-brand-500 hover:underline">privacy policy</a>. No spam, ever.
                     </p>
                   </>
                 )}

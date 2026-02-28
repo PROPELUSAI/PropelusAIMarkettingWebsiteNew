@@ -4,7 +4,7 @@ import FAQClient from './FAQClient';
 export const metadata: Metadata = {
   title: 'FAQ - AI Services, Products, Pricing & Delivery | PropelusAI',
   description:
-    'Everything you need to know about PropelusAI — process, pricing, timelines, support, confidentiality, and the difference between Services (one-time builds) and Products (monthly subscriptions).',
+    'Everything you need to know about PropelusAI. Process, pricing, timelines, support, confidentiality, and the difference between Services (one time builds) and Products (monthly subscriptions).',
   openGraph: {
     title: 'PropelusAI FAQ',
     description:

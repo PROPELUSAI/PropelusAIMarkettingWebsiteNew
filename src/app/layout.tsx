@@ -36,7 +36,7 @@ const organizationSchema = {
     contentUrl: 'https://www.propelusai.com/propelus-faviocn-removebg-preview-512.png',
   },
   description:
-    'AI-powered growth systems designed for global teams. Transform your business with AI-powered websites, CRM systems, subscription-based AI products, and automation.',
+    'AI powered growth systems designed for global teams. Transform your business with AI powered websites, CRM systems, subscription based AI products, and automation.',
   sameAs: [
     'https://www.linkedin.com/company/propelusai',
     'https://twitter.com/propelusai',
@@ -53,7 +53,7 @@ const websiteSchema = {
   '@type': 'WebSite',
   name: 'PropelusAI',
   url: 'https://www.propelusai.com',
-  description: 'AI-powered growth systems designed for global teams',
+  description: 'AI powered growth systems designed for global teams',
   publisher: {
     '@type': 'Organization',
     name: 'PropelusAI',
@@ -81,7 +81,7 @@ export const metadata: Metadata = {
     template: '%s | PropelusAI',
   },
   description:
-    'Transform your business with AI-powered websites, CRM systems, subscription-based AI products, LinkedIn advertising, automation, and content engines. PropelusAI delivers premium, enterprise-grade experiences built for global growth.',
+    'Transform your business with AI powered websites, CRM systems, subscription based AI products, LinkedIn advertising, automation, and content engines. PropelusAI delivers premium, enterprise grade experiences built for global growth.',
   keywords: [
     'AI services',
     'AI automation',
@@ -112,7 +112,7 @@ export const metadata: Metadata = {
     url: 'https://www.propelusai.com',
     siteName: 'PropelusAI',
     title: 'PropelusAI - Premium AI Services & Products',
-    description: 'AI-powered growth systems designed for global teams.',
+    description: 'AI powered growth systems designed for global teams.',
     images: [
       {
         url: '/propelus-faviocn-removebg-preview-512.png',
@@ -125,7 +125,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'PropelusAI - Premium AI Services & Products',
-    description: 'AI-powered growth systems designed for global teams.',
+    description: 'AI powered growth systems designed for global teams.',
     images: ['/propelus-faviocn-removebg-preview-512.png'],
   },
   robots: {

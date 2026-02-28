@@ -66,7 +66,7 @@ function Hero() {
             transition={{ duration: 0.6, delay: 0.6 }}
             className="text-white/70 text-lg mb-8 max-w-xl leading-relaxed"
           >
-            We build premium AI-driven websites, CRM systems, and subscription-based growth engines with enterprise-level precision. From marketing automation to predictive analytics, we help ambitious teams scale faster through intelligent, disciplined execution.
+            We build premium AI driven websites, CRM systems, and subscription based growth engines with enterprise level precision. From marketing automation to predictive analytics, we help ambitious teams scale faster through intelligent, disciplined execution.
           </motion.p>
 
           <motion.div
@@ -148,8 +148,8 @@ function Marquee2() {
 }
 
 function Pathways() {
-  const productFeatures = ['AI-driven LinkedIn advertising (monthly)', 'LinkedIn content engine (20 posts/month)', 'AI-powered CRM subscription', 'Lead scoring & monthly lead segmentation', 'Instagram & Facebook ads management', 'Monthly content creation (10 assets/month)', 'Funnel analytics & CRO subscription', 'AI-assisted cold calling subscription'];
-  const serviceFeatures = ['Website building (AI-powered)', 'Mobile app development', 'Custom CRM development', 'Domain & email setup', 'Cybersecurity audits', 'Marketing automation implementation', 'Funnel buildouts', 'One-time technical integrations'];
+  const productFeatures = ['AI driven LinkedIn advertising (monthly)', 'LinkedIn content engine (20 posts/month)', 'AI powered CRM subscription', 'Lead scoring & monthly lead segmentation', 'Instagram & Facebook ads management', 'Monthly content creation (10 assets/month)', 'Funnel analytics & CRO subscription', 'AI assisted cold calling subscription'];
+  const serviceFeatures = ['Website building (AI powered)', 'Mobile app development', 'Custom CRM development', 'Domain & email setup', 'Cybersecurity audits', 'Marketing automation implementation', 'Funnel buildouts', 'One time technical integrations'];
 
   return (
     <section className="section-padding section-light relative overflow-hidden">
@@ -160,7 +160,7 @@ function Pathways() {
         <AnimatedSection className="text-center max-w-2xl mx-auto mb-16">
           <span className="tag mb-4 inline-flex">AI Solutions</span>
           <h2 className="mb-4">One brand. Two growth pathways: Products & Services.</h2>
-          <p className="text-lg text-surface-500">Choose between subscription-based AI products for ongoing growth or high-impact project services for one-time, high-value implementations.</p>
+          <p className="text-lg text-surface-500">Choose between subscription based AI products for ongoing growth or high impact project services for one time, high value implementations.</p>
         </AnimatedSection>
 
         <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto relative">
@@ -183,7 +183,7 @@ function Pathways() {
               </div>
 
               <p className="text-surface-500 text-sm mb-1 leading-relaxed">Monthly & quarterly subscription plans</p>
-              <p className="text-surface-500 text-sm mb-6 leading-relaxed">AI-powered systems that continuously optimize, and scale business growth.</p>
+              <p className="text-surface-500 text-sm mb-6 leading-relaxed">AI powered systems that continuously optimize, and scale business growth.</p>
 
               <div className="flex flex-wrap gap-1.5 mb-6">
                 {productFeatures.map((feature) => (
@@ -208,13 +208,13 @@ function Pathways() {
                   <svg className="w-6 h-6 text-brand-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M13 10V3L4 14h7v7l9-11h-7z" strokeLinecap="round" strokeLinejoin="round"/></svg>
                 </div>
                 <div>
-                  <span className="text-xs font-medium text-brand-500 uppercase tracking-wider">One-Time Projects</span>
+                  <span className="text-xs font-medium text-brand-500 uppercase tracking-wider">One Time Projects</span>
                   <h3 className="text-surface-900 text-xl">AI Services</h3>
                 </div>
               </div>
 
-              <p className="text-surface-500 text-sm mb-1 leading-relaxed">High-impact project implementations</p>
-              <p className="text-surface-500 text-sm mb-6 leading-relaxed">One-time builds that create permanent infrastructure for your business growth.</p>
+              <p className="text-surface-500 text-sm mb-1 leading-relaxed">High impact project implementations</p>
+              <p className="text-surface-500 text-sm mb-6 leading-relaxed">One time builds that create permanent infrastructure for your business growth.</p>
 
               <div className="flex flex-wrap gap-1.5 mb-6">
                 {serviceFeatures.map((feature) => (
@@ -359,7 +359,7 @@ export default function HomePage() {
       <CTASection
         tag="Ready to Build?"
         title="Let's create the most powerful version of your business."
-        description="Whether you need a complete AI-driven ecosystem or a single high-impact product, we'll help you launch with clarity, precision, and measurable results."
+        description="Whether you need a complete AI driven ecosystem or a single high impact product, we'll help you launch with clarity, precision, and measurable results."
         primaryLabel="Start Your Project"
         primaryHref="/contact"
         secondaryLabel="Book Strategy Session"

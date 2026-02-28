@@ -14,7 +14,7 @@ export default function FAQClient() {
       <PageHero
         tag="Clarity & Confidence"
         title="Frequently Asked Questions"
-        description="Everything you need to know about PropelusAI in one place. Below are the most common questions clients ask us about our process, pricing, timelines, support, confidentiality, and the difference between our Services (one-time builds) and Products (monthly subscriptions). If your question isn't listed here, simply reach out — our team will respond within one business day."
+        description="Everything you need to know about PropelusAI in one place. Below are the most common questions clients ask us about our process, pricing, timelines, support, confidentiality, and the difference between our Services (one time builds) and Products (monthly subscriptions). If your question isn't listed here, simply reach out and our team will respond within one business day."
       />
 
       <section className="section-padding section-light">
@@ -38,7 +38,7 @@ export default function FAQClient() {
       <CTASection
         tag="Still Have Questions?"
         title="Still have questions? We're one message away."
-        description="Whether you're planning a one-time AI project or exploring subscription-based AI products, our team will help you choose the best path."
+        description="Whether you're planning a one time AI project or exploring subscription based AI products, our team will help you choose the best path."
         primaryLabel="Contact Us"
         secondaryLabel="Start Your Project"
         secondaryHref="/contact"

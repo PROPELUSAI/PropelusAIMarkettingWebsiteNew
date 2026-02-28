@@ -8,10 +8,10 @@ import PageHero from '@/components/PageHero';
 export const metadata: Metadata = {
   title: 'Blogs & Insights - AI Growth Strategies | PropelusAI',
   description:
-    'AI-Driven Perspectives on Growth, Automation, SaaS, and Modern IT Systems. Learn how to scale your business with intelligent automation.',
+    'AI Driven Perspectives on Growth, Automation, SaaS, and Modern IT Systems. Learn how to scale your business with intelligent automation.',
   openGraph: {
     title: 'PropelusAI Blogs & Insights',
-    description: 'Expert insights on AI-powered business growth and automation.',
+    description: 'Expert insights on AI powered business growth and automation.',
   },
   alternates: { canonical: 'https://www.propelusai.com/blogs' },
 };
@@ -61,7 +61,7 @@ export default async function BlogsPage() {
       <PageHero
         tag="Insights & Perspectives"
         title="Blogs & Insights"
-        description="AI-driven perspectives on growth, automation, SaaS, and modern IT systems."
+        description="AI driven perspectives on growth, automation, SaaS, and modern IT systems."
       />
 
       <section className="section-padding section-light">
@@ -74,7 +74,7 @@ export default async function BlogsPage() {
                 </svg>
               </div>
               <h3 className="text-lg font-medium text-surface-700 mb-2">No posts yet</h3>
-              <p className="text-sm text-surface-400">Check back soon — new insights are on the way.</p>
+              <p className="text-sm text-surface-400">Check back soon, new insights are on the way.</p>
             </div>
           ) : (
             <StaggerContainer className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -158,7 +158,7 @@ export default async function BlogsPage() {
 
       <CTASection
         tag="Ready to Scale?"
-        title="Transform Your Business with AI-Powered Growth"
+        title="Transform Your Business with AI Powered Growth"
         description="From lead generation to marketing automation, we build systems that drive measurable results."
       />
     </>

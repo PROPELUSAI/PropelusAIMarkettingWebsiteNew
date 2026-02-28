@@ -4,11 +4,11 @@ import PageHero from '@/components/PageHero';
 export const metadata: Metadata = {
   title: 'Terms of Service',
   description:
-    'Terms of Service for PropelusAI\'s AI-powered business solutions and services. Read about account terms, service delivery, payment, intellectual property, and more.',
+    'Terms of Service for PropelusAI\'s AI powered business solutions and services. Read about account terms, service delivery, payment, intellectual property, and more.',
   openGraph: {
     title: 'Terms of Service - PropelusAI',
     description:
-      'Terms of Service for PropelusAI\'s AI-powered business solutions and services.',
+      'Terms of Service for PropelusAI\'s AI powered business solutions and services.',
   },
   alternates: { canonical: 'https://www.propelusai.com/terms' },
 };
@@ -19,7 +19,7 @@ const sections = [
     content: [
       { subtitle: 'Eligibility', text: 'To use PropelusAI services, you must be at least 18 years old, confirm business use, and have legal authority to enter this agreement.' },
       { subtitle: 'Account Information', text: 'You agree to provide accurate, complete, and current information and maintain the confidentiality of your account credentials.' },
-      { subtitle: 'Account Security', text: 'Notify us immediately of any unauthorized use and comply with additional security measures including multi-factor authentication.' },
+      { subtitle: 'Account Security', text: 'Notify us immediately of any unauthorized use and comply with additional security measures including multi factor authentication.' },
     ],
   },
   {

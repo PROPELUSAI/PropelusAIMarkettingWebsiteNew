@@ -29,8 +29,8 @@ export default function Footer() {
               <Image src="/logo.png" alt="PropelusAI" width={260} height={56} className="h-11 w-auto" />
             </Link>
             <p className="text-surface-400 text-sm leading-relaxed max-w-sm mb-4">
-              PropelusAI builds AI-powered websites, CRM systems, automation engines, and
-              subscription-based AI growth products that help businesses scale with precision,
+              PropelusAI builds AI powered websites, CRM systems, automation engines, and
+              subscription based AI growth products that help businesses scale with precision,
               intelligence, and measurable ROI.
             </p>
             <div className="space-y-1 text-sm text-surface-400 mb-4">

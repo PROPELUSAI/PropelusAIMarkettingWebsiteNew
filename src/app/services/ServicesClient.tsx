@@ -15,8 +15,8 @@ export default function ServicesClient() {
   return (
     <>
       <PageHero
-        tag="One-Time Payment Based Services"
-        title="AI-powered services, meticulously designed for modern businesses"
+        tag="One Time Payment Based Services"
+        title="AI powered services, meticulously designed for modern businesses"
         description="Every service ships with dual-theme UI systems, bespoke components, micro-interactions, and measurable business outcomes. No gradients. Only premium build quality. Each engagement includes a dedicated account manager and technical pod, weekly executive-ready status reports, light and dark mode parity, plus comprehensive launch, enablement, and optimization support."
       />
 

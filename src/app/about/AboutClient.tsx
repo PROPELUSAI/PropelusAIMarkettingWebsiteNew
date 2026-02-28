@@ -12,7 +12,7 @@ export default function AboutClient() {
       <PageHero
         tag="Who We Are"
         title="About PropelusAI - AI Powered Growth"
-        description="Design-first. AI-native. Globally trusted."
+        description="Design first. AI native. Globally trusted."
       />
 
       {/* Story */}
@@ -21,12 +21,12 @@ export default function AboutClient() {
           <AnimatedSection>
             <p className="text-lg text-surface-600 leading-relaxed mb-6">
               PropelusAI is a next-generation AI company delivering premium websites, CRM systems, automation engines,
-              and subscription-based AI products. We specialize in helping businesses scale with precision, intelligence,
+              and subscription based AI products. We specialize in helping businesses scale with precision, intelligence,
               and uncompromising quality.
             </p>
             <p className="text-surface-500 leading-relaxed mb-6">
-              Founded on the belief that modern businesses need AI-powered systems that evolve, we combine product thinking,
-              enterprise-grade engineering, and a disciplined design philosophy to deliver measurable growth for global teams
+              Founded on the belief that modern businesses need AI powered systems that evolve, we combine product thinking,
+              enterprise grade engineering, and a disciplined design philosophy to deliver measurable growth for global teams
               across industries.
             </p>
             <p className="text-surface-500 leading-relaxed">
@@ -47,7 +47,7 @@ export default function AboutClient() {
               <div className="card-dark rounded-2xl p-8 h-full">
                 <h3 className="text-lg text-white mb-3">Mission</h3>
                 <p className="text-surface-400 leading-relaxed">
-                  To build AI-powered systems that transform how businesses operate, scale, and grow with clarity, speed, and measurable ROI.
+                  To build AI powered systems that transform how businesses operate, scale, and grow with clarity, speed, and measurable ROI.
                 </p>
               </div>
             </AnimatedSection>
@@ -55,7 +55,7 @@ export default function AboutClient() {
               <div className="card-dark rounded-2xl p-8 h-full">
                 <h3 className="text-lg text-white mb-3">Vision</h3>
                 <p className="text-surface-400 leading-relaxed">
-                  To become the world&apos;s most trusted partner for premium AI-driven transformations — solutions that feel handcrafted, intelligent, and built to last.
+                  To become the world&apos;s most trusted partner for premium AI driven transformations. Solutions that feel handcrafted, intelligent, and built to last.
                 </p>
               </div>
             </AnimatedSection>
@@ -123,8 +123,8 @@ export default function AboutClient() {
 
       <CTASection
         tag="Ready to build?"
-        title="Ready to build the AI-powered future of your business?"
-        description="Whether you need a one-time transformation or ongoing AI-driven growth, PropelusAI will architect the system that takes your business to the next level."
+        title="Ready to build the AI powered future of your business?"
+        description="Whether you need a one time transformation or ongoing AI driven growth, PropelusAI will architect the system that takes your business to the next level."
         primaryLabel="Start Your Project"
         secondaryLabel="Explore AI Products"
         secondaryHref="/products"

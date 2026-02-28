@@ -4,11 +4,11 @@ import PageHero from '@/components/PageHero';
 export const metadata: Metadata = {
   title: 'Privacy Policy',
   description:
-    'Privacy Policy for PropelusAI\'s AI-powered business solutions and services. Learn how we collect, use, and protect your personal information.',
+    'Privacy Policy for PropelusAI\'s AI powered business solutions and services. Learn how we collect, use, and protect your personal information.',
   openGraph: {
     title: 'Privacy Policy - PropelusAI',
     description:
-      'Privacy Policy for PropelusAI\'s AI-powered business solutions and services.',
+      'Privacy Policy for PropelusAI\'s AI powered business solutions and services.',
   },
   alternates: { canonical: 'https://www.propelusai.com/privacy' },
 };
@@ -36,7 +36,7 @@ const sections = [
   {
     title: 'How We Use Your Information',
     items: [
-      'Deliver AI-powered business solutions and services',
+      'Deliver AI powered business solutions and services',
       'Process payments and manage billing',
       'Provide customer support and technical assistance',
       'Communicate about projects and service delivery',

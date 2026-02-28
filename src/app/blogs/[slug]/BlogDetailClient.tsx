@@ -187,7 +187,7 @@ export default function BlogDetailClient({ blog }: { blog: Blog }) {
 
       <CTASection
         tag="Ready to Scale?"
-        title="Transform Your Business with AI-Powered Growth"
+        title="Transform Your Business with AI Powered Growth"
         description="From lead generation to marketing automation, we build systems that drive measurable results."
       />
     </>

@@ -28,7 +28,7 @@ export default function ProductsClient() {
       <PageHero
         tag="Subscription-Based AI Products"
         title="AI Products Designed for Predictable, Compounding Growth"
-        description="High performance AI systems that work for you. Our AI Products are recurring, subscription-based systems designed to deliver consistent growth across your pipeline, content, CRM, ads, and funnel analytics. Built for global teams, each Product includes ongoing optimization, monthly reporting, and continuous AI-driven improvements."
+        description="High performance AI systems that work for you. Our AI Products are recurring, subscription based systems designed to deliver consistent growth across your pipeline, content, CRM, ads, and funnel analytics. Built for global teams, each Product includes ongoing optimization, monthly reporting, and continuous AI driven improvements."
       />
 
       <section className="section-padding section-light">
@@ -70,7 +70,7 @@ export default function ProductsClient() {
 
       <CTASection
         tag="Ready to Scale"
-        title="Ready for subscription-based AI growth?"
+        title="Ready for subscription based AI growth?"
         description="Choose an AI Product that fits your goals, or bundle multiple for maximum impact. Our team will help you customize the right monthly plan."
         primaryLabel="Talk to Our Team"
         secondaryLabel="View Services"

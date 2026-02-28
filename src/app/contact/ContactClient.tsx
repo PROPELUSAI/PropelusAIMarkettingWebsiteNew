@@ -13,13 +13,13 @@ import { useSubmitContactMutation } from '@/store';
 const contactInfo = [
   { icon: '📩', label: 'Email', value: siteConfig.email },
   { icon: '💬', label: 'WhatsApp', value: `${siteConfig.whatsapp.in} (IN) | ${siteConfig.whatsapp.us} (US)` },
-  { icon: '🕒', label: 'Business Hours', value: '9 AM – 8 PM (All Time Zones)' },
+  { icon: '🕒', label: 'Business Hours', value: '9 AM to 8 PM (All Time Zones)' },
 ];
 
 const reasons = [
   { title: 'Fast Response', desc: 'We reply within 24 hours' },
   { title: 'Clear Roadmapping', desc: 'Every conversation ends with clarity' },
-  { title: 'AI-Native Expertise', desc: 'One unified system approach' },
+  { title: 'AI Native Expertise', desc: 'One unified system approach' },
   { title: 'Global Support', desc: 'Handle clients worldwide' },
 ];
 
@@ -61,7 +61,7 @@ export default function ContactClient() {
       const fullDescription = [
         formData.interest === 'other' && formData.otherInterest ? `[Interest: ${formData.otherInterest}]` : '',
         formData.description || '',
-      ].filter(Boolean).join(' — ') || null;
+      ].filter(Boolean).join(' | ') || null;
 
       await submitContact({
         full_name: formData.name,
@@ -99,7 +99,7 @@ export default function ContactClient() {
       <PageHero
         tag="Let's Build Something Extraordinary"
         title="Start Your AI Powered Growth Journey"
-        description="Ready to transform your business with AI? Whether you're launching a new website, building a CRM, automating operations, or scaling with AI-driven ads, it starts with a conversation. Our global team responds within 24 hours (or within 4 hours for enterprise clients)."
+        description="Ready to transform your business with AI? Whether you're launching a new website, building a CRM, automating operations, or scaling with AI driven ads, it starts with a conversation. Our global team responds within 24 hours (or within 4 hours for enterprise clients)."
       />
 
       <section className="section-padding section-light">
@@ -166,7 +166,7 @@ export default function ContactClient() {
                       {label('What are you interested in?')}
                       <select value={formData.interest} onChange={(e) => update('interest', e.target.value)} className="form-input" disabled={isLoading}>
                         <option value="">Select a service...</option>
-                        <option value="ai-website">AI-Powered Website</option>
+                        <option value="ai-website">AI Powered Website</option>
                         <option value="crm">CRM & Lead Management</option>
                         <option value="linkedin-ads">LinkedIn Advertising</option>
                         <option value="meta-google-ads">Meta & Google Ads</option>
@@ -180,7 +180,7 @@ export default function ContactClient() {
                     {formData.interest === 'other' && (
                       <div>
                         {label('Please describe what you\'re looking for')}
-                        <textarea placeholder="Tell us what you have in mind — specific goals, challenges, or ideas..." rows={3} value={formData.otherInterest} onChange={(e) => update('otherInterest', e.target.value)} className="form-input resize-none" disabled={isLoading} />
+                        <textarea placeholder="Tell us what you have in mind. Specific goals, challenges, or ideas..." rows={3} value={formData.otherInterest} onChange={(e) => update('otherInterest', e.target.value)} className="form-input resize-none" disabled={isLoading} />
                       </div>
                     )}
 
@@ -252,8 +252,8 @@ export default function ContactClient() {
 
                 <h3 className="text-base font-medium mb-5">Global Offices</h3>
                 <div className="space-y-3 mb-10">
-                  <div className="text-sm"><span className="text-surface-700 font-medium">United States</span> — West Hide Trail, Phoenix, AZ 85085</div>
-                  <div className="text-sm"><span className="text-surface-700 font-medium">India</span> — Surat, Gujarat & Kolkata, West Bengal</div>
+                  <div className="text-sm"><span className="text-surface-700 font-medium">United States</span> | West Hide Trail, Phoenix, AZ 85085</div>
+                  <div className="text-sm"><span className="text-surface-700 font-medium">India</span> | Surat, Gujarat & Kolkata, West Bengal</div>
                 </div>
 
                 <h3 className="text-base font-medium mb-4">Why Contact Us</h3>
@@ -279,7 +279,7 @@ export default function ContactClient() {
         <AnimatedSection className="container-main text-center max-w-2xl mx-auto">
           <h2 className="text-white mb-4">Let&apos;s Build Your System Together</h2>
           <p className="text-surface-400 leading-relaxed">
-            Your next stage of growth begins with one message. Tell us your goals, and we&apos;ll architect the perfect AI-powered solution.
+            Your next stage of growth begins with one message. Tell us your goals, and we&apos;ll architect the perfect AI powered solution.
           </p>
         </AnimatedSection>
       </section>

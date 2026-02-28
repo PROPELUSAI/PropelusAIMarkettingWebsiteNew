@@ -80,7 +80,7 @@ export default function TestimonialsClient() {
       <PageHero
         tag="Trust, Proven"
         title="What Global Teams Say About PropelusAI"
-        description="Real outcomes. Real experiences. AI-powered success stories. We support businesses globally with premium AI systems built for measurable growth."
+        description="Real outcomes. Real experiences. AI powered success stories. We support businesses globally with premium AI systems built for measurable growth."
       />
 
       {/* Testimonials Grid */}
