@@ -1,3 +1,9 @@
+/**
+ * config/env.ts — Environment variable loading and validation.
+ * Loads .env from multiple locations (monorepo/standalone/production),
+ * validates all required variables with Zod schema, and exports
+ * the typed configuration object used throughout the backend.
+ */
 import { config } from 'dotenv';
 import path from 'path';
 import fs from 'fs';

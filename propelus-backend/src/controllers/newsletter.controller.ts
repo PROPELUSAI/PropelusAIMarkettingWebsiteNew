@@ -1,5 +1,9 @@
-import { Request, Response } from 'express';
-import { NewsletterSubscriber } from '../db/mongodb/models/NewsletterSubscriber';
+/**
+ * newsletter.controller.ts — Newsletter subscription and campaign endpoints.
+ * Public: subscribe/unsubscribe with welcome email via Resend.
+ * Admin: manage subscribers, create/send campaigns, view all campaigns.
+ */
+import { Request, Response } from 'express';import { NewsletterSubscriber } from '../db/mongodb/models/NewsletterSubscriber';
 import { NewsletterCampaign } from '../db/mongodb/models/NewsletterCampaign';
 import { asyncHandler } from '../utils/asyncHandler';
 import { ApiResponse } from '../utils/ApiResponse';

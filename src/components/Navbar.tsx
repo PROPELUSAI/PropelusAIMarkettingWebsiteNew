@@ -1,3 +1,9 @@
+/**
+ * Navbar.tsx — Fixed top navigation bar (client component).
+ * Features: transparent-to-solid scroll transition, active link highlighting,
+ * responsive mobile menu with Framer Motion slide-in animation,
+ * and "Contact" CTA button.
+ */
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -7,6 +13,7 @@ import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { navigation } from '@/lib/data';
 
+/** Renders the fixed navbar with desktop links, mobile drawer, and scroll effects */
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);

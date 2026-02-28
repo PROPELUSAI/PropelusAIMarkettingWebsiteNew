@@ -1,3 +1,8 @@
+/**
+ * PageHero.tsx — Reusable page hero section (client component).
+ * Renders a top-padded section with animated tag, title, and description.
+ * Used as the header for every interior page (About, Services, Products, etc.).
+ */
 'use client';
 
 import { motion } from 'framer-motion';
@@ -9,6 +14,7 @@ interface PageHeroProps {
   dark?: boolean;
 }
 
+/** Renders a page hero with staggered entrance animation for tag, title, and description */
 export default function PageHero({ tag, title, description, dark = false }: PageHeroProps) {
   return (
     <section className={`pt-32 pb-16 lg:pt-40 lg:pb-20 ${dark ? 'section-dark' : 'section-warm'}`}>

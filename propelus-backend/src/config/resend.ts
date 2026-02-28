@@ -1,3 +1,8 @@
+/**
+ * resend.ts — Resend email client initialization.
+ * Configures the Resend SDK for transactional emails.
+ * Gracefully skips if RESEND_API_KEY is not set.
+ */
 import { Resend } from 'resend';
 import env from './env';
 import { logger } from '../utils/logger';

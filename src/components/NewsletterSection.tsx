@@ -1,8 +1,14 @@
+/**
+ * NewsletterSection.tsx — Email newsletter subscription form (client component).
+ * Renders inside the Footer. Submits email to backend via RTK Query,
+ * shows success message with 5-second auto-reset, handles errors.
+ */
 'use client';
 
 import { useState, useEffect } from 'react';
 import { useSubscribeNewsletterMutation } from '@/store';
 
+/** Renders the newsletter subscription form with email input and submit button */
 export default function NewsletterSection() {
   const [email, setEmail] = useState('');
   const [subscribeNewsletter, { isLoading, isSuccess, isError, error, reset: resetMutation }] = useSubscribeNewsletterMutation();

@@ -1,3 +1,7 @@
+/**
+ * ApiError.ts — Custom error class for structured API error responses.
+ * Provides static factory methods for common HTTP errors (400, 401, 403, 404, 409, 500).
+ */
 export class ApiError extends Error {
   public statusCode: number;
   public isOperational: boolean;

@@ -1,3 +1,10 @@
+/**
+ * AIChatbot.tsx — Floating AI chatbot widget (client component).
+ * Features: lead capture form (name + email) before chat is unlocked,
+ * newsletter auto-subscription, session persistence via sessionStorage,
+ * Gemini AI responses via backend, clear/reset functionality.
+ * Appears as a floating button in the bottom-right corner.
+ */
 'use client';
 
 import { useState, useRef, useEffect, useCallback } from 'react';
@@ -8,12 +15,12 @@ const CHAT_SESSION_KEY = 'propelusai_chat_session';
 const CHAT_MESSAGES_KEY = 'propelusai_chat_messages';
 const CHAT_USER_KEY = 'propelusai_chat_user';
 
-// Generate a unique session ID
+/** Generates a unique session ID for chat tracking */
 const generateSessionId = () => {
   return `chat_${Date.now()}_${Math.random().toString(36).substring(2, 9)}`;
 };
 
-// Get or create session ID
+/** Retrieves or creates a session ID from sessionStorage */
 const getSessionId = (): string => {
   if (typeof window === 'undefined') return generateSessionId();
   
@@ -25,7 +32,7 @@ const getSessionId = (): string => {
   return sessionId;
 };
 
-// Load messages from session storage
+/** Loads chat messages from sessionStorage (returns empty array on failure) */
 const loadMessages = (): ChatMessage[] => {
   if (typeof window === 'undefined') return [];
   
@@ -37,13 +44,13 @@ const loadMessages = (): ChatMessage[] => {
   }
 };
 
-// Save messages to session storage
+/** Persists chat messages to sessionStorage */
 const saveMessages = (messages: ChatMessage[]) => {
   if (typeof window === 'undefined') return;
   sessionStorage.setItem(CHAT_MESSAGES_KEY, JSON.stringify(messages));
 };
 
-// Load user info from session storage
+/** Loads saved user info (name + email) from sessionStorage */
 const loadUser = (): { name: string; email: string } | null => {
   if (typeof window === 'undefined') return null;
   try {
@@ -54,12 +61,13 @@ const loadUser = (): { name: string; email: string } | null => {
   }
 };
 
-// Save user info to session storage
+/** Persists user info to sessionStorage */
 const saveUser = (user: { name: string; email: string }) => {
   if (typeof window === 'undefined') return;
   sessionStorage.setItem(CHAT_USER_KEY, JSON.stringify(user));
 };
 
+/** Main chatbot component: floating button, lead capture form, and chat window */
 export default function AIChatbot() {
   const [isOpen, setIsOpen] = useState(false);
   const [message, setMessage] = useState('');

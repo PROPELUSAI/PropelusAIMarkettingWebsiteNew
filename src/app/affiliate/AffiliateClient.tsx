@@ -1,3 +1,9 @@
+/**
+ * AffiliateClient.tsx — Affiliate program page (client component).
+ * Shows three perk cards, a registration form (name, email, phone, description),
+ * and a "Why Partner With Us" section. Submits via RTK Query mutation
+ * with 5-second auto-reset on success.
+ */
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -7,12 +13,14 @@ import AnimatedSection, { StaggerContainer, StaggerItem } from '@/components/Ani
 import { HiOutlineBanknotes, HiOutlineRocketLaunch, HiOutlineUserGroup } from 'react-icons/hi2';
 import { useSubmitAffiliateMutation } from '@/store';
 
+/** Affiliate program benefits displayed as icon cards */
 const perks = [
   { icon: HiOutlineBanknotes, title: 'Competitive Commissions', desc: 'Earn attractive commissions on every successful referral and recurring revenue from long-term clients.' },
   { icon: HiOutlineRocketLaunch, title: 'Premium AI Solutions', desc: 'Promote cutting edge AI services including automation, CRM builds, websites, and growth strategies.' },
   { icon: HiOutlineUserGroup, title: 'Dedicated Support', desc: 'Get access to marketing materials and dedicated support to help you succeed.' },
 ];
 
+/** Renders the affiliate page: hero, perks grid, registration form, and partnership section */
 export default function AffiliateClient() {
   const [formData, setFormData] = useState({ name: '', email: '', phone: '', description: '' });
   const [submitAffiliate, { isLoading, isSuccess, isError, error, reset: resetMutation }] = useSubmitAffiliateMutation();

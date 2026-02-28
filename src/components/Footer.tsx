@@ -1,9 +1,16 @@
+/**
+ * Footer.tsx — Site-wide footer (server component).
+ * Contains: newsletter subscription section, brand column with contact info
+ * and social icons, Products/Services/Company link columns, offices,
+ * and copyright bar with Terms/Privacy/Support links.
+ */
 import Link from 'next/link';
 import Image from 'next/image';
 import { siteConfig, footerLinks } from '@/lib/data';
 import { SiLinkedin, SiInstagram, SiFacebook, SiThreads, SiPinterest, SiYoutube, SiBluesky } from 'react-icons/si';
 import NewsletterSection from './NewsletterSection';
 
+/** Social media platform links with their icons */
 const socials = [
   { label: 'LinkedIn', href: 'https://www.linkedin.com/company/propelusai/', icon: SiLinkedin },
   { label: 'Instagram', href: 'https://www.instagram.com/propelusai/', icon: SiInstagram },
@@ -14,6 +21,7 @@ const socials = [
   { label: 'Bluesky', href: 'https://bsky.app/profile/propelusai.bsky.social', icon: SiBluesky },
 ];
 
+/** Renders the full footer: newsletter, brand info, link columns, and copyright */
 export default function Footer() {
   return (
     <footer className="bg-surface-950 text-white">

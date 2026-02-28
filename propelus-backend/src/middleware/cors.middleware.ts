@@ -1,3 +1,7 @@
+/**
+ * cors.middleware.ts — CORS configuration for allowed origins.
+ * Reads ALLOWED_ORIGINS from env and permits requests from those domains.
+ */
 import cors from 'cors';
 import env from '../config/env';
 

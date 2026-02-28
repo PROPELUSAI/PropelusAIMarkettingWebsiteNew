@@ -1,5 +1,9 @@
-import { Request, Response } from 'express';
-import { Testimonial } from '../db/mongodb/models/Testimonial';
+/**
+ * testimonial.controller.ts — Testimonial submission and management.
+ * Public: submit testimonials (pending review), get approved ones.
+ * Admin: list all, approve/reject (with email notification), delete.
+ */
+import { Request, Response } from 'express';import { Testimonial } from '../db/mongodb/models/Testimonial';
 import { asyncHandler } from '../utils/asyncHandler';
 import { ApiResponse } from '../utils/ApiResponse';
 import { ApiError } from '../utils/ApiError';

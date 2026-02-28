@@ -1,3 +1,8 @@
+/**
+ * ApiResponse.ts — Standardized JSON response helper.
+ * Provides static methods for success, created, paginated, and error responses
+ * ensuring a consistent response format across all endpoints.
+ */
 import { Response } from 'express';
 
 export class ApiResponse {

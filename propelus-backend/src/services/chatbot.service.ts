@@ -1,3 +1,8 @@
+/**
+ * chatbot.service.ts — AI chatbot business logic.
+ * Manages chat sessions in MongoDB, sends messages through Gemini AI,
+ * tracks lead scores, retrieves conversation history, and provides analytics.
+ */
 import { ChatConversation, IChatConversation } from '../db/mongodb/models/ChatConversation';
 import { geminiService } from './gemini.service';
 import { logger } from '../utils/logger';

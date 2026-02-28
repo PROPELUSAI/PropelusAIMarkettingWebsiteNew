@@ -8,9 +8,13 @@ import CTASection from '@/components/CTASection';
 import { stats, products, testimonials } from '@/lib/data';
 
 /* ============================================
-   Home Page
+   Home Page — Main landing page
+   Sections: Hero (video bg), StatsBar, Marquee,
+   Pathways (Products vs Services), Features,
+   TestimonialHighlight (auto-rotating carousel), CTA
    ============================================ */
 
+/* Hero — Full-screen video background with parallax scroll, tagline, and CTAs */
 function Hero() {
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] });
@@ -89,6 +93,7 @@ function Hero() {
   );
 }
 
+/* StatsBar — Displays key business metrics (150+ delivered, 42% faster, etc.) */
 function StatsBar() {
   return (
     <section className="section-light py-16 lg:py-20 border-b border-surface-100">
@@ -104,6 +109,7 @@ function StatsBar() {
   );
 }
 
+/* Marquee — Dark-themed infinite scrolling ticker of service names */
 function Marquee() {
   const items = [
     'LinkedIn Advertising', 'Content Engine', 'CRM Development', 'Meta Ads',
@@ -125,6 +131,7 @@ function Marquee() {
     </section>
   );
 }
+/* Marquee2 — Light-themed alternate marquee (currently unused) */
 function Marquee2() {
   const items = [
     'LinkedIn Advertising', 'Content Engine', 'CRM Development', 'Meta Ads',
@@ -147,6 +154,7 @@ function Marquee2() {
   );
 }
 
+/* Pathways — Side-by-side comparison of Products (subscriptions) vs Services (one-time) */
 function Pathways() {
   const productFeatures = ['AI driven LinkedIn advertising (monthly)', 'LinkedIn content engine (20 posts/month)', 'AI powered CRM subscription', 'Lead scoring & monthly lead segmentation', 'Instagram & Facebook ads management', 'Monthly content creation (10 assets/month)', 'Funnel analytics & CRO subscription', 'AI assisted cold calling subscription'];
   const serviceFeatures = ['Website building (AI powered)', 'Mobile app development', 'Custom CRM development', 'Domain & email setup', 'Cybersecurity audits', 'Marketing automation implementation', 'Funnel buildouts', 'One time technical integrations'];
@@ -236,6 +244,7 @@ function Pathways() {
   );
 }
 
+/* Features — Three-column grid: Global Presence, Industry Agnostic, Full Funnel */
 function Features() {
   const features = [
     { title: 'Global Presence', desc: 'Serving clients worldwide' },
@@ -257,6 +266,7 @@ function Features() {
   );
 }
 
+/* TestimonialHighlight — Auto-rotating testimonial carousel with swipe animation (6s interval) */
 function TestimonialHighlight() {
   const [current, setCurrent] = useState(0);
   const [direction, setDirection] = useState(1);
@@ -346,6 +356,7 @@ function TestimonialHighlight() {
   );
 }
 
+/* HomePage — Composes all homepage sections in order */
 export default function HomePage() {
   return (
     <>

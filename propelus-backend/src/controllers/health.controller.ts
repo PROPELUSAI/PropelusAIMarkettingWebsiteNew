@@ -1,5 +1,9 @@
-import { Request, Response } from 'express';
-import mongoose from 'mongoose';
+/**
+ * health.controller.ts — Health check endpoint.
+ * Returns server status, uptime, and MongoDB connection state.
+ * Used by Vercel/Render health checks and monitoring tools.
+ */
+import { Request, Response } from 'express';import mongoose from 'mongoose';
 import { asyncHandler } from '../utils/asyncHandler';
 import { ApiResponse } from '../utils/ApiResponse';
 

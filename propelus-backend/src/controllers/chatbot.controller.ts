@@ -1,5 +1,10 @@
-import { Request, Response } from 'express';
-import { asyncHandler } from '../utils/asyncHandler';
+/**
+ * chatbot.controller.ts — AI chatbot endpoints.
+ * Handles message sending (via Gemini AI), chatbot newsletter subscription
+ * with lead capture to ChatConversation, conversation history retrieval,
+ * and chatbot analytics for admin.
+ */
+import { Request, Response } from 'express';import { asyncHandler } from '../utils/asyncHandler';
 import { ApiResponse } from '../utils/ApiResponse';
 import { chatbotService } from '../services/chatbot.service';
 import { NewsletterSubscriber } from '../db/mongodb/models/NewsletterSubscriber';

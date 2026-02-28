@@ -1,3 +1,7 @@
+/**
+ * logger.ts — Simple structured logger with timestamp, level, and color output.
+ * Supports info, warn, error, and debug levels. Debug only logs in development.
+ */
 type LogLevel = 'info' | 'warn' | 'error' | 'debug';
 
 function formatTimestamp(): string {

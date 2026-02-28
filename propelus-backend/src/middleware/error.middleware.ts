@@ -1,3 +1,8 @@
+/**
+ * error.middleware.ts — Global error handler and 404 handler.
+ * Catches all unhandled errors, formats Mongoose validation/cast/duplicate
+ * errors, and returns structured JSON responses with dev-mode stack traces.
+ */
 import { Request, Response, NextFunction } from 'express';
 import { ApiError } from '../utils/ApiError';
 import { logger } from '../utils/logger';

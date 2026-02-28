@@ -1,3 +1,8 @@
+/**
+ * auth.middleware.ts — JWT authentication and role-based authorization.
+ * verifyToken: extracts and validates Bearer token from Authorization header.
+ * requireRole: restricts access to specific admin roles (e.g., 'admin', 'super_admin').
+ */
 import { Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
 import env from '../config/env';

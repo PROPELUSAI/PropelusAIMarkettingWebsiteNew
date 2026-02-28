@@ -1,3 +1,11 @@
+/**
+ * data.ts — Central content & data file for the entire frontend.
+ * Contains: siteConfig, navigation links, stats, products (21),
+ * services (31 across 5 categories), testimonials, values,
+ * FAQ categories, footer links, and homepage pathway data.
+ * All page-level content references this file as the single source of truth.
+ */
+
 /* ============================================
    PropelusAI. Site Content & Data
    ============================================ */

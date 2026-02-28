@@ -1,3 +1,6 @@
+/**
+ * security.middleware.ts — HTTP security headers via Helmet and HPP protection.
+ */
 import helmet from 'helmet';
 import hpp from 'hpp';
 import { RequestHandler } from 'express';

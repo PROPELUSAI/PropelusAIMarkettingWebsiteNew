@@ -1,3 +1,7 @@
+/**
+ * mongodb.ts — MongoDB connection management via Mongoose.
+ * Provides connectMongoDB and disconnectMongoDB functions used by server.ts.
+ */
 import mongoose from 'mongoose';
 import env from './env';
 import { logger } from '../utils/logger';

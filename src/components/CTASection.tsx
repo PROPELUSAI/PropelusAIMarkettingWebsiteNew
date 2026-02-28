@@ -1,3 +1,8 @@
+/**
+ * CTASection.tsx — Reusable call-to-action section (server component).
+ * Renders a centered section with tag, title, description, and two
+ * action buttons (primary + secondary). Supports dark and warm variants.
+ */
 import Link from 'next/link';
 import AnimatedSection from './AnimatedSection';
 
@@ -12,6 +17,7 @@ interface CTASectionProps {
   dark?: boolean;
 }
 
+/** Renders a full-width CTA section with configurable text and button links */
 export default function CTASection({
   tag = 'Ready to Build?',
   title = "Let's create the most powerful version of your business.",

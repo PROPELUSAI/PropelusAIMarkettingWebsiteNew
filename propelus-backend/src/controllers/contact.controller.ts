@@ -1,5 +1,9 @@
-import { Request, Response } from 'express';
-import { ContactSubmission } from '../db/mongodb/models/ContactSubmission';
+/**
+ * contact.controller.ts — Contact form submission endpoints.
+ * Handles public form submission (with notification email + analytics tracking),
+ * admin CRUD operations with pagination/filters, and lead status management.
+ */
+import { Request, Response } from 'express';import { ContactSubmission } from '../db/mongodb/models/ContactSubmission';
 import { asyncHandler } from '../utils/asyncHandler';
 import { ApiResponse } from '../utils/ApiResponse';
 import { ApiError } from '../utils/ApiError';

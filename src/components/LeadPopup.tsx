@@ -1,3 +1,10 @@
+/**
+ * LeadPopup.tsx — First-visit lead capture popup (client component).
+ * Appears after 3 seconds on first visit (tracked via localStorage).
+ * Split layout: left panel with stats & highlights, right panel with
+ * multi-field form (name, email, company, country, phone, interest,
+ * promo code, description, optional calendar). Submits via RTK Query.
+ */
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
@@ -8,9 +15,12 @@ import { useSubmitLeadMutation } from '@/store';
 import EmbeddedCalendar from '@/components/EmbeddedCalendar';
 import { countries } from '@/lib/countries';
 
+/** Delay before popup appears on first visit (milliseconds) */
 const POPUP_DELAY_MS = 3000;
+/** localStorage key to track if popup was already dismissed */
 const LOCAL_KEY = 'propelusai_popup_dismissed';
 
+/** Key metrics displayed in the left panel */
 const stats = [
   { value: '3.1×', label: 'Pipeline Growth' },
   { value: '42%', label: 'Faster Sales Cycles' },
@@ -24,6 +34,7 @@ const highlights = [
   'Outcome-first approach with measurable ROI',
 ];
 
+/** Renders the full-screen modal popup with lead capture form */
 export default function LeadPopup() {
   const [isVisible, setIsVisible] = useState(false);
   const [phone, setPhone] = useState<string | undefined>('');

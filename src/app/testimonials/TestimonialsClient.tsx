@@ -1,3 +1,10 @@
+/**
+ * TestimonialsClient.tsx — Testimonials page (client component).
+ * Merges API-fetched testimonials with static ones from data.ts,
+ * displays them in a 2-column grid with "Show All" toggle,
+ * and includes a testimonial submission form with image sidebar.
+ * 5-second auto-reset on successful submission.
+ */
 'use client';
 
 import { useState, useMemo, useEffect } from 'react';
@@ -7,6 +14,7 @@ import AnimatedSection from '@/components/AnimatedSection';
 import { testimonials as staticTestimonials } from '@/lib/data';
 import { useGetTestimonialsQuery, useSubmitTestimonialMutation, Testimonial } from '@/store';
 
+/** Rotating avatar background colors for testimonial initials */
 const avatarColors = [
   'bg-brand-500/15 text-brand-600',
   'bg-emerald-500/15 text-emerald-600',
@@ -18,11 +26,13 @@ const avatarColors = [
   'bg-teal-500/15 text-teal-600',
 ];
 
+/** Extracts up to 2 uppercase initials from a name for avatar display */
 function getInitials(name?: string) {
   if (!name) return '?';
   return name.split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase();
 }
 
+/** Renders testimonials grid, "Show All" toggle, and submission form */
 export default function TestimonialsClient() {
   const [formData, setFormData] = useState({ name: '', email: '', phone: '', testimonial: '' });
   const [showAll, setShowAll] = useState(false);

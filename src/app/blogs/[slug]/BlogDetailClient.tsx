@@ -1,3 +1,9 @@
+/**
+ * BlogDetailClient.tsx — Individual blog post detail page (client component).
+ * Displays article header (category, date, tags), featured image,
+ * body content (HTML or raw text), optional in-article CTA, and bottom CTA.
+ * Uses Framer Motion for staggered entrance animations.
+ */
 'use client';
 
 import Link from 'next/link';
@@ -24,6 +30,7 @@ interface Blog {
   cta_link?: string;
 }
 
+/** Formats an ISO date string to "Month DD, YYYY" long display format */
 function formatDate(dateStr: string | null | undefined): string {
   if (!dateStr) return '';
   return new Date(dateStr).toLocaleDateString('en-US', {
@@ -32,7 +39,7 @@ function formatDate(dateStr: string | null | undefined): string {
     day: 'numeric',
   });
 }
-
+/** Renders a full blog article: header, featured image, body content, and CTA */
 export default function BlogDetailClient({ blog }: { blog: Blog }) {
   const displayDate = formatDate(blog.publish_date || blog.created_at);
 

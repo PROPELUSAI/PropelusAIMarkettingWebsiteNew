@@ -1,3 +1,9 @@
+/**
+ * EmbeddedCalendar.tsx — Inline date & time picker (client component).
+ * Renders a monthly calendar grid alongside a scrollable time slot list.
+ * Supports compact mode (for popups), 24-hour minimum future restriction,
+ * business hours (9 AM to 9:30 PM), and displays selected date/time summary.
+ */
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
@@ -26,6 +32,7 @@ interface TimeSlot {
   value: string;
 }
 
+/** Renders the calendar grid with date selection and time slot picker */
 export default function EmbeddedCalendar({
   value,
   onChange,

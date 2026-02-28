@@ -1,3 +1,7 @@
+/**
+ * types/index.ts — Shared TypeScript types and interfaces for the backend.
+ * Defines LeadStatus, Priority, AuthRequest, JwtPayload, and pagination helpers.
+ */
 import { Request } from 'express';
 
 // ─── Enums ───────────────────────────────────────────

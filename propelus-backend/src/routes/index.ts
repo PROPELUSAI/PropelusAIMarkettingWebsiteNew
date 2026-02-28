@@ -1,3 +1,8 @@
+/**
+ * routes/index.ts — Central route registrar.
+ * Mounts all API v1 sub-routers under /api/v1/, registers the
+ * health check at /health, and provides a root route with API info.
+ */
 import { Router } from 'express';
 import contactRoutes from './contact.routes';
 import testimonialRoutes from './testimonial.routes';

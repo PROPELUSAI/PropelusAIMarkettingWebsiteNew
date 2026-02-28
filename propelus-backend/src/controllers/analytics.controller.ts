@@ -1,5 +1,8 @@
-import { Request, Response } from 'express';
-import { asyncHandler } from '../utils/asyncHandler';
+/**
+ * analytics.controller.ts — Analytics event tracking and metrics endpoints.
+ * Public: track events. Admin: query events by type and view dashboard metrics.
+ */
+import { Request, Response } from 'express';import { asyncHandler } from '../utils/asyncHandler';
 import { ApiResponse } from '../utils/ApiResponse';
 import { analyticsService } from '../services/analytics.service';
 import { AuthRequest } from '../types';

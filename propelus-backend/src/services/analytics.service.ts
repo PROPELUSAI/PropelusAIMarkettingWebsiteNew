@@ -1,3 +1,8 @@
+/**
+ * analytics.service.ts — Analytics event tracking and reporting.
+ * Tracks form submissions, page views, and custom events in MongoDB.
+ * Provides dashboard metrics and event queries for admin reporting.
+ */
 import { AnalyticsEvent } from '../db/mongodb/models/AnalyticsEvent';
 import { logger } from '../utils/logger';
 

@@ -1,3 +1,8 @@
+/**
+ * ProductsClient.tsx — Products listing page (client component).
+ * Renders all 21 subscription-based AI products as cards with icons,
+ * descriptions, deliverables, and "Get Quote" CTAs.
+ */
 'use client';
 
 import Link from 'next/link';
@@ -6,6 +11,7 @@ import { StaggerContainer, StaggerItem } from '@/components/AnimatedSection';
 import CTASection from '@/components/CTASection';
 import { products } from '@/lib/data';
 
+/** Maps product icon keys to inline SVG components for the card headers */
 const iconMap: Record<string, React.ReactNode> = {
   linkedin: <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M8 11v5M8 8v.01M12 16v-5c0-1.1.9-2 2-2s2 .9 2 2v5"/></svg>,
   content: <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"><path d="M12 20h9M16.5 3.5a2.12 2.12 0 013 3L7 19l-4 1 1-4z"/></svg>,
@@ -22,6 +28,7 @@ const iconMap: Record<string, React.ReactNode> = {
   shield: <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>,
 };
 
+/** Renders the full Products page: hero, product grid with stagger animation, and CTA */
 export default function ProductsClient() {
   return (
     <>

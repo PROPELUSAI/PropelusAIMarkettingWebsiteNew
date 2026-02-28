@@ -1,3 +1,8 @@
+/**
+ * FAQClient.tsx — FAQ page (client component).
+ * Renders categorized FAQ sections with collapsible accordion items
+ * using Framer Motion for smooth open/close animation.
+ */
 'use client';
 
 import { useState } from 'react';
@@ -8,6 +13,7 @@ import AnimatedSection from '@/components/AnimatedSection';
 import CTASection from '@/components/CTASection';
 import { faqCategories } from '@/lib/data';
 
+/** Renders the full FAQ page: hero, categorized accordion sections, and CTA */
 export default function FAQClient() {
   return (
     <>
@@ -47,6 +53,7 @@ export default function FAQClient() {
   );
 }
 
+/** Single FAQ accordion item — click to expand/collapse answer with Framer Motion */
 function FAQItem({ question, answer }: { question: string; answer: string }) {
   const [open, setOpen] = useState(false);
 

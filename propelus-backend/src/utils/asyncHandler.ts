@@ -1,3 +1,7 @@
+/**
+ * asyncHandler.ts — Wraps async Express handlers to auto-catch errors.
+ * Eliminates the need for try-catch in every route handler.
+ */
 import { Request, Response, NextFunction } from 'express';
 
 /**

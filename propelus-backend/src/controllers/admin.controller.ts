@@ -1,5 +1,9 @@
-import { Request, Response } from 'express';
-import bcrypt from 'bcryptjs';
+/**
+ * admin.controller.ts — Admin authentication and dashboard endpoints.
+ * Handles login (JWT generation), profile management, password change,
+ * and aggregated dashboard statistics across all collections.
+ */
+import { Request, Response } from 'express';import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import { AdminUser } from '../db/mongodb/models/AdminUser';
 import { ContactSubmission } from '../db/mongodb/models/ContactSubmission';

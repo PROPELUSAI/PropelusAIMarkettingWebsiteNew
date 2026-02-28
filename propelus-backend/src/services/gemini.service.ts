@@ -1,3 +1,9 @@
+/**
+ * gemini.service.ts — Google Gemini AI integration for the chatbot.
+ * Contains the system prompt with PropelusAI knowledge base,
+ * conversation context formatting, and response generation.
+ * Enforces scope-locked responses (PropelusAI-only topics).
+ */
 import { model as geminiModel } from '../config/gemini';
 import { KNOWLEDGE_BASE } from '../config/knowledgeBase';
 import { logger } from '../utils/logger';

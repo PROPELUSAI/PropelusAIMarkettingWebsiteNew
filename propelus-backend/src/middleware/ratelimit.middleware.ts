@@ -1,3 +1,8 @@
+/**
+ * ratelimit.middleware.ts — Rate limiting for API endpoints.
+ * Provides general, form-specific, and chatbot-specific rate limiters
+ * to prevent abuse and protect backend resources.
+ */
 import rateLimit from 'express-rate-limit';
 import env from '../config/env';
 

@@ -1,3 +1,8 @@
+/**
+ * validate.middleware.ts — Zod schema validation middleware.
+ * Validates request body/query/params against Zod schemas and returns
+ * formatted error messages on validation failure.
+ */
 import { Request, Response, NextFunction } from 'express';
 import { ZodSchema, ZodError, ZodIssue } from 'zod';
 import { ApiError } from '../utils/ApiError';

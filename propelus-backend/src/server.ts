@@ -1,3 +1,8 @@
+/**
+ * server.ts — Application entry point.
+ * Connects to MongoDB, starts the HTTP server on the configured port,
+ * and sets up graceful shutdown handlers for SIGTERM/SIGINT.
+ */
 import app from './app';
 import env from './config/env';
 import { connectMongoDB, disconnectMongoDB } from './config/mongodb';

@@ -1,3 +1,8 @@
+/**
+ * gemini.ts — Google Gemini AI model initialization.
+ * Configures the Gemini 2.0 Flash model for chatbot responses.
+ * Gracefully skips initialization if GEMINI_API_KEY is not set.
+ */
 import { GoogleGenerativeAI, GenerativeModel } from '@google/generative-ai';
 import env from './env';
 import { logger } from '../utils/logger';

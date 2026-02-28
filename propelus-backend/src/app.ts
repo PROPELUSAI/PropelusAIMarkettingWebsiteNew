@@ -1,3 +1,8 @@
+/**
+ * app.ts — Express application setup.
+ * Configures security headers, CORS, body parsing, rate limiting,
+ * API routes, 404 handler, and global error handler.
+ */
 import express from 'express';
 import routes from './routes';
 import { corsMiddleware } from './middleware/cors.middleware';

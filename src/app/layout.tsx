@@ -1,3 +1,11 @@
+/**
+ * layout.tsx — Root layout for the entire Next.js application.
+ * Configures Google Fonts (DM Sans + DM Mono), SEO metadata, Open Graph,
+ * JSON-LD structured data (Organization, WebSite, Logo schemas),
+ * analytics scripts (GTM, Meta Pixel, Zoho PageSense),
+ * and wraps all pages with Redux StoreProvider, Navbar, Footer,
+ * LeadPopup, and AIChatbot.
+ */
 import type { Metadata } from 'next';
 import { DM_Sans, DM_Mono } from 'next/font/google';
 import Script from 'next/script';
@@ -142,6 +150,7 @@ export const metadata: Metadata = {
   alternates: { canonical: 'https://www.propelusai.com' },
 };
 
+/** Root layout: wraps every page with fonts, providers, nav, footer, popups, and analytics */
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${dmSans.variable} ${dmMono.variable}`} suppressHydrationWarning>

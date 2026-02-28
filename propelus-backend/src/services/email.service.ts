@@ -1,3 +1,9 @@
+/**
+ * email.service.ts — Email sending via Resend API.
+ * Handles all outbound emails: contact form notifications, newsletter
+ * welcome emails, testimonial/affiliate approvals, campaign bulk sends.
+ * Includes retry logic and branded HTML email templates.
+ */
 import { resend, emailFrom } from '../config/resend';
 import env from '../config/env';
 import { logger } from '../utils/logger';

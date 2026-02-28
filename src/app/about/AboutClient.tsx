@@ -1,3 +1,8 @@
+/**
+ * AboutClient.tsx — About page (client component).
+ * Sections: Company Story, Mission & Vision cards, Core Values grid,
+ * Global Offices (US & India), and a bottom CTA.
+ */
 'use client';
 
 import Link from 'next/link';
@@ -6,6 +11,7 @@ import AnimatedSection, { StaggerContainer, StaggerItem } from '@/components/Ani
 import CTASection from '@/components/CTASection';
 import { values, siteConfig } from '@/lib/data';
 
+/** Renders the full About page with story, mission/vision, values, and offices */
 export default function AboutClient() {
   return (
     <>

@@ -8,6 +8,9 @@ import AnimatedSection from '@/components/AnimatedSection';
 import CTASection from '@/components/CTASection';
 import { serviceCategories } from '@/lib/data';
 
+/* ServicesClient — Displays all service categories with tabbed navigation.
+   Users select a category tab → services for that category render below.
+   Each service card shows: title, summary, description, timeline, deliverables, and CTA buttons. */
 export default function ServicesClient() {
   const [activeCategory, setActiveCategory] = useState(serviceCategories[0].id);
   const activeCat = serviceCategories.find((c) => c.id === activeCategory) || serviceCategories[0];
@@ -99,6 +102,8 @@ export default function ServicesClient() {
   );
 }
 
+/* ServiceCard — Individual service card with animated entry.
+   Renders headline, title, summary, description, timeline, deliverables grid, and contact CTAs. */
 function ServiceCard({ service, index }: { service: (typeof serviceCategories)[0]['services'][0]; index: number }) {
   return (
     <motion.div

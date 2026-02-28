@@ -1,5 +1,9 @@
-import { Request, Response } from 'express';
-import { AffiliateRegistration } from '../db/mongodb/models/AffiliateRegistration';
+/**
+ * affiliate.controller.ts — Affiliate program registration and management.
+ * Public: register with auto-generated affiliate code.
+ * Admin: list, approve (with commission rate), reject, and update status.
+ */
+import { Request, Response } from 'express';import { AffiliateRegistration } from '../db/mongodb/models/AffiliateRegistration';
 import { asyncHandler } from '../utils/asyncHandler';
 import { ApiResponse } from '../utils/ApiResponse';
 import { ApiError } from '../utils/ApiError';

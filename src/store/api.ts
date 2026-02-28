@@ -1,3 +1,13 @@
+/**
+ * api.ts — RTK Query API slice for all frontend-to-backend communication.
+ * Defines TypeScript interfaces for all form payloads and API responses,
+ * and exports auto-generated React hooks for each endpoint:
+ *   - Contact form, Lead popup, Testimonials (submit + fetch),
+ *   - Affiliate registration, Newsletter subscription,
+ *   - AI Chatbot (message + newsletter subscribe + history),
+ *   - Health check.
+ * Base URL routes through Next.js /api proxy in browser, direct backend URL on server.
+ */
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 // ── Types matching BACKEND validators exactly ──

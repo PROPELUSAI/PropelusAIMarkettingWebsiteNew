@@ -1,3 +1,11 @@
+/**
+ * ContactClient.tsx — Contact / "Start Your Project" page (client component).
+ * Contains a multi-field form (name, company, email, country dropdown,
+ * phone via PhoneInput, interest selector with "Other" conditional field,
+ * promo code, embedded calendar picker, and project description).
+ * Sidebar shows direct contact info, offices, and "Why Contact Us" reasons.
+ * Submits to the backend via RTK Query mutation with 5-second auto-reset.
+ */
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -10,19 +18,21 @@ import { siteConfig } from '@/lib/data';
 import { countries } from '@/lib/countries';
 import { useSubmitContactMutation } from '@/store';
 
+/** Static contact information displayed in the sidebar */
 const contactInfo = [
   { icon: '📩', label: 'Email', value: siteConfig.email },
   { icon: '💬', label: 'WhatsApp', value: `${siteConfig.whatsapp.in} (IN) | ${siteConfig.whatsapp.us} (US)` },
   { icon: '🕒', label: 'Business Hours', value: '9 AM – 8 PM (All Time Zones)' },
 ];
 
+/** Selling points displayed beneath "Why Contact Us" in the sidebar */
 const reasons = [
   { title: 'Fast Response', desc: 'We reply within 24 hours' },
   { title: 'Clear Roadmapping', desc: 'Every conversation ends with clarity' },
   { title: 'AI-Native Expertise', desc: 'One unified system approach' },
   { title: 'Global Support', desc: 'Handle clients worldwide' },
 ];
-
+/** Renders the contact page: hero, form with calendar, sidebar, and bottom CTA */
 export default function ContactClient() {
   const [formData, setFormData] = useState({
     name: '', company: '', email: '', country: '', interest: '', otherInterest: '', promo: '', description: '',

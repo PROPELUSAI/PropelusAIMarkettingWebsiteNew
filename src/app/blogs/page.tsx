@@ -1,3 +1,9 @@
+/**
+ * blogs/page.tsx — Blog listing page (server component).
+ * Fetches all published blogs from the backend API with 60-second ISR revalidation,
+ * renders them as responsive cards in a 3-column grid with featured images,
+ * category badges, tags, and publication dates.
+ */
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -30,6 +36,7 @@ interface Blog {
   created_at: string;
 }
 
+/** Fetches blog posts from the backend API; returns empty array on failure */
 async function fetchBlogs(): Promise<Blog[]> {
   try {
     const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
@@ -43,7 +50,7 @@ async function fetchBlogs(): Promise<Blog[]> {
     return [];
   }
 }
-
+/** Formats an ISO date string to "Mon DD, YYYY" display format */
 function formatDate(dateStr: string | null | undefined): string {
   if (!dateStr) return '';
   return new Date(dateStr).toLocaleDateString('en-US', {
@@ -52,7 +59,7 @@ function formatDate(dateStr: string | null | undefined): string {
     day: 'numeric',
   });
 }
-
+/** Server component: fetches blogs and renders the listing page with cards */
 export default async function BlogsPage() {
   const blogs = await fetchBlogs();
 
