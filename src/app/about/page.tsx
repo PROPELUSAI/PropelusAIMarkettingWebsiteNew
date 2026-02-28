@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'About PropelusAI',
     description:
-      'The global AI company behind premium, ROI driven digital transformations.',
+      'The global AI company behind premium, ROI-driven digital transformations.',
   },
   alternates: { canonical: 'https://www.propelusai.com/about' },
 };

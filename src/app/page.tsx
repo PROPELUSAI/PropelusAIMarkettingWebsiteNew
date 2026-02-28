@@ -213,7 +213,7 @@ function Pathways() {
                 </div>
               </div>
 
-              <p className="text-surface-500 text-sm mb-1 leading-relaxed">High impact project implementations</p>
+              <p className="text-surface-500 text-sm mb-1 leading-relaxed">High-impact project implementations</p>
               <p className="text-surface-500 text-sm mb-6 leading-relaxed">One time builds that create permanent infrastructure for your business growth.</p>
 
               <div className="flex flex-wrap gap-1.5 mb-6">

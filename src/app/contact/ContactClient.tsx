@@ -13,13 +13,13 @@ import { useSubmitContactMutation } from '@/store';
 const contactInfo = [
   { icon: '📩', label: 'Email', value: siteConfig.email },
   { icon: '💬', label: 'WhatsApp', value: `${siteConfig.whatsapp.in} (IN) | ${siteConfig.whatsapp.us} (US)` },
-  { icon: '🕒', label: 'Business Hours', value: '9 AM to 8 PM (All Time Zones)' },
+  { icon: '🕒', label: 'Business Hours', value: '9 AM – 8 PM (All Time Zones)' },
 ];
 
 const reasons = [
   { title: 'Fast Response', desc: 'We reply within 24 hours' },
   { title: 'Clear Roadmapping', desc: 'Every conversation ends with clarity' },
-  { title: 'AI Native Expertise', desc: 'One unified system approach' },
+  { title: 'AI-Native Expertise', desc: 'One unified system approach' },
   { title: 'Global Support', desc: 'Handle clients worldwide' },
 ];
 
@@ -61,7 +61,7 @@ export default function ContactClient() {
       const fullDescription = [
         formData.interest === 'other' && formData.otherInterest ? `[Interest: ${formData.otherInterest}]` : '',
         formData.description || '',
-      ].filter(Boolean).join(' | ') || null;
+      ].filter(Boolean).join(' — ') || null;
 
       await submitContact({
         full_name: formData.name,
@@ -180,7 +180,7 @@ export default function ContactClient() {
                     {formData.interest === 'other' && (
                       <div>
                         {label('Please describe what you\'re looking for')}
-                        <textarea placeholder="Tell us what you have in mind. Specific goals, challenges, or ideas..." rows={3} value={formData.otherInterest} onChange={(e) => update('otherInterest', e.target.value)} className="form-input resize-none" disabled={isLoading} />
+                        <textarea placeholder="Tell us what you have in mind — specific goals, challenges, or ideas..." rows={3} value={formData.otherInterest} onChange={(e) => update('otherInterest', e.target.value)} className="form-input resize-none" disabled={isLoading} />
                       </div>
                     )}
 
@@ -252,8 +252,8 @@ export default function ContactClient() {
 
                 <h3 className="text-base font-medium mb-5">Global Offices</h3>
                 <div className="space-y-3 mb-10">
-                  <div className="text-sm"><span className="text-surface-700 font-medium">United States</span> | West Hide Trail, Phoenix, AZ 85085</div>
-                  <div className="text-sm"><span className="text-surface-700 font-medium">India</span> | Surat, Gujarat & Kolkata, West Bengal</div>
+                  <div className="text-sm"><span className="text-surface-700 font-medium">United States</span> — West Hide Trail, Phoenix, AZ 85085</div>
+                  <div className="text-sm"><span className="text-surface-700 font-medium">India</span> — Surat, Gujarat & Kolkata, West Bengal</div>
                 </div>
 
                 <h3 className="text-base font-medium mb-4">Why Contact Us</h3>

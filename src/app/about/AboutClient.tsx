@@ -12,7 +12,7 @@ export default function AboutClient() {
       <PageHero
         tag="Who We Are"
         title="About PropelusAI - AI Powered Growth"
-        description="Design first. AI native. Globally trusted."
+        description="Design-first. AI native. Globally trusted."
       />
 
       {/* Story */}
@@ -55,7 +55,7 @@ export default function AboutClient() {
               <div className="card-dark rounded-2xl p-8 h-full">
                 <h3 className="text-lg text-white mb-3">Vision</h3>
                 <p className="text-surface-400 leading-relaxed">
-                  To become the world&apos;s most trusted partner for premium AI driven transformations. Solutions that feel handcrafted, intelligent, and built to last.
+                  To become the world&apos;s most trusted partner for premium AI driven transformations — solutions that feel handcrafted, intelligent, and built to last.
                 </p>
               </div>
             </AnimatedSection>

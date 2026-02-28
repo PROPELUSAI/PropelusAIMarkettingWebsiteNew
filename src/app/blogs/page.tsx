@@ -74,7 +74,7 @@ export default async function BlogsPage() {
                 </svg>
               </div>
               <h3 className="text-lg font-medium text-surface-700 mb-2">No posts yet</h3>
-              <p className="text-sm text-surface-400">Check back soon, new insights are on the way.</p>
+              <p className="text-sm text-surface-400">Check back soon — new insights are on the way.</p>
             </div>
           ) : (
             <StaggerContainer className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">

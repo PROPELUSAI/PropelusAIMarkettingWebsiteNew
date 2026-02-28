@@ -227,7 +227,7 @@ export default function AIChatbot() {
                   </svg>
                 </div>
                 <div>
-                  <h3 className="font-semibold text-sm">Propel | PropelusAI</h3>
+                  <h3 className="font-semibold text-sm">Propel — PropelusAI</h3>
                   <p className="text-xs text-white/70 flex items-center gap-1">
                     <span className="w-1.5 h-1.5 rounded-full bg-green-400"></span>
                     {chatUser ? `Chatting with ${chatUser.name.split(' ')[0]}` : 'Online'}

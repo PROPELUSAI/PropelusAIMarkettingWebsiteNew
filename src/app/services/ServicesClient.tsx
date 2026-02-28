@@ -117,10 +117,6 @@ function ServiceCard({ service, index }: { service: (typeof serviceCategories)[0
           <h3 className="text-lg font-medium mb-2">{service.title}</h3>
           <p className="text-sm font-medium text-surface-600 leading-relaxed">{service.summary}</p>
         </div>
-        <div className="shrink-0 text-right">
-          <div className="text-xs text-surface-400 uppercase tracking-wider mb-1">Investment</div>
-          <div className="text-sm font-medium text-surface-700">{service.investment}</div>
-        </div>
       </div>
 
       {/* Description paragraph */}

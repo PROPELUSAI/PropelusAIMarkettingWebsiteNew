@@ -156,7 +156,7 @@ export default function AffiliateClient() {
           <span className="tag tag-dark mb-5 inline-flex">Why Partner With Us?</span>
           <h2 className="mb-5 text-white">PropelusAI delivers real results that make selling easy.</h2>
           <p className="text-surface-400 leading-relaxed mb-4">
-            Our clients see measurable transformations, from 3× pipeline growth to 78% efficiency improvements.
+            Our clients see measurable transformations — from 3× pipeline growth to 78% efficiency improvements.
             When you promote PropelusAI, you&apos;re offering proven AI solutions backed by real success stories across
             industries like SaaS, healthcare, manufacturing, and e-commerce.
           </p>

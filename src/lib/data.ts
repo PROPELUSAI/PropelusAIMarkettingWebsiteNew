@@ -214,7 +214,6 @@ export const serviceCategories = [
       {
         title: 'AI Based Website Building & Hosting',
         headline: 'Enterprise grade corporate experiences without the overhead.',
-        investment: '$67,600 to $169,000',
         summary: 'Responsive, SEO optimized websites with AI personalization, embedded chat, and premium managed hosting.',
         description: 'We pair strategic UX with AI assisted design to deliver websites that feel handcrafted yet scale like products. Every launch includes performance hardening, governance ready security, and meticulous QA.',
         timeline: '2–4 weeks for build, followed by managed hosting',
@@ -223,7 +222,6 @@ export const serviceCategories = [
       {
         title: 'AI Based Mobile Application Development',
         headline: 'Cross platform mobile apps with embedded intelligence.',
-        investment: '$101,400 to $253,500',
         summary: 'iOS and Android applications enhanced with recommendation engines, predictive analytics, and adaptive UX.',
         description: 'From concept to store submission, we design product ready mobile experiences that learn from user behavior. Expect native level performance, secure data pipelines, and continuous optimization.',
         timeline: '8–12 weeks build + 2 weeks for store approvals',
@@ -240,7 +238,6 @@ export const serviceCategories = [
       {
         title: 'AI Driven LinkedIn Advertising',
         headline: 'Predictive targeting for professional audiences.',
-        investment: '$8,450 to $16,900/month',
         summary: 'Adaptive campaigns that learn from engagement signals to maximize enterprise LinkedIn ROI.',
         description: 'We pair creative testing with machine led optimization so your ads reach the right decision makers at the right time, backed by transparent analytics.',
         timeline: '1 week setup, then ongoing monthly optimization',
@@ -249,7 +246,6 @@ export const serviceCategories = [
       {
         title: 'LinkedIn Revamp & AI Content Strategy',
         headline: 'Elevate executive presence with AI assisted storytelling.',
-        investment: '$5,070 to $10,140',
         summary: 'Profile optimization plus 20 bespoke AI guided posts every month to cement thought leadership.',
         description: 'We align tone, cadence, and creative direction with your brand voice, delivering a steady drumbeat of high performing content paired with analytics.',
         timeline: '1 week revamp + ongoing monthly publishing',
@@ -258,7 +254,6 @@ export const serviceCategories = [
       {
         title: 'AI Based LinkedIn Targeting & Lead Segmentation',
         headline: 'Precision prospecting fed directly into your pipeline.',
-        investment: '$3,380 to $8,450',
         summary: 'Automated lead scoring and behavioral segmentation sourced from millions of LinkedIn profiles.',
         description: 'Our AI stack uncovers buying signals, prioritizes outreach, and syncs updated data into your CRM for action ready campaigns.',
         timeline: '2 weeks initial build + continuous monthly refresh',
@@ -267,7 +262,6 @@ export const serviceCategories = [
       {
         title: 'AI Assisted Cold Calling & Prospect Prioritization',
         headline: 'Human conversations informed by machine intelligence.',
-        investment: '$1,690 to $5,070',
         summary: 'Prioritized call lists, dynamic scripts, and coaching insights derived from call analytics.',
         description: 'We blend AI scoring with real world sales tactics to focus reps on the right accounts, backed by continuous testing and coaching feedback loops.',
         timeline: '1 week implementation + monthly optimization cycles',
@@ -276,7 +270,6 @@ export const serviceCategories = [
       {
         title: 'AI Powered Content Creation & Marketing',
         headline: 'A predictable content engine across every channel.',
-        investment: '$3,380 to $8,450/month',
         summary: 'Ten high impact content assets per month with SEO alignment, channel distribution, and performance tracking.',
         description: 'We merge AI velocity with editorial craftsmanship to keep your pipeline fed with relevant articles, emails, and social narratives.',
         timeline: 'Monthly recurring cadence',
@@ -293,7 +286,6 @@ export const serviceCategories = [
       {
         title: 'AI Powered CRM Building & Integration',
         headline: 'A CRM that mirrors your exact operating model.',
-        investment: '$33,800 to $84,500',
         summary: 'Custom CRM development with AI analytics, workflow automation, and deep integrations.',
         description: 'We architect a CRM that feels bespoke to your teams, layering predictive intelligence and automation without breaking existing tooling.',
         timeline: '6–8 weeks build + 2 weeks testing + training',
@@ -302,7 +294,6 @@ export const serviceCategories = [
       {
         title: 'CRM Performance Tracking & Analytics',
         headline: 'Clarity on every KPI in real time.',
-        investment: '$8,450 to $16,900',
         summary: 'Executive ready dashboards, predictive analytics, and automated reporting layered on your CRM data.',
         description: 'We turn scattered data into a unified intelligence layer that surfaces bottlenecks and growth levers instantly.',
         timeline: '2 weeks implementation + rolling enhancements',
@@ -311,7 +302,6 @@ export const serviceCategories = [
       {
         title: 'Custom Brand Tailored CRM Creation',
         headline: 'A white label CRM experience aligned with your brand.',
-        investment: '$50,700 to $101,400',
         summary: 'Fully bespoke CRM interfaces, workflows, and security built for franchised or multi brand organizations.',
         description: 'Beyond integrations, we give you a CRM that visually and functionally reflects your brand system, from UI tokens to governance rules.',
         timeline: '8–10 weeks build + 2 weeks brand QA',
@@ -320,7 +310,6 @@ export const serviceCategories = [
       {
         title: 'AI Based Lead Generation & Management',
         headline: 'Automated lead engines with conversion intelligence.',
-        investment: '$3,380 to $6,760/month',
         summary: 'Machine learning scores, nurtures, and routes leads across every touchpoint.',
         description: 'We orchestrate multi channel capture, scoring, and follow up, ensuring revenue teams obsess over the right conversations.',
         timeline: '2 weeks setup + continuous optimization',
@@ -329,7 +318,6 @@ export const serviceCategories = [
       {
         title: 'Funnel Tracking & AI Driven Insights',
         headline: 'Continuous funnel intelligence without dashboards sprawl.',
-        investment: '$1,690 to $4,225/month',
         summary: 'Real time funnel analytics, AI insights, and CRO recommendations delivered as actionable narratives.',
         description: 'We stitch every touchpoint together, exposing friction, forecasting revenue, and recommending experiments that move the needle.',
         timeline: '1 week setup + ongoing monthly analysis',
@@ -338,7 +326,6 @@ export const serviceCategories = [
       {
         title: 'Complete Marketing Automation',
         headline: 'End to end automation architecture with AI personalization.',
-        investment: '$16,900 to $42,250',
         summary: 'Lead capture to customer retention orchestrated through intelligent workflows that scale effortlessly.',
         description: 'We evaluate your tech stack, design omnichannel workflows, and implement automation that adapts to every lifecycle stage.',
         timeline: '3–4 weeks implementation + managed optimization',
@@ -355,7 +342,6 @@ export const serviceCategories = [
       {
         title: 'Professional Video Editing & Post Production',
         headline: 'Transform raw footage into cinematic marketing assets.',
-        investment: '$550 to $1,925',
         summary: 'Turn your existing video content into polished, professional marketing materials with AI enhanced editing.',
         description: 'Our AI enhanced editing suite combines color grading, audio enhancement, motion graphics, and creative direction to deliver broadcast quality videos that captivate audiences and drive conversions.',
         timeline: '5–10 business days from footage receipt',
@@ -364,7 +350,6 @@ export const serviceCategories = [
       {
         title: 'Event Coverage & Documentary Filmmaking',
         headline: 'Capture your events with cinematic excellence.',
-        investment: '$1,650 to $5,500',
         summary: 'Professional event filming and documentary production that transforms conferences, product launches, and corporate events into compelling visual stories.',
         description: 'Multi camera event coverage with professional cinematography, real time highlight capture, interview recording, and full documentary editing. Perfect for internal communications, marketing campaigns, and stakeholder reporting.',
         timeline: 'Highlight reel within 48 hours, full edit within 2 weeks',
@@ -373,7 +358,6 @@ export const serviceCategories = [
       {
         title: 'Client Testimonial Video Production',
         headline: 'Authentic customer stories that build unshakeable trust.',
-        investment: '$1,375 to $4,400',
         summary: 'Strategic testimonial videos that showcase real customer success stories with professional filming and editing.',
         description: 'We handle everything from interview scripting to filming, editing, and optimization. delivering social proof that converts prospects into customers. Includes AI assisted interview script development and behavioral psychology based storytelling.',
         timeline: '3–4 weeks from kickoff to final delivery',
@@ -382,7 +366,6 @@ export const serviceCategories = [
       {
         title: 'Corporate Films & Brand Story Videos',
         headline: 'Cinematic storytelling that defines your brand legacy.',
-        investment: '$5,070 to $25,350',
         summary: 'Full service corporate film production from concept to final cut, designed to inspire stakeholders and captivate audiences.',
         description: 'We produce cinematic brand story videos, corporate documentaries, and company culture films with AI enhanced pre production planning, professional cinematography, and post production polish. Perfect for investor relations, recruitment, brand campaigns, and internal communications.',
         timeline: '3–6 weeks from concept to final delivery',
@@ -391,7 +374,6 @@ export const serviceCategories = [
       {
         title: 'Animation & Motion Graphics Production',
         headline: 'Complex ideas made simple through visual storytelling.',
-        investment: '$3,380 to $16,900',
         summary: 'Custom 2D/3D animation and motion graphics for explainer videos, product demos, social content, and brand storytelling.',
         description: 'From explainer animations to kinetic typography and 3D product visualizations, we bring concepts to life with AI accelerated production workflows. Every project includes storyboarding, voiceover direction, and multi format delivery.',
         timeline: '2–4 weeks depending on complexity and length',
@@ -400,7 +382,6 @@ export const serviceCategories = [
       {
         title: 'AI Assisted Video Production & Editing',
         headline: 'Engaging video content from concept to final cut.',
-        investment: '$5,070 to $25,350',
         summary: 'Professional video production including explainer videos, product demos, social content, and promotional videos with AI enhanced editing.',
         description: 'We produce compelling video content that tells your story effectively. From scripting to post production, we leverage AI tools for efficiency while maintaining creative quality and brand alignment.',
         timeline: '2–4 weeks depending on complexity + revisions',
@@ -409,7 +390,6 @@ export const serviceCategories = [
       {
         title: 'Brand Voice & Messaging Architecture Development',
         headline: 'Define your brand voice once. use it everywhere.',
-        investment: '$2,750 to $8,250',
         summary: 'Establish a consistent, compelling brand voice that resonates across every customer touchpoint.',
         description: 'Our AI enhanced process combines behavioral psychology, competitive analysis, and audience research to create messaging frameworks that drive conversions. Includes comprehensive brand voice audit and target audience psychographic profiling.',
         timeline: '3–4 weeks from discovery to final delivery',
@@ -418,7 +398,6 @@ export const serviceCategories = [
       {
         title: 'Strategic Business Storytelling & Founder Narrative',
         headline: 'Turn your founder story into a competitive advantage.',
-        investment: '$1,650 to $5,500',
         summary: 'Craft compelling founder and business narratives that humanize your brand and build emotional connections.',
         description: 'Perfect for investor pitches, About pages, speaking engagements, and thought leadership platforms. Includes AI assisted narrative arc development and emotional connection point identification.',
         timeline: '2–3 weeks with 2 revision rounds',
@@ -427,7 +406,6 @@ export const serviceCategories = [
       {
         title: 'Creative Campaign Ideation & Problem Solving Workshop',
         headline: 'Break through creative blocks with AI powered ideation.',
-        investment: '$2,200 to $6,600',
         summary: 'Intensive creative workshop that combines AI assisted ideation, behavioral psychology, and strategic thinking.',
         description: 'Walk away with campaign concepts, messaging hooks, and execution roadmaps. Includes AI powered ideation session, strategic problem framing, and multiple creative concept development.',
         timeline: 'Scheduled within 2 weeks, deliverables within 1 week post workshop',
@@ -436,7 +414,6 @@ export const serviceCategories = [
       {
         title: 'Brand Naming & Thematic Direction',
         headline: 'Names that stick, themes that resonate.',
-        investment: '$2,750 to $11,000',
         summary: 'Strategic brand and product naming services powered by linguistic analysis, trademark screening, and cultural relevance testing.',
         description: 'We don\'t just create names. we develop entire thematic directions that inform all brand expressions. Includes AI assisted name generation, linguistic and phonetic analysis, and cultural appropriateness testing.',
         timeline: '3–4 weeks from brief to final recommendations',
@@ -445,7 +422,6 @@ export const serviceCategories = [
       {
         title: 'Voiceover Script Development & Audio Direction',
         headline: 'Scripts that sound perfect when spoken aloud.',
-        investment: '$275 to $1,100',
         summary: 'Professional voiceover scriptwriting optimized for clarity, emotional impact, and natural delivery.',
         description: 'Includes voice tone direction, pacing guidelines, and audio visual storytelling alignment for videos, podcasts, and audio content. AI assisted scriptwriting for spoken delivery with phonetic optimization.',
         timeline: '3–5 business days per script',
@@ -454,7 +430,6 @@ export const serviceCategories = [
       {
         title: 'Complete Brand Identity & Positioning Package',
         headline: 'Your entire brand system designed from the ground up.',
-        investment: '$8,450 to $25,350',
         summary: 'End to end brand identity creation including logo, visual system, messaging architecture, positioning, and comprehensive brand guidelines.',
         description: 'We architect cohesive brand identities that resonate across every channel. From visual design tokens to messaging frameworks, every element is strategically crafted to differentiate your business and build lasting recognition.',
         timeline: '4–6 weeks for complete brand system delivery',
@@ -463,7 +438,6 @@ export const serviceCategories = [
       {
         title: 'AI Enhanced Graphics Design',
         headline: 'Stunning visuals for every marketing touchpoint.',
-        investment: '$2,535 to $8,450',
         summary: 'Custom graphics, social media assets, infographics, and presentation decks designed with brand consistency.',
         description: 'We blend AI powered design tools with creative expertise to deliver high impact visuals that resonate with your audience. Every asset is optimized for its intended platform and purpose.',
         timeline: '1–2 weeks for initial package + ongoing monthly support',
@@ -472,7 +446,6 @@ export const serviceCategories = [
       {
         title: 'Professional Logo Design & Brand Identity',
         headline: 'Memorable logos that define your brand.',
-        investment: '$3,380 to $16,900',
         summary: 'Complete logo design with multiple concepts, refinements, and full brand identity package including color palettes and typography.',
         description: 'We create distinctive logos through a collaborative process that captures your brand essence. Each project includes comprehensive brand guidelines to ensure consistent application across all channels.',
         timeline: '2–3 weeks for complete brand identity package',
@@ -481,7 +454,6 @@ export const serviceCategories = [
       {
         title: 'Company/Service Profile Design & Writing',
         headline: 'Professional company profiles that win business.',
-        investment: '$1,100 to $3,300',
         summary: 'Comprehensive company or service profile documents that position your business for RFPs, partnership opportunities, and corporate sales.',
         description: 'Combines strategic copywriting with professional design for maximum impact. Includes strategic company positioning, service/capability descriptions, and case study integration.',
         timeline: '2–3 weeks from briefing to final delivery',
@@ -490,7 +462,6 @@ export const serviceCategories = [
       {
         title: 'Pitch Decks & Corporate Presentations',
         headline: 'Presentations that close deals and win funding.',
-        investment: '$2,535 to $8,450',
         summary: 'Investor ready pitch decks and corporate presentations with strategic narrative design, data visualization, and premium visual styling.',
         description: 'We combine storytelling frameworks with AI enhanced design to build presentations that command attention. Whether for fundraising, sales enablement, or board reporting, every slide is engineered for maximum impact and clarity.',
         timeline: '1–2 weeks from brief to final delivery',
@@ -499,7 +470,6 @@ export const serviceCategories = [
       {
         title: 'Marketing Collateral & Campaign Artwork',
         headline: 'Every touchpoint designed for conversion.',
-        investment: '$1,690 to $5,070',
         summary: 'Professional marketing materials including brochures, flyers, social media kits, email templates, and campaign assets.',
         description: 'We design brand consistent marketing collateral that drives action across print and digital channels. AI powered layout optimization ensures every piece is visually compelling and conversion focused.',
         timeline: '1–2 weeks per collateral package',
@@ -516,7 +486,6 @@ export const serviceCategories = [
       {
         title: 'Custom Email Domain Setup',
         headline: 'Professional mail infrastructure with enterprise safeguards.',
-        investment: '$169 to $507',
         summary: 'Secure domain configuration, compliance ready policies, and seamless device rollouts.',
         description: 'We configure DNS, identity, and mobile device policies so your team enjoys frictionless collaboration with ironclad protections.',
         timeline: '1–2 weeks setup + annual managed maintenance',
@@ -525,7 +494,6 @@ export const serviceCategories = [
       {
         title: 'Cybersecurity & Data Protection',
         headline: 'Defense in depth with proactive surveillance.',
-        investment: '$8,450 to $25,350',
         summary: 'Security audits, encryption, firewall hardening, and ongoing threat monitoring orchestrated by specialists.',
         description: 'We evaluate posture, deploy modern tooling, and maintain 24/7 vigilance so your sensitive data stays uncompromised.',
         timeline: '2–3 weeks initial hardening + ongoing monitoring',
