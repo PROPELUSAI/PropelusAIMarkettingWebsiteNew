@@ -1,3 +1,8 @@
+/**
+ * FAQClient.tsx — FAQ page (client component).
+ * Renders categorized FAQ sections with collapsible accordion items
+ * using Framer Motion for smooth open/close animation.
+ */
 'use client';
 
 import { useState } from 'react';
@@ -8,13 +13,14 @@ import AnimatedSection from '@/components/AnimatedSection';
 import CTASection from '@/components/CTASection';
 import { faqCategories } from '@/lib/data';
 
+/** Renders the full FAQ page: hero, categorized accordion sections, and CTA */
 export default function FAQClient() {
   return (
     <>
       <PageHero
         tag="Clarity & Confidence"
         title="Frequently Asked Questions"
-        description="Everything you need to know about PropelusAI — process, pricing, timelines, support, and the difference between Services and Products."
+        description="Everything you need to know about PropelusAI in one place. Below are the most common questions clients ask us about our process, pricing, timelines, support, confidentiality, and the difference between our Services (one time builds) and Products (monthly subscriptions). If your question isn't listed here, simply reach out — our team will respond within one business day."
       />
 
       <section className="section-padding section-light">
@@ -38,7 +44,7 @@ export default function FAQClient() {
       <CTASection
         tag="Still Have Questions?"
         title="Still have questions? We're one message away."
-        description="Whether you're planning a one-time AI project or exploring subscription products, our team will help you choose the best path."
+        description="Whether you're planning a one time AI project or exploring subscription based AI products, our team will help you choose the best path."
         primaryLabel="Contact Us"
         secondaryLabel="Start Your Project"
         secondaryHref="/contact"
@@ -47,6 +53,7 @@ export default function FAQClient() {
   );
 }
 
+/** Single FAQ accordion item — click to expand/collapse answer with Framer Motion */
 function FAQItem({ question, answer }: { question: string; answer: string }) {
   const [open, setOpen] = useState(false);
 

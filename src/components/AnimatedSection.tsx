@@ -1,3 +1,9 @@
+/**
+ * AnimatedSection.tsx — Reusable scroll-triggered animation wrappers.
+ * Exports: AnimatedSection (single element fade+slide), StaggerContainer
+ * (parent that staggers children), and StaggerItem (child with reveal animation).
+ * All use Framer Motion whileInView with viewport-once triggers.
+ */
 'use client';
 
 import { motion } from 'framer-motion';
@@ -18,6 +24,7 @@ const directionMap = {
   none: { x: 0, y: 0 },
 };
 
+/** Animates a single section into view with configurable direction and delay */
 export default function AnimatedSection({
   children,
   className = '',
@@ -38,8 +45,7 @@ export default function AnimatedSection({
     </motion.div>
   );
 }
-
-/* Stagger container for lists */
+/** Parent container that staggers child StaggerItem animations sequentially */
 export function StaggerContainer({
   children,
   className = '',
@@ -66,6 +72,7 @@ export function StaggerContainer({
   );
 }
 
+/** Individual stagger child — fades up when parent container triggers */
 export function StaggerItem({
   children,
   className = '',
