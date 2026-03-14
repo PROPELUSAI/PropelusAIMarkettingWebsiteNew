@@ -1,8 +1,16 @@
+/**
+ * Footer.tsx — Site-wide footer (server component).
+ * Contains: newsletter subscription section, brand column with contact info
+ * and social icons, Products/Services/Company link columns, offices,
+ * and copyright bar with Terms/Privacy/Support links.
+ */
 import Link from 'next/link';
 import Image from 'next/image';
 import { siteConfig, footerLinks } from '@/lib/data';
 import { SiLinkedin, SiInstagram, SiFacebook, SiThreads, SiPinterest, SiYoutube, SiBluesky } from 'react-icons/si';
+import NewsletterSection from './NewsletterSection';
 
+/** Social media platform links with their icons */
 const socials = [
   { label: 'LinkedIn', href: 'https://www.linkedin.com/company/propelusai/', icon: SiLinkedin },
   { label: 'Instagram', href: 'https://www.instagram.com/propelusai/', icon: SiInstagram },
@@ -13,10 +21,14 @@ const socials = [
   { label: 'Bluesky', href: 'https://bsky.app/profile/propelusai.bsky.social', icon: SiBluesky },
 ];
 
+/** Renders the full footer: newsletter, brand info, link columns, and copyright */
 export default function Footer() {
   return (
     <footer className="bg-surface-950 text-white">
       <div className="container-main py-10 lg:py-12">
+        {/* Newsletter Section */}
+        <NewsletterSection />
+
         {/* Top Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-6">
           {/* Brand Col */}
@@ -25,7 +37,9 @@ export default function Footer() {
               <Image src="/logo.png" alt="PropelusAI" width={260} height={56} className="h-11 w-auto" />
             </Link>
             <p className="text-surface-400 text-sm leading-relaxed max-w-sm mb-4">
-              AI-powered websites, CRM systems, and subscription-based growth engines for modern businesses.
+              PropelusAI builds AI powered websites, CRM systems, automation engines, and
+              subscription based AI growth products that help businesses scale with precision,
+              intelligence, and measurable ROI.
             </p>
             <div className="space-y-1 text-sm text-surface-400 mb-4">
               <p>{siteConfig.email}</p>
@@ -91,7 +105,7 @@ export default function Footer() {
             </ul>
             <h4 className="text-xs font-medium tracking-widest uppercase text-surface-400 mb-2">Offices</h4>
             <div className="space-y-1 text-sm text-surface-400">
-              <p>Huntersville, NC (US)</p>
+              <p>Phoenix, AZ (US)</p>
               <p>Surat & Kolkata (India)</p>
             </div>
           </div>
@@ -100,7 +114,7 @@ export default function Footer() {
         {/* Bottom Bar */}
         <div className="mt-8 pt-6 border-t border-white/[0.06] flex flex-col sm:flex-row justify-between items-center gap-3">
           <p className="text-xs text-surface-500">
-            © {new Date().getFullYear()} PropelusAI — All Rights Reserved.
+            © {new Date().getFullYear()} PropelusAI - All Rights Reserved. Designed for global growth across globally.
           </p>
           <div className="flex items-center gap-5 text-xs text-surface-500">
             <Link href="/terms" className="hover:text-white transition-colors">Terms</Link>
