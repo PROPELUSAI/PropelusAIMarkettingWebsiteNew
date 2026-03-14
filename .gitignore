@@ -26,8 +26,17 @@ yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
-# local env files
-.env*.local
+# environment files (never commit secrets)
+.env
+.env.local
+.env.production
+Admin/.env
+propelus-backend/.env
+
+# DO NOT ignore .env.example - it is safe to commit
+
+# Google service account keys
+ga4-analytics-api*.json
 
 # vercel
 .vercel
@@ -42,5 +51,7 @@ next-env.d.ts
 # backend
 propelus-backend/node_modules
 propelus-backend/dist
-propelus-backend/.env
 propelus-backend/scripts/test-email.ts
+
+# admin build output
+Admin/dist/

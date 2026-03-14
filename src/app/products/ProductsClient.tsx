@@ -10,6 +10,7 @@ import PageHero from '@/components/PageHero';
 import { StaggerContainer, StaggerItem } from '@/components/AnimatedSection';
 import CTASection from '@/components/CTASection';
 import { products } from '@/lib/data';
+import { slugify } from '@/lib/slugify';
 
 /** Maps product icon keys to inline SVG components for the card headers */
 const iconMap: Record<string, React.ReactNode> = {
@@ -64,8 +65,8 @@ export default function ProductsClient() {
                         </li>
                       ))}
                     </ul>
-                    <Link href="/contact" className="btn-primary w-full justify-center text-sm py-3">
-                      Get Quote
+                    <Link href={`/products/${slugify(product.title)}`} className="btn-primary w-full justify-center text-sm py-3">
+                      View Details
                     </Link>
                   </div>
                 </div>

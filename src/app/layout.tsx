@@ -9,10 +9,7 @@
 import type { Metadata } from 'next';
 import { DM_Sans, DM_Mono } from 'next/font/google';
 import Script from 'next/script';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
-import LeadPopup from '@/components/LeadPopup';
-import AIChatbot from '@/components/AIChatbot';
+import MarketingShell from '@/components/MarketingShell';
 import { StoreProvider } from '@/store/provider';
 import './globals.css';
 
@@ -38,10 +35,10 @@ const organizationSchema = {
   url: 'https://www.propelusai.com',
   logo: {
     '@type': 'ImageObject',
-    url: 'https://www.propelusai.com/propelus-faviocn-removebg-preview-512.png',
+    url: 'https://www.propelusai.com/propelus-favicon-512.png',
     width: 512,
     height: 512,
-    contentUrl: 'https://www.propelusai.com/propelus-faviocn-removebg-preview-512.png',
+    contentUrl: 'https://www.propelusai.com/propelus-favicon-512.png',
   },
   description:
     'AI powered growth systems designed for global teams. Transform your business with AI powered websites, CRM systems, subscription based AI products, and automation.',
@@ -67,7 +64,7 @@ const websiteSchema = {
     name: 'PropelusAI',
     logo: {
       '@type': 'ImageObject',
-      url: 'https://www.propelusai.com/propelus-faviocn-removebg-preview-512.png',
+      url: 'https://www.propelusai.com/propelus-favicon-512.png',
       width: 512,
       height: 512,
     },
@@ -78,7 +75,7 @@ const logoSchema = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
   url: 'https://www.propelusai.com',
-  logo: 'https://www.propelusai.com/propelus-faviocn-removebg-preview-512.png',
+  logo: 'https://www.propelusai.com/propelus-favicon-512.png',
 };
 
 export const metadata: Metadata = {
@@ -107,11 +104,11 @@ export const metadata: Metadata = {
   publisher: 'PropelusAI',
   icons: {
     icon: [
-      { url: '/propelus-faviocn-removebg-preview.png', sizes: '32x32', type: 'image/png' },
-      { url: '/propelus-faviocn-removebg-preview-512.png', sizes: '512x512', type: 'image/png' },
+      { url: '/propelus-favicon.png', sizes: '32x32', type: 'image/png' },
+      { url: '/propelus-favicon-512.png', sizes: '512x512', type: 'image/png' },
     ],
     apple: [
-      { url: '/propelus-faviocn-removebg-preview-512.png', sizes: '180x180', type: 'image/png' },
+      { url: '/propelus-favicon-512.png', sizes: '180x180', type: 'image/png' },
     ],
   },
   openGraph: {
@@ -123,7 +120,7 @@ export const metadata: Metadata = {
     description: 'AI powered growth systems designed for global teams.',
     images: [
       {
-        url: '/propelus-faviocn-removebg-preview-512.png',
+        url: '/propelus-favicon-512.png',
         width: 1200,
         height: 630,
         alt: 'PropelusAI - AI Powered Growth for Modern Businesses',
@@ -134,7 +131,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'PropelusAI - Premium AI Services & Products',
     description: 'AI powered growth systems designed for global teams.',
-    images: ['/propelus-faviocn-removebg-preview-512.png'],
+    images: ['/propelus-favicon-512.png'],
   },
   robots: {
     index: true,
@@ -165,7 +162,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-543W69WN');`}
+})(window,document,'script','dataLayer','${process.env.NEXT_PUBLIC_GTM_ID}');`}
         </Script>
 
         {/* Meta Pixel Code */}
@@ -178,7 +175,7 @@ n.queue=[];t=b.createElement(e);t.async=!0;
 t.src=v;s=b.getElementsByTagName(e)[0];
 s.parentNode.insertBefore(t,s)}(window, document,'script',
 'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '1942070599757053');
+fbq('init', '${process.env.NEXT_PUBLIC_META_PIXEL_ID}');
 fbq('track', 'PageView');`}
         </Script>
 
@@ -194,7 +191,7 @@ fbq('track', 'PageView');`}
         {/* Google Tag Manager (noscript) */}
         <noscript>
           <iframe
-            src="https://www.googletagmanager.com/ns.html?id=GTM-543W69WN"
+            src={`https://www.googletagmanager.com/ns.html?id=${process.env.NEXT_PUBLIC_GTM_ID}`}
             height="0"
             width="0"
             style={{ display: 'none', visibility: 'hidden' }}
@@ -207,7 +204,7 @@ fbq('track', 'PageView');`}
             height="1"
             width="1"
             style={{ display: 'none' }}
-            src="https://www.facebook.com/tr?id=1942070599757053&ev=PageView&noscript=1"
+            src={`https://www.facebook.com/tr?id=${process.env.NEXT_PUBLIC_META_PIXEL_ID}&ev=PageView&noscript=1`}
             alt=""
           />
         </noscript>
@@ -227,11 +224,7 @@ fbq('track', 'PageView');`}
         />
 
         <StoreProvider>
-          <Navbar />
-          <main className="min-h-screen">{children}</main>
-          <Footer />
-          <LeadPopup />
-          <AIChatbot />
+          <MarketingShell>{children}</MarketingShell>
         </StoreProvider>
       </body>
     </html>

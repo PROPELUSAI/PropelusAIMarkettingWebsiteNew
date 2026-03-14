@@ -28,8 +28,8 @@ interface Blog {
 
 async function fetchBlog(slug: string): Promise<Blog | null> {
   try {
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
-    const res = await fetch(`${apiUrl}/api/v1/blogs/${slug}`, {
+    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
+    const res = await fetch(`${siteUrl}/api/v1/blogs/${slug}`, {
       next: { revalidate: 60 },
     });
     if (!res.ok) return null;
@@ -65,5 +65,20 @@ export default async function BlogDetailPage({ params }: Props) {
   const blog = await fetchBlog(params.slug);
   if (!blog) notFound();
 
-  return <BlogDetailClient blog={blog} />;
+  const breadcrumb = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.propelusai.com' },
+      { '@type': 'ListItem', position: 2, name: 'Blog', item: 'https://www.propelusai.com/blogs' },
+      { '@type': 'ListItem', position: 3, name: blog.title, item: `https://www.propelusai.com/blogs/${blog.slug}` },
+    ],
+  };
+
+  return (
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
+      <BlogDetailClient blog={blog} />
+    </>
+  );
 }

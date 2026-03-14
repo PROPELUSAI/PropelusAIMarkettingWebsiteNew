@@ -11,7 +11,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import PhoneInput from 'react-phone-number-input';
 import 'react-phone-number-input/style.css';
-import { useSubmitLeadMutation } from '@/store';
+import { useSubmitContactMutation } from '@/store';
 import EmbeddedCalendar from '@/components/EmbeddedCalendar';
 import { countries } from '@/lib/countries';
 
@@ -50,7 +50,7 @@ export default function LeadPopup() {
     scheduledTime: '',
   });
 
-  const [submitLead, { isLoading, isSuccess }] = useSubmitLeadMutation();
+  const [submitLead, { isLoading, isSuccess }] = useSubmitContactMutation();
 
   useEffect(() => {
     if (typeof window === 'undefined') return;

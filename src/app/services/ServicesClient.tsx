@@ -7,6 +7,7 @@ import PageHero from '@/components/PageHero';
 import AnimatedSection from '@/components/AnimatedSection';
 import CTASection from '@/components/CTASection';
 import { serviceCategories } from '@/lib/data';
+import { slugify } from '@/lib/slugify';
 
 /* ServicesClient — Displays all service categories with tabbed navigation.
    Users select a category tab → services for that category render below.
@@ -148,8 +149,8 @@ function ServiceCard({ service, index }: { service: (typeof serviceCategories)[0
           ))}
         </div>
         <div className="flex flex-wrap gap-3">
-          <Link href="/contact" className="btn-primary text-sm py-2.5 px-6">Get Detailed Quote</Link>
-          <Link href="/contact" className="btn-secondary text-sm py-2.5 px-6">Schedule Consultation</Link>
+          <Link href={`/services/${slugify(service.title)}`} className="btn-primary text-sm py-2.5 px-6">View Details</Link>
+          <Link href="/contact" className="btn-secondary text-sm py-2.5 px-6">Get Quote</Link>
         </div>
       </div>
     </motion.div>

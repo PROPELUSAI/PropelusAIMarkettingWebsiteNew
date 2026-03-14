@@ -9,7 +9,7 @@
 
 import { useState, useRef, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useSendChatMessageMutation, useChatbotSubscribeNewsletterMutation, ChatMessage } from '@/store';
+import { useSendMessageMutation, useSubscribeChatNewsletterMutation, type ChatMessage } from '@/store';
 
 const CHAT_SESSION_KEY = 'propelusai_chat_session';
 const CHAT_MESSAGES_KEY = 'propelusai_chat_messages';
@@ -83,8 +83,8 @@ export default function AIChatbot() {
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   
-  const [sendMessage, { isLoading: isSending }] = useSendChatMessageMutation();
-  const [subscribeNewsletter, { isLoading: isSubscribing }] = useChatbotSubscribeNewsletterMutation();
+  const [sendMessage, { isLoading: isSending }] = useSendMessageMutation();
+  const [subscribeNewsletter, { isLoading: isSubscribing }] = useSubscribeChatNewsletterMutation();
 
   // Load user & messages on mount
   useEffect(() => {

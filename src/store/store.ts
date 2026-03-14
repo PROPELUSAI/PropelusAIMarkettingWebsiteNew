@@ -1,17 +1,17 @@
-/**
- * store.ts — Redux store configuration.
- * Configures a single store with the RTK Query API reducer and middleware.
- * Exports RootState and AppDispatch types for typed hooks.
- */
 import { configureStore } from '@reduxjs/toolkit';
-import { api } from './api';
+import { baseApi } from './api/baseApi';
+import authReducer from './slices/authSlice';
+import uiReducer from './slices/uiSlice';
 
 export const store = configureStore({
   reducer: {
-    [api.reducerPath]: api.reducer,
+    [baseApi.reducerPath]: baseApi.reducer,
+    auth: authReducer,
+    ui: uiReducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(api.middleware),
+    getDefaultMiddleware().concat(baseApi.middleware),
+  devTools: process.env.NODE_ENV !== 'production',
 });
 
 export type RootState = ReturnType<typeof store.getState>;

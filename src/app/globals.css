@@ -8,32 +8,97 @@
    ============================================ */
 
 :root {
-  --brand: #635bff;
-  --brand-light: #8a81ff;
-  --brand-dark: #4f48e0;
-  --brand-muted: rgba(99, 91, 255, 0.08);
-  --brand-subtle: rgba(99, 91, 255, 0.04);
-  --text-primary: #1a1a2e;
-  --text-secondary: #4a4a5a;
-  --text-tertiary: #6b6b7b;
-  --text-on-dark: #f5f5f5;
-  --text-on-dark-secondary: rgba(255, 255, 255, 0.7);
-  --bg-white: #ffffff;
-  --bg-light: #fafafa;
-  --bg-warm: #f5f5f7;
-  --bg-dark: #0d0d1a;
-  --bg-dark-card: #1a1a2e;
-  --bg-dark-elevated: #222240;
-  --border-light: #e8e8ed;
-  --border-dark: rgba(255, 255, 255, 0.08);
+  /* ============================================
+     Design System Tokens — CSS Custom Properties
+     These mirror the Tailwind config tokens for use
+     in third-party components and dynamic styling.
+     ============================================ */
+
+  /* Brand Colors */
+  --color-brand-primary: #635bff;
+  --color-brand-secondary: #8a81ff;
+  --color-brand-accent: #4f48e0;
+  --color-brand-dark: #1e1b5e;
+  --color-brand-light: #f0efff;
+
+  /* Text Colors */
+  --color-text-primary: #1a1a2e;
+  --color-text-secondary: #4a4a5a;
+  --color-text-muted: #6b6b7b;
+  --color-text-inverse: #f5f5f5;
+  --color-text-link: #635bff;
+
+  /* Surface Colors */
+  --color-surface-card: #ffffff;
+  --color-surface-input: #fafafa;
+  --color-surface-warm: #f5f5f7;
+  --color-surface-dark: #0d0d1a;
+  --color-surface-dark-card: #1a1a2e;
+  --color-surface-dark-elevated: #222240;
+  --color-surface-overlay: rgba(13, 13, 26, 0.7);
+
+  /* Status Colors */
+  --color-status-success: #10b981;
+  --color-status-success-light: #ecfdf5;
+  --color-status-warning: #f59e0b;
+  --color-status-warning-light: #fffbeb;
+  --color-status-error: #ef4444;
+  --color-status-error-light: #fef2f2;
+  --color-status-info: #3b82f6;
+  --color-status-info-light: #eff6ff;
+
+  /* Border Colors */
+  --color-border-light: #e8e8ed;
+  --color-border-dark: rgba(255, 255, 255, 0.08);
+
+  /* Border Radius */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-2xl: 1.5rem;
+  --radius-full: 9999px;
+
+  /* Shadows */
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
   --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.06);
   --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.08);
   --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.12);
-  --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 16px;
-  --radius-xl: 24px;
+  --shadow-glow: 0 4px 20px rgba(99, 91, 255, 0.35);
+
+  /* Typography */
+  --font-heading: var(--font-dm-sans), system-ui, sans-serif;
+  --font-body: var(--font-dm-sans), system-ui, sans-serif;
+  --font-mono: var(--font-dm-mono), monospace;
+
+  /* Transition Durations */
+  --duration-fast: 150ms;
+  --duration-normal: 300ms;
+  --duration-slow: 500ms;
+
+  /* ============================================
+     Legacy Variables — Kept for backward compat
+     with existing component CSS classes below.
+     These reference the new design tokens.
+     ============================================ */
+  --brand: var(--color-brand-primary);
+  --brand-light: var(--color-brand-secondary);
+  --brand-dark: var(--color-brand-accent);
+  --brand-muted: rgba(99, 91, 255, 0.08);
+  --brand-subtle: rgba(99, 91, 255, 0.04);
+  --text-primary: var(--color-text-primary);
+  --text-secondary: var(--color-text-secondary);
+  --text-tertiary: var(--color-text-muted);
+  --text-on-dark: var(--color-text-inverse);
+  --text-on-dark-secondary: rgba(255, 255, 255, 0.7);
+  --bg-white: var(--color-surface-card);
+  --bg-light: var(--color-surface-input);
+  --bg-warm: var(--color-surface-warm);
+  --bg-dark: var(--color-surface-dark);
+  --bg-dark-card: var(--color-surface-dark-card);
+  --bg-dark-elevated: var(--color-surface-dark-elevated);
+  --border-light: var(--color-border-light);
+  --border-dark: var(--color-border-dark);
 }
 
 /* Base Reset */

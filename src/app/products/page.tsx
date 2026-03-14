@@ -13,6 +13,20 @@ export const metadata: Metadata = {
   alternates: { canonical: 'https://www.propelusai.com/products' },
 };
 
+const breadcrumb = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.propelusai.com' },
+    { '@type': 'ListItem', position: 2, name: 'Products', item: 'https://www.propelusai.com/products' },
+  ],
+};
+
 export default function ProductsPage() {
-  return <ProductsClient />;
+  return (
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
+      <ProductsClient />
+    </>
+  );
 }

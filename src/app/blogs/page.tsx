@@ -36,16 +36,16 @@ interface Blog {
   created_at: string;
 }
 
-/** Fetches blog posts from the backend API; returns empty array on failure */
+/** Fetches blog posts from the internal Next.js API; returns empty array on failure */
 async function fetchBlogs(): Promise<Blog[]> {
   try {
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
-    const res = await fetch(`${apiUrl}/api/v1/blogs?limit=50`, {
-      next: { revalidate: 60 }, // Refresh every 60 seconds
+    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
+    const res = await fetch(`${siteUrl}/api/v1/blogs?limit=50`, {
+      next: { revalidate: 60 },
     });
     if (!res.ok) return [];
     const json = await res.json();
-    return json.data ?? [];
+    return json.data?.blogs ?? json.data ?? [];
   } catch {
     return [];
   }
@@ -59,12 +59,22 @@ function formatDate(dateStr: string | null | undefined): string {
     day: 'numeric',
   });
 }
+const breadcrumb = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.propelusai.com' },
+    { '@type': 'ListItem', position: 2, name: 'Blog', item: 'https://www.propelusai.com/blogs' },
+  ],
+};
+
 /** Server component: fetches blogs and renders the listing page with cards */
 export default async function BlogsPage() {
   const blogs = await fetchBlogs();
 
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
       <PageHero
         tag="Insights & Perspectives"
         title="Blogs & Insights"
