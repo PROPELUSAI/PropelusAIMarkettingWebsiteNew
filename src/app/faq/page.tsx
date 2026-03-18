@@ -1,14 +1,15 @@
 import type { Metadata } from 'next';
 import FAQClient from './FAQClient';
+import { faqCategories } from '@/lib/data';
 
 export const metadata: Metadata = {
-  title: 'FAQ - AI Services, Products, Pricing & Delivery | PropelusAI',
+  title: 'FAQ | Pricing, Timelines & Process',
   description:
-    'Everything you need to know about PropelusAI — process, pricing, timelines, support, confidentiality, and the difference between Services (one time builds) and Products (monthly subscriptions).',
+    'Answers about website development, SaaS, CRM, AI automation pricing, timelines, and post launch support at PropelusAI.',
   openGraph: {
     title: 'PropelusAI FAQ',
     description:
-      'Answers to common questions about our AI services, products, pricing, and delivery.',
+      'Answers to common questions about website development, CRM builds, AI automation, pricing, and the Soul AI engine.',
   },
   alternates: { canonical: 'https://www.propelusai.com/faq' },
 };
@@ -22,10 +23,26 @@ const breadcrumb = {
   ],
 };
 
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqCategories.flatMap((category) =>
+    category.items.map((item) => ({
+      '@type': 'Question',
+      name: item.q,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: item.a,
+      },
+    }))
+  ),
+};
+
 export default function FAQPage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       <FAQClient />
     </>
   );

@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   description:
     'Privacy Policy for PropelusAI\'s AI powered business solutions and services. Learn how we collect, use, and protect your personal information.',
   openGraph: {
-    title: 'Privacy Policy - PropelusAI',
+    title: 'Privacy Policy | PropelusAI',
     description:
       'Privacy Policy for PropelusAI\'s AI powered business solutions and services.',
   },
@@ -46,7 +46,7 @@ const sections = [
   },
   {
     title: 'How We Share Your Information',
-    text: 'We do not sell your personal information. We share information with trusted cloud hosting providers, payment processors, email platforms, analytics tools, and customer support platforms. In the event of a merger or acquisition, your information may be transferred as part of the transaction.',
+    text: 'We do not sell your personal information. We share information with trusted cloud infrastructure providers, payment processors, email platforms, analytics tools, and customer support platforms. In the event of a merger or acquisition, your information may be transferred as part of the transaction.',
   },
   {
     title: 'Cookies & Tracking',
@@ -70,9 +70,19 @@ const sections = [
   },
 ];
 
+const breadcrumb = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.propelusai.com' },
+    { '@type': 'ListItem', position: 2, name: 'Privacy', item: 'https://www.propelusai.com/privacy' },
+  ],
+};
+
 export default function PrivacyPage() {
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
       <PageHero title="Privacy Policy" description="At PropelusAI, we understand that building an online business starts with trust. This Privacy Policy outlines how we collect, use, and protect your personal information." />
 
       <section className="section-padding section-light">

@@ -6,6 +6,8 @@ export interface ContactFormData {
   country: string;
   mobile_number?: string | null;
   interest?: string | null;
+  linkedin_url?: string | null;
+  team_size?: string | null;
   scheduled_time: string;
   company_name?: string | null;
   description?: string | null;

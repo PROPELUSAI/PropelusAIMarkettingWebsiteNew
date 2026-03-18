@@ -7,6 +7,11 @@ export interface ITestimonial extends Document {
   status: string;
   mobileNumber?: string | null;
   rating?: number | null;
+  designation?: string | null;
+  company?: string | null;
+  industry?: string | null;
+  city?: string | null;
+  imageUrl?: string | null;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -19,6 +24,11 @@ const testimonialSchema = new Schema<ITestimonial>(
     status: { type: String, default: 'pending', index: true },
     mobileNumber: { type: String, default: null },
     rating: { type: Number, default: null },
+    designation: { type: String, default: null },
+    company: { type: String, default: null },
+    industry: { type: String, default: null },
+    city: { type: String, default: null },
+    imageUrl: { type: String, default: null },
   },
   { timestamps: true }
 );

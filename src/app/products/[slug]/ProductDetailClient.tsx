@@ -7,22 +7,26 @@ import AnimatedSection from '@/components/AnimatedSection';
 import CTASection from '@/components/CTASection';
 import type { ProductDetail } from '@/lib/productDetails';
 import { getProductBySlug } from '@/lib/productDetails';
+import { getServiceBySlug } from '@/lib/serviceDetails';
 
 function FAQItem({ q, a }: { q: string; a: string }) {
   const [open, setOpen] = useState(false);
   return (
     <div className="border-b border-surface-100 last:border-0">
-      <button onClick={() => setOpen(!open)} className="w-full flex items-center justify-between py-4 text-left">
+      <button onClick={() => setOpen(!open)} aria-expanded={open} className="w-full flex items-center justify-between py-4 text-left">
         <span className="text-sm font-medium text-surface-800 pr-4">{q}</span>
         <svg className={`w-4 h-4 shrink-0 text-surface-400 transition-transform ${open ? 'rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path d="M19 9l-7 7-7-7" strokeLinecap="round" strokeLinejoin="round" /></svg>
       </button>
-      {open && <p className="pb-4 text-sm text-surface-500 leading-relaxed">{a}</p>}
+      <div className={`overflow-hidden transition-all duration-200 ${open ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}>
+        <p className="pb-4 text-sm text-surface-500 leading-relaxed">{a}</p>
+      </div>
     </div>
   );
 }
 
 export default function ProductDetailClient({ product }: { product: ProductDetail }) {
   const related = product.relatedSlugs.map((s) => getProductBySlug(s)).filter(Boolean) as ProductDetail[];
+  const relatedServices = (product.relatedServiceSlugs || []).map((s) => getServiceBySlug(s)).filter((s): s is NonNullable<typeof s> => Boolean(s));
 
   return (
     <>
@@ -100,6 +104,24 @@ export default function ProductDetailClient({ product }: { product: ProductDetai
         </div>
       </section>
 
+      {/* Pricing */}
+      {product.startingPrice && (
+        <section className="py-12 section-warm">
+          <div className="container-main max-w-3xl">
+            <AnimatedSection>
+              <h2 className="mb-4">Pricing</h2>
+              <div className="card !p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                <div>
+                  <p className="text-2xl font-semibold text-surface-900 mb-1">{product.startingPrice}</p>
+                  <p className="text-sm text-surface-500">{product.priceNote}</p>
+                </div>
+                <Link href="/contact" className="btn-primary shrink-0">Get Started</Link>
+              </div>
+            </AnimatedSection>
+          </div>
+        </section>
+      )}
+
       {/* FAQ */}
       {product.faqs.length > 0 && (
         <section className="section-padding section-light">
@@ -127,6 +149,27 @@ export default function ProductDetailClient({ product }: { product: ProductDetai
                   <Link key={r.slug} href={`/products/${r.slug}`} className="card !p-4 hover:border-brand-500/30 transition-colors group">
                     <h3 className="text-sm font-medium group-hover:text-brand-500 transition-colors mb-1">{r.title}</h3>
                     <p className="text-xs text-surface-400 line-clamp-2">{r.subtitle}</p>
+                  </Link>
+                ))}
+              </div>
+            </AnimatedSection>
+          </div>
+        </section>
+      )}
+
+      {/* Complementary Services */}
+      {relatedServices.length > 0 && (
+        <section className="py-12 section-warm">
+          <div className="container-main max-w-3xl">
+            <AnimatedSection>
+              <h2 className="mb-6">Complementary Services</h2>
+              <p className="text-sm text-surface-500 mb-4">Pair this subscription with a one time project build for a complete solution.</p>
+              <div className="grid sm:grid-cols-2 gap-4">
+                {relatedServices.map((rs) => (
+                  <Link key={rs.slug} href={`/services/${rs.slug}`} className="card !p-4 hover:border-brand-500/30 transition-colors group">
+                    <h3 className="text-sm font-medium group-hover:text-brand-500 transition-colors mb-1">{rs.title}</h3>
+                    <p className="text-xs text-surface-400 line-clamp-2">{rs.summary}</p>
+                    {rs.startingPrice && <p className="text-xs text-brand-500 font-medium mt-2">{rs.startingPrice}</p>}
                   </Link>
                 ))}
               </div>

@@ -15,6 +15,11 @@ export async function POST(request: NextRequest) {
       testimonial: data.testimonial.trim(),
       mobileNumber: data.mobile_number || null,
       rating: data.rating || null,
+      designation: data.designation || null,
+      company: data.company || null,
+      industry: data.industry || null,
+      city: data.city || null,
+      imageUrl: data.image_url || null,
       status: 'pending',
     });
 

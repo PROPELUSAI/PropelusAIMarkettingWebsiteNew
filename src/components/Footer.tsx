@@ -7,17 +7,19 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { siteConfig, footerLinks } from '@/lib/data';
-import { SiLinkedin, SiInstagram, SiFacebook, SiThreads, SiPinterest, SiYoutube, SiBluesky } from 'react-icons/si';
+import { SiLinkedin, SiInstagram, SiFacebook, SiThreads, SiPinterest, SiYoutube, SiBluesky, SiX, SiQuora } from 'react-icons/si';
 import NewsletterSection from './NewsletterSection';
 
 /** Social media platform links with their icons */
 const socials = [
   { label: 'LinkedIn', href: 'https://www.linkedin.com/company/propelusai/', icon: SiLinkedin },
+  { label: 'X', href: 'https://x.com/propelusai', icon: SiX }, /* TODO: verify URL */
   { label: 'Instagram', href: 'https://www.instagram.com/propelusai/', icon: SiInstagram },
   { label: 'Facebook', href: 'https://www.facebook.com/propelusai', icon: SiFacebook },
   { label: 'Threads', href: 'https://www.threads.net/@propelusai', icon: SiThreads },
   { label: 'Pinterest', href: 'https://www.pinterest.com/PropelusAI/', icon: SiPinterest },
   { label: 'YouTube', href: 'https://www.youtube.com/@PropelusAI', icon: SiYoutube },
+  { label: 'Quora', href: 'https://www.quora.com/profile/PropelusAI', icon: SiQuora }, /* TODO: verify URL */
   { label: 'Bluesky', href: 'https://bsky.app/profile/propelusai.bsky.social', icon: SiBluesky },
 ];
 
@@ -42,8 +44,9 @@ export default function Footer() {
               intelligence, and measurable ROI.
             </p>
             <div className="space-y-1 text-sm text-surface-400 mb-4">
-              <p>{siteConfig.email}</p>
-              <p>WhatsApp: {siteConfig.whatsapp.in} (IN) | {siteConfig.whatsapp.us} (US)</p>
+              <p><a href={`mailto:${siteConfig.email}`} className="hover:text-white transition-colors">{siteConfig.email}</a></p>
+              <p>WhatsApp: <a href={`https://wa.me/${siteConfig.whatsapp.in.replace(/\s/g, '')}`} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">{siteConfig.whatsapp.in}</a> (IN)</p>
+              <p>WhatsApp: <a href={`https://wa.me/${siteConfig.whatsapp.us.replace(/\s/g, '')}`} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">{siteConfig.whatsapp.us}</a> (US)</p>
             </div>
 
             {/* Social Icons */}
@@ -105,8 +108,8 @@ export default function Footer() {
             </ul>
             <h4 className="text-xs font-medium tracking-widest uppercase text-surface-400 mb-2">Offices</h4>
             <div className="space-y-1 text-sm text-surface-400">
-              <p>Phoenix, AZ (US)</p>
-              <p>Surat & Kolkata (India)</p>
+              <p>Phoenix, Arizona, USA</p>
+              <p>Surat & Kolkata, India</p>
             </div>
           </div>
         </div>
@@ -114,7 +117,7 @@ export default function Footer() {
         {/* Bottom Bar */}
         <div className="mt-8 pt-6 border-t border-white/[0.06] flex flex-col sm:flex-row justify-between items-center gap-3">
           <p className="text-xs text-surface-500">
-            © {new Date().getFullYear()} PropelusAI - All Rights Reserved. Designed for global growth across globally.
+            © {new Date().getFullYear()} PropelusAI | All Rights Reserved. Designed for global growth.
           </p>
           <div className="flex items-center gap-5 text-xs text-surface-500">
             <Link href="/terms" className="hover:text-white transition-colors">Terms</Link>

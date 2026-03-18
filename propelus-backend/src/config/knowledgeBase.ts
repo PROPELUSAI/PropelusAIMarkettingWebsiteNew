@@ -1,7 +1,7 @@
 /**
  * PropelusAI Comprehensive Knowledge Base
  * ─────────────────────────────────────────
- * This file contains ALL company data used to power the AI chatbot "Propel".
+ * This file contains ALL company data used to power the AI chatbot "PropelusAI".
  * It feeds the Gemini LLM with accurate, detailed information about every
  * service, product, pricing range, deliverable, FAQ, and company detail.
  */
@@ -32,7 +32,7 @@ COMPANY VALUES:
 1. Precision in Everything — Every project begins with intention — from design tokens to workflow architecture. No shortcuts, no guesswork.
 2. Product-Grade Engineering — We deliver digital experiences that match the quality of world-class software platforms. Dual-theme design, clean architecture, and enterprise-ready execution come standard.
 3. AI at the Core — AI isn't a feature — it's embedded across research, segmentation, automation, analytics, content, and system intelligence.
-4. Outcome-First Thinking — Everything we build must drive a measurable business result: more revenue, more efficiency, more opportunities, more clarity.
+4. Outcome first Thinking — Everything we build must drive a measurable business result: more revenue, more efficiency, more opportunities, more clarity.
 
 KEY DIFFERENTIATORS:
 • AI-native: Every solution has AI baked in — not bolted on
@@ -71,9 +71,8 @@ Description: Intelligent websites and mobile applications delivered with enterpr
 ────────────────────────────────
 
 SERVICE 1.1: AI-Based Website Building & Hosting
-• Headline: Enterprise-grade corporate experiences without the overhead.
-• Investment: $67,600 – $169,000
-• Summary: Responsive, SEO-optimized websites with AI personalization, embedded chat, and premium managed hosting.
+• Headline: Enterprise grade corporate experiences without the overhead.
+• Summary: Responsive, SEO optimized websites with AI personalization, embedded chat, and premium managed hosting.
 • Description: We pair strategic UX with AI-assisted design to deliver websites that feel handcrafted yet scale like products. Every launch includes performance hardening, governance-ready security, and meticulous QA.
 • Timeline: 2–4 weeks for build, followed by managed hosting
 • Deliverables: Custom AI-powered website | Domain + SSL configuration | Hosting + CDN setup | Performance optimization suite | SEO foundation and analytics integration
@@ -138,7 +137,7 @@ SERVICE 2.6: AI-Powered Content Creation & Marketing
 • Summary: Ten high-impact content assets per month with SEO alignment, channel distribution, and performance tracking.
 • Description: We merge AI velocity with editorial craftsmanship to keep your pipeline fed with relevant articles, emails, and social narratives.
 • Timeline: Monthly recurring cadence
-• Deliverables: Monthly content calendar | 10 SEO-optimized long + short-form assets | Social + email derivatives | Performance + SEO analysis | Iterative recommendations
+• Deliverables: Monthly content calendar | 10 SEO optimized long + short-form assets | Social + email derivatives | Performance + SEO analysis | Iterative recommendations
 
 ────────────────────────────────
 CATEGORY 3: CRM & AUTOMATION
@@ -443,7 +442,7 @@ PRODUCT 15: Funnel Tracking & AI-Driven Insights
 
 PRODUCT 16: 24/7 Cybersecurity Monitoring & Threat Response
 • Subtitle: Always-on security surveillance with real-time threat detection and incident response.
-• Description: Enterprise-grade cybersecurity monitoring subscription that provides continuous threat surveillance, vulnerability scanning, automated incident response, and monthly security posture reporting.
+• Description: Enterprise grade cybersecurity monitoring subscription that provides continuous threat surveillance, vulnerability scanning, automated incident response, and monthly security posture reporting.
 • Deliverables: 24/7 security monitoring & alerting | Real-time threat detection & response | Monthly vulnerability scanning | Security posture reporting | Incident response playbooks | Compliance audit support
 
 PRODUCT 17: Weekly Social Media Reels & Shorts Production
@@ -524,7 +523,7 @@ Q: Do you work globally?
 A: Yes, we support clients globally.
 
 Q: What makes PropelusAI different from other agencies?
-A: AI-native engineering, outcome-focused execution, enterprise-grade delivery, transparent pricing, global presence, predictive analytics, high-quality automation, and confidential client work approach.
+A: AI-native engineering, outcome-focused execution, Enterprise grade delivery, transparent pricing, global presence, predictive analytics, high-quality automation, and confidential client work approach.
 
 SERVICES (ONE-TIME BUILDS):
 Q: How long does a website project take?

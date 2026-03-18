@@ -42,23 +42,62 @@ const organizationSchema = {
   },
   description:
     'AI powered growth systems designed for global teams. Transform your business with AI powered websites, CRM systems, subscription based AI products, and automation.',
+  '@id': 'https://www.propelusai.com/#organization',
+  foundingDate: '2024-01-01',
+  email: 'support@propelusai.com',
   sameAs: [
     'https://www.linkedin.com/company/propelusai',
     'https://twitter.com/propelusai',
   ],
-  contactPoint: {
-    '@type': 'ContactPoint',
-    contactType: 'Customer Service',
-    url: 'https://www.propelusai.com/contact',
-  },
+  address: [
+    {
+      '@type': 'PostalAddress',
+      addressLocality: 'Phoenix',
+      addressRegion: 'Arizona',
+      addressCountry: 'US',
+    },
+    {
+      '@type': 'PostalAddress',
+      addressLocality: 'Surat',
+      addressRegion: 'Gujarat',
+      addressCountry: 'IN',
+    },
+    {
+      '@type': 'PostalAddress',
+      addressLocality: 'Kolkata',
+      addressRegion: 'West Bengal',
+      addressCountry: 'IN',
+    },
+  ],
+  contactPoint: [
+    {
+      '@type': 'ContactPoint',
+      contactType: 'Customer Service',
+      email: 'support@propelusai.com',
+      url: 'https://www.propelusai.com/contact',
+      availableLanguage: ['English'],
+    },
+  ],
+  knowsAbout: [
+    'AI website development',
+    'CRM systems',
+    'LinkedIn advertising',
+    'Marketing automation',
+    'AI content generation',
+    'Lead generation',
+    'Mobile app development',
+    'SaaS development',
+  ],
 };
 
 const websiteSchema = {
   '@context': 'https://schema.org',
   '@type': 'WebSite',
+  '@id': 'https://www.propelusai.com/#website',
   name: 'PropelusAI',
   url: 'https://www.propelusai.com',
   description: 'AI powered growth systems designed for global teams',
+  inLanguage: 'en-US',
   publisher: {
     '@type': 'Organization',
     name: 'PropelusAI',
@@ -69,24 +108,25 @@ const websiteSchema = {
       height: 512,
     },
   },
-};
-
-const logoSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'Organization',
-  url: 'https://www.propelusai.com',
-  logo: 'https://www.propelusai.com/propelus-favicon-512.png',
+  potentialAction: {
+    '@type': 'SearchAction',
+    target: {
+      '@type': 'EntryPoint',
+      urlTemplate: 'https://www.propelusai.com/blogs?q={search_term_string}',
+    },
+    'query-input': 'required name=search_term_string',
+  },
 };
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.propelusai.com'),
   title: {
     default:
-      'PropelusAI - AI Powered Growth for Modern Businesses | Premium AI Services & Automation',
+      'PropelusAI - AI Website Development, CRM & SaaS',
     template: '%s | PropelusAI',
   },
   description:
-    'Transform your business with AI powered websites, CRM systems, subscription based AI products, LinkedIn advertising, automation, and content engines. PropelusAI delivers premium, enterprise grade experiences built for global growth.',
+    'PropelusAI builds AI websites, CRM systems, SaaS platforms, and marketing automation. 150+ projects delivered. Custom software from $2,500.',
   keywords: [
     'AI services',
     'AI automation',
@@ -120,7 +160,7 @@ export const metadata: Metadata = {
     description: 'AI powered growth systems designed for global teams.',
     images: [
       {
-        url: '/propelus-favicon-512.png',
+        url: '/propelus-favicon-1200.png',
         width: 1200,
         height: 630,
         alt: 'PropelusAI - AI Powered Growth for Modern Businesses',
@@ -131,7 +171,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'PropelusAI - Premium AI Services & Products',
     description: 'AI powered growth systems designed for global teams.',
-    images: ['/propelus-favicon-512.png'],
+    images: ['/propelus-favicon-1200.png'],
   },
   robots: {
     index: true,
@@ -180,12 +220,25 @@ fbq('track', 'PageView');`}
         </Script>
 
         {/* Zoho PageSense */}
-        <Script id="zoho-pagesense" strategy="afterInteractive">
+        <Script id="zoho-pagesense" strategy="lazyOnload">
           {`(function(w,s){var e=document.createElement("script");e.type="text/javascript";e.async=true;e.src="https://cdn-in.pagesense.io/js/60065896954/f226d04c18114c509d24d2b42411990d.js";var x=document.getElementsByTagName("script")[0];x.parentNode.insertBefore(e,x);})(window,"script");`}
         </Script>
 
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://cdn-in.pagesense.io" />
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+        <link rel="dns-prefetch" href="https://connect.facebook.net" />
+
+        {/* Structured Data — placed in head for earliest crawler discovery */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+        />
       </head>
       <body className="font-sans antialiased">
         {/* Google Tag Manager (noscript) */}
@@ -208,20 +261,6 @@ fbq('track', 'PageView');`}
             alt=""
           />
         </noscript>
-
-        {/* Structured Data for Google Search */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(logoSchema) }}
-        />
 
         <StoreProvider>
           <MarketingShell>{children}</MarketingShell>

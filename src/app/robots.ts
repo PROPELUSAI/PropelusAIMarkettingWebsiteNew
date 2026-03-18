@@ -1,12 +1,12 @@
 import { MetadataRoute } from 'next';
 
 /**
- * SEO-Optimized Robots.txt for PropelusAI
+ * SEO optimized Robots.txt for PropelusAI
  *
  * This file tells search engines:
  * - Which pages to crawl
  * - Where to find the sitemap
- * - Crawl rate preferences
+ * - AI crawler access rules
  *
  * Automatically accessible at: /robots.txt
  */
@@ -21,12 +21,52 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: '*',
         allow: '/',
-        disallow: ['/api/', '/admin/', '/_next/'],
+        disallow: ['/api/', '/admin/', '/_next/', '/@propelusaiadminpanel279', '/propelusaiadmin279'],
       },
       {
         userAgent: 'Googlebot',
         allow: '/',
-        disallow: ['/api/', '/admin/'],
+        disallow: ['/api/', '/admin/', '/@propelusaiadminpanel279', '/propelusaiadmin279'],
+      },
+      // Allow AI search crawlers for visibility in AI search results
+      {
+        userAgent: 'GPTBot',
+        allow: '/',
+        disallow: ['/api/', '/admin/', '/@propelusaiadminpanel279', '/propelusaiadmin279'],
+      },
+      {
+        userAgent: 'ChatGPT-User',
+        allow: '/',
+        disallow: ['/api/', '/admin/', '/@propelusaiadminpanel279', '/propelusaiadmin279'],
+      },
+      {
+        userAgent: 'Google-Extended',
+        allow: '/',
+        disallow: ['/api/', '/admin/', '/@propelusaiadminpanel279', '/propelusaiadmin279'],
+      },
+      {
+        userAgent: 'PerplexityBot',
+        allow: '/',
+        disallow: ['/api/', '/admin/', '/@propelusaiadminpanel279', '/propelusaiadmin279'],
+      },
+      {
+        userAgent: 'ClaudeBot',
+        allow: '/',
+        disallow: ['/api/', '/admin/', '/@propelusaiadminpanel279', '/propelusaiadmin279'],
+      },
+      {
+        userAgent: 'Applebot-Extended',
+        allow: '/',
+        disallow: ['/api/', '/admin/', '/@propelusaiadminpanel279', '/propelusaiadmin279'],
+      },
+      // Block training-only scrapers
+      {
+        userAgent: 'CCBot',
+        disallow: '/',
+      },
+      {
+        userAgent: 'Bytespider',
+        disallow: '/',
       },
     ],
     sitemap: `${baseUrl}/sitemap.xml`,

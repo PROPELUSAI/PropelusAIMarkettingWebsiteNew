@@ -19,12 +19,13 @@ export const siteConfig = {
   whatsapp: { in: '+91 9477466514', us: '+1 6232357330' },
   offices: {
     us: { city: 'Phoenix', state: 'Arizona', entity: 'BETH and friends LLC' },
-    in: { cities: ['Surat, Gujarat', 'Kolkata, West Bengal'], entity: 'RBSS VENTURES (Propelus by RBSS)', gstin: '19ABMFR6144D1ZZ' },
+    in: { cities: ['Surat, Gujarat', 'Kolkata, West Bengal'], entity: 'PropelusAI by RBSS Ventures', gstin: '19ABMFR6144D1ZZ' },
   },
 };
 
 export const navigation = [
   { label: 'Home', href: '/' },
+  { label: 'Soul', href: '/soul' },
   { label: 'Products', href: '/products' },
   { label: 'Services', href: '/services' },
   { label: 'Testimonials', href: '/testimonials' },
@@ -216,23 +217,23 @@ export const serviceCategories = [
   {
     id: 'web-mobile',
     title: 'Web & Mobile Solutions',
-    subtitle: 'AI crafted digital products and hosting built for scale.',
-    description: 'Intelligent websites and mobile applications delivered with enterprise hosting, airtight security, and performance first engineering.',
+    subtitle: 'AI crafted digital products built for scale.',
+    description: 'Intelligent websites and mobile applications delivered with airtight security and performance first engineering.',
     services: [
       {
-        title: 'AI Based Website Building & Hosting',
+        title: 'AI Based Website Building',
         headline: 'Enterprise grade corporate experiences without the overhead.',
-        summary: 'Responsive, SEO optimized websites with AI personalization, embedded chat, and premium managed hosting.',
+        summary: 'Responsive, SEO optimized websites with AI personalization, embedded chat, and performance optimization.',
         description: 'We pair strategic UX with AI assisted design to deliver websites that feel handcrafted yet scale like products. Every launch includes performance hardening, governance ready security, and meticulous QA.',
-        timeline: '2–4 weeks for build, followed by managed hosting',
-        features: ['Custom AI powered website', 'Domain + SSL configuration', 'Hosting + CDN setup', 'Performance optimization suite', 'SEO foundation and analytics integration'],
+        timeline: '2 to 4 weeks for build and launch',
+        features: ['Custom AI powered website', 'Domain + SSL configuration', 'CDN setup and delivery optimization', 'Performance optimization suite', 'SEO foundation and analytics integration'],
       },
       {
         title: 'AI Based Mobile Application Development',
         headline: 'Cross platform mobile apps with embedded intelligence.',
         summary: 'iOS and Android applications enhanced with recommendation engines, predictive analytics, and adaptive UX.',
         description: 'From concept to store submission, we design product ready mobile experiences that learn from user behavior. Expect native level performance, secure data pipelines, and continuous optimization.',
-        timeline: '8–12 weeks build + 2 weeks for store approvals',
+        timeline: '8 to 12 weeks build + 2 weeks for store approvals',
         features: ['Native mobile application bundle', 'App store submissions + assets', 'User documentation + training', 'Analytics dashboard integration', 'Maintenance + monitoring plan'],
       },
     ],
@@ -296,7 +297,7 @@ export const serviceCategories = [
         headline: 'A CRM that mirrors your exact operating model.',
         summary: 'Custom CRM development with AI analytics, workflow automation, and deep integrations.',
         description: 'We architect a CRM that feels bespoke to your teams, layering predictive intelligence and automation without breaking existing tooling.',
-        timeline: '6–8 weeks build + 2 weeks testing + training',
+        timeline: '6 to 8 weeks build + 2 weeks testing + training',
         features: ['Custom CRM platform', 'Integration setup', 'Data migration playbooks', 'User training kit', 'Documentation + support plans'],
       },
       {
@@ -312,7 +313,7 @@ export const serviceCategories = [
         headline: 'A white label CRM experience aligned with your brand.',
         summary: 'Fully bespoke CRM interfaces, workflows, and security built for franchised or multi brand organizations.',
         description: 'Beyond integrations, we give you a CRM that visually and functionally reflects your brand system, from UI tokens to governance rules.',
-        timeline: '8–10 weeks build + 2 weeks brand QA',
+        timeline: '8 to 10 weeks build + 2 weeks brand QA',
         features: ['Fully branded CRM instance', 'Workflow + field setup', 'Brand integration package', 'User training program', 'Documentation + support suite'],
       },
       {
@@ -336,7 +337,7 @@ export const serviceCategories = [
         headline: 'End to end automation architecture with AI personalization.',
         summary: 'Lead capture to customer retention orchestrated through intelligent workflows that scale effortlessly.',
         description: 'We evaluate your tech stack, design omnichannel workflows, and implement automation that adapts to every lifecycle stage.',
-        timeline: '3–4 weeks implementation + managed optimization',
+        timeline: '3 to 4 weeks implementation + managed optimization',
         features: ['Automation strategy deck', 'Workflow designs + builds', 'Campaign templates + assets', 'Monitoring dashboard', 'Training + support sessions'],
       },
     ],
@@ -352,7 +353,7 @@ export const serviceCategories = [
         headline: 'Transform raw footage into cinematic marketing assets.',
         summary: 'Turn your existing video content into polished, professional marketing materials with AI enhanced editing.',
         description: 'Our AI enhanced editing suite combines color grading, audio enhancement, motion graphics, and creative direction to deliver broadcast quality videos that captivate audiences and drive conversions.',
-        timeline: '5–10 business days from footage receipt',
+        timeline: '5 to 10 business days from footage receipt',
         features: ['Professionally edited video (up to 5 minutes)', 'Color graded final output', 'Audio enhanced soundtrack', 'Multiple format exports (social, web, presentation)', 'Raw project files included'],
       },
       {
@@ -368,7 +369,7 @@ export const serviceCategories = [
         headline: 'Authentic customer stories that build unshakeable trust.',
         summary: 'Strategic testimonial videos that showcase real customer success stories with professional filming and editing.',
         description: 'We handle everything from interview scripting to filming, editing, and optimization. delivering social proof that converts prospects into customers. Includes AI assisted interview script development and behavioral psychology based storytelling.',
-        timeline: '3–4 weeks from kickoff to final delivery',
+        timeline: '3 to 4 weeks from kickoff to final delivery',
         features: ['3-5 professionally produced testimonial videos', 'Full length interviews (2-3 minutes each)', 'Short form social cuts (15-30 seconds)', 'Transcripts and captions included', 'B roll and lifestyle footage'],
       },
       {
@@ -376,7 +377,7 @@ export const serviceCategories = [
         headline: 'Cinematic storytelling that defines your brand legacy.',
         summary: 'Full service corporate film production from concept to final cut, designed to inspire stakeholders and captivate audiences.',
         description: 'We produce cinematic brand story videos, corporate documentaries, and company culture films with AI enhanced pre production planning, professional cinematography, and post production polish. Perfect for investor relations, recruitment, brand campaigns, and internal communications.',
-        timeline: '3–6 weeks from concept to final delivery',
+        timeline: '3 to 6 weeks from concept to final delivery',
         features: ['Full corporate film production (up to 10 minutes)', 'Script development and storyboarding', 'Professional cinematography and direction', 'AI enhanced post production and color grading', 'Multiple format exports and distribution strategy'],
       },
       {
@@ -384,7 +385,7 @@ export const serviceCategories = [
         headline: 'Complex ideas made simple through visual storytelling.',
         summary: 'Custom 2D/3D animation and motion graphics for explainer videos, product demos, social content, and brand storytelling.',
         description: 'From explainer animations to kinetic typography and 3D product visualizations, we bring concepts to life with AI accelerated production workflows. Every project includes storyboarding, voiceover direction, and multi format delivery.',
-        timeline: '2–4 weeks depending on complexity and length',
+        timeline: '2 to 4 weeks depending on complexity and length',
         features: ['Custom 2D/3D animation production', 'Storyboard and concept art', 'Professional voiceover integration', 'Sound design and music scoring', 'Multi format exports (social, web, presentation)'],
       },
       {
@@ -392,7 +393,7 @@ export const serviceCategories = [
         headline: 'Engaging video content from concept to final cut.',
         summary: 'Professional video production including explainer videos, product demos, social content, and promotional videos with AI enhanced editing.',
         description: 'We produce compelling video content that tells your story effectively. From scripting to post production, we leverage AI tools for efficiency while maintaining creative quality and brand alignment.',
-        timeline: '2–4 weeks depending on complexity + revisions',
+        timeline: '2 to 4 weeks depending on complexity + revisions',
         features: ['Final video in multiple formats', 'Source project files', 'Platform optimized versions', 'Subtitle files (SRT)', 'Thumbnail + preview assets'],
       },
       {
@@ -400,7 +401,7 @@ export const serviceCategories = [
         headline: 'Define your brand voice once. use it everywhere.',
         summary: 'Establish a consistent, compelling brand voice that resonates across every customer touchpoint.',
         description: 'Our AI enhanced process combines behavioral psychology, competitive analysis, and audience research to create messaging frameworks that drive conversions. Includes comprehensive brand voice audit and target audience psychographic profiling.',
-        timeline: '3–4 weeks from discovery to final delivery',
+        timeline: '3 to 4 weeks from discovery to final delivery',
         features: ['Brand voice definition document', 'Messaging architecture framework', 'Tone of voice guidelines', 'Competitive positioning statement', 'Content style guide with 50+ examples'],
       },
       {
@@ -408,7 +409,7 @@ export const serviceCategories = [
         headline: 'Turn your founder story into a competitive advantage.',
         summary: 'Craft compelling founder and business narratives that humanize your brand and build emotional connections.',
         description: 'Perfect for investor pitches, About pages, speaking engagements, and thought leadership platforms. Includes AI assisted narrative arc development and emotional connection point identification.',
-        timeline: '2–3 weeks with 2 revision rounds',
+        timeline: '2 to 3 weeks with 2 revision rounds',
         features: ['Comprehensive founder narrative document', 'Elevator pitch (30-second version)', 'Extended story (2-3 minute spoken/written)', 'About page copy', 'Speaking engagement talking points'],
       },
       {
@@ -424,7 +425,7 @@ export const serviceCategories = [
         headline: 'Names that stick, themes that resonate.',
         summary: 'Strategic brand and product naming services powered by linguistic analysis, trademark screening, and cultural relevance testing.',
         description: 'We don\'t just create names. we develop entire thematic directions that inform all brand expressions. Includes AI assisted name generation, linguistic and phonetic analysis, and cultural appropriateness testing.',
-        timeline: '3–4 weeks from brief to final recommendations',
+        timeline: '3 to 4 weeks from brief to final recommendations',
         features: ['50 shortlisted name options with rationales', '10 finalist names with full analysis', '3 recommended names with positioning statements', 'Domain and social handle availability report', 'Trademark screening summary'],
       },
       {
@@ -432,7 +433,7 @@ export const serviceCategories = [
         headline: 'Scripts that sound perfect when spoken aloud.',
         summary: 'Professional voiceover scriptwriting optimized for clarity, emotional impact, and natural delivery.',
         description: 'Includes voice tone direction, pacing guidelines, and audio visual storytelling alignment for videos, podcasts, and audio content. AI assisted scriptwriting for spoken delivery with phonetic optimization.',
-        timeline: '3–5 business days per script',
+        timeline: '3 to 5 business days per script',
         features: ['Professionally formatted voiceover scripts', 'Voice tone and style direction', 'Pacing and pronunciation guides', 'Alternative version options', 'Talent briefing document'],
       },
       {
@@ -440,7 +441,7 @@ export const serviceCategories = [
         headline: 'Your entire brand system designed from the ground up.',
         summary: 'End to end brand identity creation including logo, visual system, messaging architecture, positioning, and comprehensive brand guidelines.',
         description: 'We architect cohesive brand identities that resonate across every channel. From visual design tokens to messaging frameworks, every element is strategically crafted to differentiate your business and build lasting recognition.',
-        timeline: '4–6 weeks for complete brand system delivery',
+        timeline: '4 to 6 weeks for complete brand system delivery',
         features: ['Logo suite in all formats', 'Complete visual identity system', 'Brand messaging and positioning framework', 'Comprehensive brand guidelines document', 'Application templates and usage examples'],
       },
       {
@@ -448,7 +449,7 @@ export const serviceCategories = [
         headline: 'Stunning visuals for every marketing touchpoint.',
         summary: 'Custom graphics, social media assets, infographics, and presentation decks designed with brand consistency.',
         description: 'We blend AI powered design tools with creative expertise to deliver high impact visuals that resonate with your audience. Every asset is optimized for its intended platform and purpose.',
-        timeline: '1–2 weeks for initial package + ongoing monthly support',
+        timeline: '1 to 2 weeks for initial package + ongoing monthly support',
         features: ['Custom graphics package', 'Source files + export formats', 'Brand aligned templates', 'Usage guidelines', 'Asset organization system'],
       },
       {
@@ -456,7 +457,7 @@ export const serviceCategories = [
         headline: 'Memorable logos that define your brand.',
         summary: 'Complete logo design with multiple concepts, refinements, and full brand identity package including color palettes and typography.',
         description: 'We create distinctive logos through a collaborative process that captures your brand essence. Each project includes comprehensive brand guidelines to ensure consistent application across all channels.',
-        timeline: '2–3 weeks for complete brand identity package',
+        timeline: '2 to 3 weeks for complete brand identity package',
         features: ['Final logo in all formats (AI, EPS, SVG, PNG)', 'Brand style guide document', 'Color palette specifications', 'Typography guidelines', 'Application examples + mockups'],
       },
       {
@@ -464,7 +465,7 @@ export const serviceCategories = [
         headline: 'Professional company profiles that win business.',
         summary: 'Comprehensive company or service profile documents that position your business for RFPs, partnership opportunities, and corporate sales.',
         description: 'Combines strategic copywriting with professional design for maximum impact. Includes strategic company positioning, service/capability descriptions, and case study integration.',
-        timeline: '2–3 weeks from briefing to final delivery',
+        timeline: '2 to 3 weeks from briefing to final delivery',
         features: ['8-16 page company profile document', 'Executive summary (1-page)', 'Service overview sections', 'Case studies and client success stories', 'Team and capability highlights'],
       },
       {
@@ -472,7 +473,7 @@ export const serviceCategories = [
         headline: 'Presentations that close deals and win funding.',
         summary: 'Investor ready pitch decks and corporate presentations with strategic narrative design, data visualization, and premium visual styling.',
         description: 'We combine storytelling frameworks with AI enhanced design to build presentations that command attention. Whether for fundraising, sales enablement, or board reporting, every slide is engineered for maximum impact and clarity.',
-        timeline: '1–2 weeks from brief to final delivery',
+        timeline: '1 to 2 weeks from brief to final delivery',
         features: ['Custom designed pitch deck (15-30 slides)', 'Strategic narrative and story arc', 'Data visualization and infographics', 'Speaker notes and talking points', 'Editable source files (PowerPoint/Keynote/Google Slides)'],
       },
       {
@@ -480,7 +481,7 @@ export const serviceCategories = [
         headline: 'Every touchpoint designed for conversion.',
         summary: 'Professional marketing materials including brochures, flyers, social media kits, email templates, and campaign assets.',
         description: 'We design brand consistent marketing collateral that drives action across print and digital channels. AI powered layout optimization ensures every piece is visually compelling and conversion focused.',
-        timeline: '1–2 weeks per collateral package',
+        timeline: '1 to 2 weeks per collateral package',
         features: ['Brochure and flyer design', 'Social media asset kits', 'Email marketing templates', 'Trade show and event materials', 'Digital ad creative packages'],
       },
     ],
@@ -496,7 +497,7 @@ export const serviceCategories = [
         headline: 'Professional mail infrastructure with enterprise safeguards.',
         summary: 'Secure domain configuration, compliance ready policies, and seamless device rollouts.',
         description: 'We configure DNS, identity, and mobile device policies so your team enjoys frictionless collaboration with ironclad protections.',
-        timeline: '1–2 weeks setup + annual managed maintenance',
+        timeline: '1 to 2 weeks setup + annual managed maintenance',
         features: ['Custom email domain + DNS configuration', 'Security + compliance policy setup', 'User account provisioning', 'Mobile + desktop setup guides', 'Backup + documentation package'],
       },
       {
@@ -504,74 +505,93 @@ export const serviceCategories = [
         headline: 'Defense in depth with proactive surveillance.',
         summary: 'Security audits, encryption, firewall hardening, and ongoing threat monitoring orchestrated by specialists.',
         description: 'We evaluate posture, deploy modern tooling, and maintain 24/7 vigilance so your sensitive data stays uncompromised.',
-        timeline: '2–3 weeks initial hardening + ongoing monitoring',
+        timeline: '2 to 3 weeks initial hardening + ongoing monitoring',
         features: ['Security assessment + roadmap', 'Protection system configuration', 'Monitoring dashboards', 'Monthly security reports', 'Incident response playbooks + training'],
       },
     ],
   },
 ];
 
-export const testimonials = [
-  { quote: 'Our demand engine was transformed in six weeks. Pipeline increased 3.1× and our team closed one of our biggest enterprise deals right after the system went live.', role: 'COO, Industrial Manufacturing', industry: 'Manufacturing (B2B)' },
-  { quote: 'The CRM and automation setup restructured our whole funnel. Our sales cycle became 42% faster and forecasting became far more accurate. The dashboards are world class.', role: 'VP Growth, SaaS Platform', industry: 'SaaS (Technology)' },
-  { quote: 'We needed strong data protection. PropelusAI delivered a security setup that resulted in zero critical incidents over the last year. Their response system is incredible.', role: 'Head of IT, Healthcare Organization', industry: 'Healthcare (Medical Services)' },
-  { quote: 'The content engine they built has taken our brand to a new level. Organic traffic grew 4× in 120 days and we\'re now getting daily inbound leads from our content alone.', role: 'Director of Marketing, Education Company', industry: 'Education (E Learning Brand)' },
-  { quote: 'Our company was drowning in manual work. PropelusAI automated our entire workflow and increased our operational efficiency by 78%. Easily the best investment we made.', role: 'Managing Partner, Consulting Firm', industry: 'Consulting (Professional Services)' },
-  { quote: 'Our mobile app went from outdated to exceptional. Engagement increased by 70% and retention jumped significantly thanks to the AI powered personalization.', role: 'Founder, FinTech Startup', industry: 'Finance (FinTech)' },
-  { quote: 'The LinkedIn strategy they implemented generated 2,400+ qualified connections in 90 days. Our inbound meeting rate tripled and we\'re now closing deals directly from LinkedIn outreach.', role: 'CEO, B2B Marketing Agency', industry: 'Marketing (Agency)' },
-  { quote: 'PropelusAI rebuilt our entire website from the ground up. Load times dropped by 65%, conversions increased by 2.3×, and our bounce rate is now under 20%. The design is stunning.', role: 'CMO, E Commerce Brand', industry: 'Retail (E Commerce)' },
-  { quote: 'Their Meta ads strategy completely changed our acquisition game. ROAS went from 1.8× to 5.2× in just two months. The targeting and creative optimization is next level.', role: 'Growth Lead, Consumer App', industry: 'Technology (Mobile Apps)' },
-  { quote: 'We were skeptical about AI automation, but PropelusAI proved us wrong. They automated our customer support, inventory management, and reporting. We saved 40+ hours per week.', role: 'Operations Director, Logistics Company', industry: 'Logistics (Supply Chain)' },
-  { quote: 'The AI chatbot they built for our website handles 80% of customer inquiries automatically. Customer satisfaction scores went up and our support team can now focus on complex issues.', role: 'Customer Success Manager, SaaS Startup', industry: 'SaaS (Customer Support)' },
-  { quote: 'PropelusAI designed and launched our MVP in record time. The product was so polished that we secured seed funding within 3 months of launch. Their technical expertise is unmatched.', role: 'Founder, Tech Startup', industry: 'Technology (Startup)' },
-  { quote: 'The email marketing automation they set up generates $50K+ in monthly recurring revenue on autopilot. Segmentation, personalization, and timing are all AI optimized. Game changer.', role: 'Marketing Director, Online Education', industry: 'Education (Online Courses)' },
-  { quote: 'Our data was a mess before PropelusAI. They built a centralized analytics dashboard that gives us real time insights across all channels. Decision making is now data driven and fast.', role: 'VP of Analytics, Media Company', industry: 'Media (Digital Publishing)' },
-  { quote: 'The AI powered recommendation engine increased our average order value by 45%. Customers are discovering products they love and our repeat purchase rate has never been higher.', role: 'Head of Product, Retail Brand', industry: 'Retail (Fashion)' },
-  { quote: 'PropelusAI transformed our lead qualification process. The AI scoring system identifies high intent prospects with 92% accuracy. Our sales team is closing deals faster than ever.', role: 'Sales Director, Enterprise Software', industry: 'SaaS (Enterprise)' },
+export interface TestimonialData {
+  quote: string;
+  name: string;
+  designation: string;
+  company: string;
+  industry: string;
+  imageUrl?: string | null;
+}
+
+export const testimonials: TestimonialData[] = [
+  { quote: 'Our demand engine was transformed in six weeks. Pipeline increased 3.1x and our team closed one of our biggest enterprise deals right after the system went live.', name: 'James Turner', designation: 'COO', company: 'Industrial Manufacturing Firm', industry: 'Manufacturing (B2B)', imageUrl: 'https://randomuser.me/api/portraits/men/32.jpg' },
+  { quote: 'The CRM and automation setup restructured our whole funnel. Our sales cycle became 42% faster and forecasting became far more accurate. The dashboards are world class.', name: 'David Chen', designation: 'VP Growth', company: 'SaaS Platform', industry: 'SaaS (Technology)', imageUrl: 'https://randomuser.me/api/portraits/men/45.jpg' },
+  { quote: 'We needed strong data protection. PropelusAI delivered a security setup that resulted in zero critical incidents over the last year. Their response system is incredible.', name: 'Michael Brooks', designation: 'Head of IT', company: 'Healthcare Organization', industry: 'Healthcare (Medical Services)', imageUrl: 'https://randomuser.me/api/portraits/men/22.jpg' },
+  { quote: 'The content engine they built has taken our brand to a new level. Organic traffic grew 4x in 120 days and we are now getting daily inbound leads from our content alone.', name: 'Sarah Mitchell', designation: 'Director of Marketing', company: 'Education Company', industry: 'Education (E Learning Brand)', imageUrl: 'https://randomuser.me/api/portraits/women/44.jpg' },
+  { quote: 'Our company was drowning in manual work. PropelusAI automated our entire workflow and increased our operational efficiency by 78%. Easily the best investment we made.', name: 'Robert Hayes', designation: 'Managing Partner', company: 'Consulting Firm', industry: 'Consulting (Professional Services)', imageUrl: 'https://randomuser.me/api/portraits/men/52.jpg' },
+  { quote: 'Our mobile app went from outdated to exceptional. Engagement increased by 70% and retention jumped significantly thanks to the AI powered personalization.', name: 'Emily Carter', designation: 'Founder', company: 'FinTech Startup', industry: 'Finance (FinTech)', imageUrl: 'https://randomuser.me/api/portraits/women/28.jpg' },
+  { quote: 'The LinkedIn strategy they implemented generated 2,400+ qualified connections in 90 days. Our inbound meeting rate tripled and we are now closing deals directly from LinkedIn outreach.', name: 'Thomas Reed', designation: 'CEO', company: 'B2B Marketing Agency', industry: 'Marketing (Agency)', imageUrl: 'https://randomuser.me/api/portraits/men/65.jpg' },
+  { quote: 'PropelusAI rebuilt our entire website from the ground up. Load times dropped by 65%, conversions increased by 2.3x, and our bounce rate is now under 20%. The design is stunning.', name: 'Michelle Scott', designation: 'CMO', company: 'E Commerce Brand', industry: 'Retail (E Commerce)', imageUrl: 'https://randomuser.me/api/portraits/women/63.jpg' },
+  { quote: 'Their Meta ads strategy completely changed our acquisition game. ROAS went from 1.8x to 5.2x in just two months. The targeting and creative optimization is next level.', name: 'Kevin Walsh', designation: 'Growth Lead', company: 'Consumer App', industry: 'Technology (Mobile Apps)', imageUrl: 'https://randomuser.me/api/portraits/men/75.jpg' },
+  { quote: 'We were skeptical about AI automation, but PropelusAI proved us wrong. They automated our customer support, inventory management, and reporting. We saved 40+ hours per week.', name: 'Victor Graham', designation: 'Operations Director', company: 'Logistics Company', industry: 'Logistics (Supply Chain)', imageUrl: 'https://randomuser.me/api/portraits/men/41.jpg' },
+  { quote: 'The AI chatbot they built for our website handles 80% of customer inquiries automatically. Customer satisfaction scores went up and our support team can now focus on complex issues.', name: 'Laura Bennett', designation: 'Customer Success Manager', company: 'SaaS Startup', industry: 'SaaS (Customer Support)', imageUrl: 'https://randomuser.me/api/portraits/women/35.jpg' },
+  { quote: 'PropelusAI designed and launched our MVP in record time. The product was so polished that we secured seed funding within 3 months of launch. Their technical expertise is unmatched.', name: 'Jason Cole', designation: 'Founder', company: 'Tech Startup', industry: 'Technology (Startup)', imageUrl: 'https://randomuser.me/api/portraits/men/86.jpg' },
+  { quote: 'The email marketing automation they set up generates $50K+ in monthly recurring revenue on autopilot. Segmentation, personalization, and timing are all AI optimized.', name: 'Hannah Foster', designation: 'Marketing Director', company: 'Online Education Platform', industry: 'Education (Online Courses)', imageUrl: 'https://randomuser.me/api/portraits/women/52.jpg' },
+  { quote: 'Our data was a mess before PropelusAI. They built a centralized analytics dashboard that gives us real time insights across all channels. Decision making is now data driven and fast.', name: 'Chris Morgan', designation: 'VP of Analytics', company: 'Media Company', industry: 'Media (Digital Publishing)', imageUrl: 'https://randomuser.me/api/portraits/men/55.jpg' },
+  { quote: 'The AI powered recommendation engine increased our average order value by 45%. Customers are discovering products they love and our repeat purchase rate has never been higher.', name: 'Elena Ross', designation: 'Head of Product', company: 'Retail Brand', industry: 'Retail (Fashion)', imageUrl: 'https://randomuser.me/api/portraits/women/68.jpg' },
+  { quote: 'PropelusAI transformed our lead qualification process. The AI scoring system identifies high intent prospects with 92% accuracy. Our sales team is closing deals faster than ever.', name: 'Brian Parker', designation: 'Sales Director', company: 'Enterprise Software', industry: 'SaaS (Enterprise)', imageUrl: 'https://randomuser.me/api/portraits/men/29.jpg' },
 ];
 
 export const faqCategories = [
   {
     title: 'General Questions',
     items: [
-      { q: "What's the difference between your Products and Services?", a: 'Services are one time, upfront engagements, while Products are subscription based with recurring monthly access.' },
-      { q: 'Which industries do you work with?', a: 'We offer solutions and business consulting across all industries. Whether you are an individual professional or a large company, our expertise is tailored to drive your success.' },
-      { q: 'Do you work globally?', a: 'Yes, we support clients globally.' },
-      { q: 'What makes PropelusAI different from other agencies?', a: 'AI native engineering, outcome focused execution, enterprise grade delivery, transparent pricing, global presence, predictive analytics, high quality automation, and confidential client work approach.' },
+      { q: "What's the difference between your Products and Services?", a: 'Services are one time project engagements like website development, CRM development, and mobile app builds. Products are subscription based offerings like LinkedIn advertising, content engines, and lead generation that run monthly or quarterly with ongoing optimization.' },
+      { q: 'Which industries do you work with?', a: 'We work across all industries including SaaS, healthcare, manufacturing, e commerce, financial services, education, consulting, and logistics. Our solutions are customized for each industry vertical.' },
+      { q: 'Do you work globally?', a: 'Yes. We have offices in Phoenix, Arizona, USA and in India (Surat and Kolkata). We serve clients across North America, Europe, the Middle East, and Asia Pacific.' },
+      { q: 'What makes PropelusAI different from other agencies?', a: 'We are an AI first company, not a traditional agency. Every solution we build uses AI automation, predictive analytics, and intelligent workflows. We combine custom software development with marketing automation under one roof, so your systems work together from day one.' },
     ],
   },
   {
-    title: 'Services Questions (One Time Builds)',
+    title: 'Services and Project Timelines',
     items: [
-      { q: 'How long does a website project take?', a: 'Most AI powered websites take 2–4 weeks depending on the number of pages and complexity.' },
-      { q: 'How long does a mobile app take?', a: 'Timelines vary based on requirements, features, and complexity. Typical builds take 8–12 weeks plus 2 weeks for store approvals.' },
-      { q: 'Can I request changes after delivery?', a: 'Yes, every service includes post launch support for minor fixes, plus optional add ons for extended maintenance.' },
-      { q: 'Do you build custom CRMs?', a: 'Yes, we build fully custom CRMs as one time projects tailored to your brand, as well as white label and non white label solutions based on your requirements and budget.' },
-      { q: 'Do you support integrations?', a: 'Yes, we support all types of integrations.' },
-      { q: 'What if I already have a website or CRM?', a: 'We can upgrade, redesign, rebuild, migrate, or integrate AI features into your existing system.' },
+      { q: 'How long does a website development project take?', a: 'Most AI powered websites take 2 to 4 weeks depending on the number of pages, features, and complexity. SaaS platforms and complex web applications may take 6 to 12 weeks.' },
+      { q: 'How long does a mobile app take?', a: 'Native and cross platform mobile apps typically take 8 to 12 weeks for development plus 2 weeks for app store approvals. Timelines depend on features, integrations, and platform requirements.' },
+      { q: 'Do you build custom CRM systems?', a: 'Yes. We build fully custom CRM systems tailored to your sales process, team structure, and industry. This includes lead management, pipeline tracking, automation workflows, and analytics dashboards.' },
+      { q: 'What technologies do you use?', a: 'Our primary stack includes Next.js, React, Node.js, MongoDB, and Python for AI and machine learning. We also work with cloud platforms like AWS and Google Cloud. For mobile, we build with React Native and native iOS and Android when needed.' },
+      { q: 'Can you integrate with our existing systems?', a: 'Yes. We handle integrations with CRMs, payment gateways, email platforms, analytics tools, ERPs, and any system with an API. We also build custom middleware when standard integrations are not available.' },
+      { q: 'What if we already have a website or CRM?', a: 'We can redesign, rebuild, migrate, or add AI features to your existing system. We start with a technical audit to determine the best approach based on your current setup and goals.' },
     ],
   },
   {
-    title: 'Product Questions (Monthly & Quarterly Plans)',
+    title: 'Products and Subscriptions',
     items: [
-      { q: 'How do your subscription Products work?', a: 'Each Product (LinkedIn ads, lead segmentation, CRM hosting, content engine, cold calling, etc.) is a monthly or quarterly recurring plan that includes ongoing optimization, analytics, reporting, and dedicated support.' },
-      { q: 'Do subscriptions include reports?', a: 'Yes, all Product plans include weekly or monthly reports depending on the offering.' },
-      { q: 'Can I upgrade or downgrade my subscription?', a: 'Yes, you can adjust your plan at the end of each billing cycle.' },
-      { q: 'Do you manage LinkedIn & Meta ads fully?', a: 'Yes, we handle creative, targeting, optimization, reporting, testing, automating and funnel tracking. Ads spend is billed directly to your ad platform; our fee covers management & optimization.' },
+      { q: 'How do your subscription products work?', a: 'Each product is a monthly or quarterly plan that includes ongoing execution, optimization, analytics, and support. Examples include LinkedIn advertising management, content creation, lead generation, and CRM management. You get a dedicated team working on your account continuously.' },
+      { q: 'Do subscriptions include reporting?', a: 'Yes. All product plans include weekly or monthly performance reports with clear metrics, insights, and recommendations for improvement.' },
+      { q: 'Can I upgrade or downgrade my subscription?', a: 'Yes. You can change your plan at the end of any billing cycle. Our team will help you evaluate which plan fits your current growth stage.' },
+      { q: 'Do you fully manage LinkedIn and Meta advertising?', a: 'Yes. We handle campaign strategy, creative production, audience targeting, bid optimization, A/B testing, and performance reporting. Ad spend is billed directly through your ad platform. Our fee covers the management and optimization work.' },
     ],
   },
   {
-    title: 'Pricing Questions',
+    title: 'Soul | AI Execution Engine',
     items: [
-      { q: 'Do you offer refunds?', a: 'Only in rare cases where no work or deliverables have been started. Once production begins, refunds are not applicable due to resource commitment.' },
-      { q: 'Do you offer bundle pricing?', a: 'Yes, combining multiple services or products may reduce overall cost. E.g., pairing website + CRM + automation.' },
+      { q: 'What is Soul?', a: 'Soul is our upcoming AI execution engine. Unlike traditional AI tools that only provide suggestions, Soul reasons through your business context, conducts autonomous research, and takes direct action across sales, marketing, and operations workflows.' },
+      { q: 'When does Soul launch?', a: 'Soul is currently in development. You can join the waitlist at propelusai.com/soul to get early access when we launch. Waitlist members receive priority onboarding and the opportunity to shape the product with direct feedback.' },
+      { q: 'How is Soul different from other AI tools?', a: 'Most AI tools stop at thinking and suggesting. Soul executes. It connects to your CRM, email, ads, and analytics to take autonomous action. It qualifies leads, triggers campaigns, and orchestrates multi step workflows without manual intervention.' },
     ],
   },
   {
-    title: 'Support & Maintenance',
+    title: 'Pricing and Payments',
     items: [
-      { q: 'Do Services include support?', a: 'Yes, every one time service includes a free support window after launch.' },
-      { q: 'Can I purchase extended support?', a: 'Yes, we offer maintenance plans, dedicated success managers, and priority support add ons.' },
+      { q: 'How is pricing determined for services?', a: 'Service pricing is based on project scope, complexity, timeline, and required resources. We provide a detailed proposal after an initial discovery call so you know exactly what to expect before any work begins.' },
+      { q: 'Do you offer bundle pricing?', a: 'Yes. Combining multiple services or products often reduces the overall cost. Common bundles include website development plus CRM plus marketing automation, or a full growth suite with ads, content, and lead generation.' },
+      { q: 'Do you offer refunds?', a: 'Refunds are available only before production work has started. Once development or campaign execution begins, refunds are not applicable due to the resource commitment involved.' },
+    ],
+  },
+  {
+    title: 'Support and Maintenance',
+    items: [
+      { q: 'Do services include post launch support?', a: 'Yes. Every project includes a complimentary support period after launch for bug fixes and minor adjustments. The duration depends on the project scope and is outlined in your proposal.' },
+      { q: 'Can I purchase extended support?', a: 'Yes. We offer ongoing maintenance plans, dedicated account managers, and priority support add-ons for businesses that need continuous technical support and system updates.' },
+      { q: 'What are your business hours?', a: 'Our team operates from 9:00 AM to 12:00 AM IST (GMT+5:30), which covers business hours across most global time zones. Enterprise clients receive priority response within 4 hours.' },
     ],
   },
 ];
@@ -579,13 +599,13 @@ export const faqCategories = [
 export const blogPosts = [
   {
     slug: 'mock-demo-bookings',
-    title: 'Why Most Businesses Lose 30–40% of Their Demo Bookings (And How to Fix It)',
-    excerpt: 'Most businesses spend thousands on ads, outreach, and lead generation. only to watch 30–40% of booked demos never show up. Learn how to fix this silent revenue killer.',
+    title: 'Why Most Businesses Lose 30 to 40% of Their Demo Bookings (And How to Fix It)',
+    excerpt: 'Most businesses spend thousands on ads, outreach, and lead generation. only to watch 30 to 40% of booked demos never show up. Learn how to fix this silent revenue killer.',
     category: 'Sales',
     date: 'December 20, 2024',
     image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=1200&h=630&fit=crop',
     featured: true,
-    content: `Most businesses spend thousands on ads, outreach, and lead generation. only to watch 30–40% of booked demos never show up. This is a silent revenue killer that drains your pipeline and wastes your sales team's time.
+    content: `Most businesses spend thousands on ads, outreach, and lead generation. only to watch 30 to 40% of booked demos never show up. This is a silent revenue killer that drains your pipeline and wastes your sales team's time.
 
 The demo no show problem isn't just about forgetful prospects. It's a systemic issue rooted in poor follow up timing, lack of personalization, and missing pre qualification steps. When a prospect books a demo, they're expressing interest. but that interest has a half life.
 
@@ -593,7 +613,7 @@ Here's what typically goes wrong: The gap between booking and the actual demo is
 
 The fix involves implementing an AI powered engagement sequence that activates the moment a demo is booked. This includes immediate confirmation with a personalized video or message, strategic reminders at 24 hours and 1 hour before, pre demo content that builds anticipation, and a frictionless rescheduling option.
 
-Companies that implement these systems see demo show rates improve by 40–60%, directly impacting pipeline velocity and revenue.
+Companies that implement these systems see demo show rates improve by 40 to 60%, directly impacting pipeline velocity and revenue.
 
 At PropelusAI, we build these automated engagement systems as part of our marketing automation and CRM solutions. The result is a predictable, high-converting demo pipeline that turns interest into revenue.`,
   },
@@ -613,13 +633,13 @@ Research shows that responding to a lead within 5 minutes makes you 21× more li
 
 AI changes this equation entirely. Here's how:
 
-Instant Lead Scoring: AI analyzes behavioral signals, firmographic data, and engagement patterns to score leads in real time, ensuring your team focuses on the highest-intent prospects first.
+Instant Lead Scoring: AI analyzes behavioral signals, firmographic data, and engagement patterns to score leads in real time, ensuring your team focuses on the highest intent prospects first.
 
 Automated Initial Outreach: While your team sleeps, AI powered sequences engage leads with personalized emails, SMS, or LinkedIn messages within minutes of their inquiry.
 
 Smart Routing: AI routes leads to the right rep based on territory, expertise, product interest, and availability. eliminating the manual sorting that causes delays.
 
-Predictive Follow-Up: AI determines the optimal time, channel, and message for follow up based on historical conversion data.
+Predictive Follow Up: AI determines the optimal time, channel, and message for follow up based on historical conversion data.
 
 At PropelusAI, our AI powered CRM and lead management systems ensure zero leads fall through the cracks. Every inquiry gets an immediate, intelligent response.`,
   },
@@ -634,20 +654,20 @@ export const values = [
 
 export const footerLinks = {
   products: [
-    { label: 'LinkedIn Ads', href: '/products' },
-    { label: 'LinkedIn Content Engine', href: '/products' },
-    { label: 'Lead Generation Engine', href: '/products' },
-    { label: 'CRM Subscription', href: '/products' },
-    { label: 'Meta Ads Management', href: '/products' },
-    { label: 'Performance Dashboards', href: '/products' },
+    { label: 'LinkedIn Ads', href: '/products/ai-driven-linkedin-advertising' },
+    { label: 'LinkedIn Content Engine', href: '/products/linkedin-content-engine' },
+    { label: 'Lead Generation Engine', href: '/products/ai-based-lead-generation-and-management' },
+    { label: 'CRM Subscription', href: '/products/ai-powered-crm-analytics-and-lead-management' },
+    { label: 'Meta Ads Management', href: '/products/ai-based-meta-and-google-advertising' },
+    { label: 'Performance Dashboards', href: '/products/performance-dashboard-subscription' },
   ],
   services: [
     { label: 'SaaS Development', href: '/services/saas-development' },
-    { label: 'AI Website Development', href: '/services' },
-    { label: 'Mobile App Development', href: '/services' },
-    { label: 'Custom CRM Build', href: '/services' },
-    { label: 'Automation Setup', href: '/services' },
-    { label: 'Technical Integrations', href: '/services' },
+    { label: 'AI Website Development', href: '/services/ai-based-website-building' },
+    { label: 'Mobile App Development', href: '/services/ai-based-mobile-application-development' },
+    { label: 'Custom CRM Build', href: '/services/ai-powered-crm-building-and-integration' },
+    { label: 'Automation Setup', href: '/services/marketing-automation-and-workflow-implementation' },
+    { label: 'Technical Integrations', href: '/services/api-integration-and-third-party-services' },
   ],
   company: [
     { label: 'About Us', href: '/about' },

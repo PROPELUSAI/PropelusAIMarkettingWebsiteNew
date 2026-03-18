@@ -6,6 +6,10 @@ export interface AffiliateFormData {
   email: string;
   mobile_number: string;
   description: string;
+  has_network?: string | null;
+  network_type?: string | null;
+  industry?: string | null;
+  interested_services?: string[] | null;
 }
 
 const affiliateApi = baseApi.injectEndpoints({

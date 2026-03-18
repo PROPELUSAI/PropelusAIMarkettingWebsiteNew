@@ -16,7 +16,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const service = getServiceBySlug(slug);
   if (!service) return {};
 
-  const title = `${service.title} - Professional ${service.categoryTitle} | PropelusAI`;
+  const title = `${service.title} | Professional ${service.categoryTitle} | PropelusAI`;
   const description = service.summary;
 
   return {
@@ -49,7 +49,26 @@ export default async function ServiceDetailPage({ params }: Props) {
     },
     serviceType: service.categoryTitle,
     url: `https://www.propelusai.com/services/${slug}`,
+    areaServed: { '@type': 'Place', name: 'Worldwide' },
+    hasOfferCatalog: {
+      '@type': 'OfferCatalog',
+      name: `${service.title} Deliverables`,
+      itemListElement: service.features.map((f) => ({
+        '@type': 'Service',
+        name: f,
+      })),
+    },
   };
+
+  const faqSchema = service.faqs.length > 0 ? {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: service.faqs.map((faq) => ({
+      '@type': 'Question',
+      name: faq.question,
+      acceptedAnswer: { '@type': 'Answer', text: faq.answer },
+    })),
+  } : null;
 
   const breadcrumbSchema = {
     '@context': 'https://schema.org',
@@ -65,6 +84,7 @@ export default async function ServiceDetailPage({ params }: Props) {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
+      {faqSchema && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />}
       <ServiceDetailClient service={service} />
     </>
   );

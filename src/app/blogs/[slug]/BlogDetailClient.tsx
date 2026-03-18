@@ -10,6 +10,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import CTASection from '@/components/CTASection';
+import BlogSubscribe from '@/components/BlogSubscribe';
 
 interface Blog {
   _id: string;
@@ -28,6 +29,7 @@ interface Blog {
   cta_type?: string;
   cta_button_text?: string;
   cta_link?: string;
+  cta_description?: string;
 }
 
 /** Formats an ISO date string to "Month DD, YYYY" long display format */
@@ -105,19 +107,13 @@ export default function BlogDetailClient({ blog }: { blog: Blog }) {
             </motion.p>
           )}
 
+          {/* Tags hidden from display, kept for SEO */}
           {blog.tags?.length > 0 && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.25 }}
-              className="flex flex-wrap gap-2 mt-4"
-            >
+            <div className="sr-only" aria-hidden="true">
               {blog.tags.map((tag) => (
-                <span key={tag} className="text-xs text-surface-400 bg-surface-50 border border-surface-100 px-2.5 py-1 rounded-full">
-                  #{tag}
-                </span>
+                <span key={tag}>#{tag}</span>
               ))}
-            </motion.div>
+            </div>
           )}
         </div>
       </section>
@@ -172,23 +168,36 @@ export default function BlogDetailClient({ blog }: { blog: Blog }) {
             )}
           </motion.article>
 
-          {/* CTA inside article if defined */}
+          {/* Dynamic CTA inside article */}
           {blog.cta_button_text && blog.cta_link && (
             <div className="mt-10 p-6 rounded-xl bg-brand-50 border border-brand-100 text-center">
-              <p className="text-sm text-surface-600 mb-4">
-                {blog.cta_type === 'lead' ? 'Ready to get started?' : 'Want to learn more?'}
-              </p>
               <a
                 href={blog.cta_link}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="btn-primary inline-flex justify-center"
               >
                 {blog.cta_button_text}
-                <svg className="w-4 h-4" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
-                  <path d="M3 8h10M9 4l4 4-4 4"/>
+                <svg className="w-4 h-4 ml-1.5" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
+                  <path d="M5 11l6-6M5 5h6v6"/>
                 </svg>
               </a>
+              {blog.cta_description && (
+                <p className="text-sm text-surface-500 mt-3 max-w-md mx-auto leading-relaxed">
+                  {blog.cta_description}
+                </p>
+              )}
             </div>
           )}
+        </div>
+      </section>
+
+      {/* Newsletter Subscribe */}
+      <section className="py-10 section-warm border-y border-surface-100">
+        <div className="container-main max-w-xl text-center">
+          <h3 className="text-lg font-medium mb-2">Enjoyed this article?</h3>
+          <p className="text-sm text-surface-500 mb-4">Get more guides on AI, development, and growth delivered to your inbox.</p>
+          <BlogSubscribe compact />
         </div>
       </section>
 

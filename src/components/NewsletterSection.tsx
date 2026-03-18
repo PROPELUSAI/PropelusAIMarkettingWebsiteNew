@@ -47,7 +47,7 @@ export default function NewsletterSection() {
       {isSuccess ? (
         <div className="bg-green-500/20 border border-green-500/30 rounded-lg p-4 text-center">
           <p className="text-green-400 text-sm font-medium">
-            ✅ Thank you for subscribing!
+            Thank you for subscribing!
           </p>
           <p className="text-green-400/70 text-xs mt-1">
             Check your inbox for a welcome email.

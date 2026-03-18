@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   description:
     'Terms of Service for PropelusAI\'s AI powered business solutions and services. Read about account terms, service delivery, payment, intellectual property, and more.',
   openGraph: {
-    title: 'Terms of Service - PropelusAI',
+    title: 'Terms of Service | PropelusAI',
     description:
       'Terms of Service for PropelusAI\'s AI powered business solutions and services.',
   },
@@ -34,7 +34,7 @@ const sections = [
     content: [
       { subtitle: 'Fees and Payment', text: 'You agree to pay all fees as outlined in your service agreement. Payment terms vary by service type (upfront, milestone, or recurring).' },
       { subtitle: 'Late Payments', text: 'Late payments may result in service suspension, additional fees, and services remaining suspended until outstanding amounts are paid.' },
-      { subtitle: 'Refund Policy', text: 'Refunds are handled case-by-case. Eligibility depends on service and project stage. Custom development and completed deliverables are generally non-refundable.' },
+      { subtitle: 'Refund Policy', text: 'Refunds are handled case by case. Eligibility depends on service and project stage. Custom development and completed deliverables are generally non refundable.' },
     ],
   },
   {
@@ -48,7 +48,7 @@ const sections = [
   {
     title: 'Data Protection & Privacy',
     content: [
-      { subtitle: 'Data Security', text: 'We implement industry-standard security measures with regular audits and updates. You acknowledge inherent risks of data transmission.' },
+      { subtitle: 'Data Security', text: 'We implement industry standard security measures with regular audits and updates. You acknowledge inherent risks of data transmission.' },
       { subtitle: 'Data Backup', text: 'We maintain regular backups. You are responsible for maintaining your own backups of critical data and content.' },
       { subtitle: 'Privacy Compliance', text: 'We comply with applicable privacy laws. Our data processing practices are governed by our Privacy Policy.' },
     ],
@@ -62,15 +62,25 @@ const sections = [
   {
     title: 'Termination',
     content: [
-      { subtitle: 'By Us', text: 'We may suspend or terminate access for violation of terms, non-payment, or other reasonable business reasons.' },
+      { subtitle: 'By Us', text: 'We may suspend or terminate access for violation of terms, non payment, or other reasonable business reasons.' },
       { subtitle: 'Effect', text: 'Upon termination, access ceases immediately. Data may be deleted after 7 days. Completed deliverables and payments remain unaffected.' },
     ],
   },
 ];
 
+const breadcrumb = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.propelusai.com' },
+    { '@type': 'ListItem', position: 2, name: 'Terms', item: 'https://www.propelusai.com/terms' },
+  ],
+};
+
 export default function TermsPage() {
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
       <PageHero title="Terms of Service" description="Thank you for choosing PropelusAI! By using our services, you agree to these Terms of Service." />
 
       <section className="section-padding section-light">

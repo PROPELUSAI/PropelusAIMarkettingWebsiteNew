@@ -7,7 +7,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import PageHero from '@/components/PageHero';
 import AnimatedSection from '@/components/AnimatedSection';
 import CTASection from '@/components/CTASection';
@@ -20,7 +20,7 @@ export default function FAQClient() {
       <PageHero
         tag="Clarity & Confidence"
         title="Frequently Asked Questions"
-        description="Everything you need to know about PropelusAI in one place. Below are the most common questions clients ask us about our process, pricing, timelines, support, confidentiality, and the difference between our Services (one time builds) and Products (monthly subscriptions). If your question isn't listed here, simply reach out — our team will respond within one business day."
+        description="Everything you need to know about PropelusAI. Below are the most common questions about our website development, CRM development, AI automation services, subscription products, Soul AI engine, pricing, timelines, and support. If your question is not listed, reach out and our team will respond within one business day."
       />
 
       <section className="section-padding section-light">
@@ -53,7 +53,7 @@ export default function FAQClient() {
   );
 }
 
-/** Single FAQ accordion item — click to expand/collapse answer with Framer Motion */
+/** Single FAQ accordion item — answer is always in DOM for crawlability, visually collapsed via CSS */
 function FAQItem({ question, answer }: { question: string; answer: string }) {
   const [open, setOpen] = useState(false);
 
@@ -62,6 +62,7 @@ function FAQItem({ question, answer }: { question: string; answer: string }) {
       <button
         onClick={() => setOpen(!open)}
         className="w-full flex items-center justify-between gap-4 px-5 py-4 text-left"
+        aria-expanded={open}
       >
         <span className="text-[0.9375rem] font-medium text-surface-700">{question}</span>
         <motion.svg
@@ -77,19 +78,14 @@ function FAQItem({ question, answer }: { question: string; answer: string }) {
           <path d="M10 4v12M4 10h12" />
         </motion.svg>
       </button>
-      <AnimatePresence>
-        {open && (
-          <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: 'auto', opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.25 }}
-            className="overflow-hidden"
-          >
-            <p className="px-5 pb-4 text-sm text-surface-500 leading-relaxed">{answer}</p>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      <motion.div
+        initial={false}
+        animate={{ height: open ? 'auto' : 0, opacity: open ? 1 : 0 }}
+        transition={{ duration: 0.25 }}
+        className="overflow-hidden"
+      >
+        <p className="px-5 pb-4 text-sm text-surface-500 leading-relaxed">{answer}</p>
+      </motion.div>
     </div>
   );
 }

@@ -104,5 +104,8 @@ export type {
   DashboardData,
 } from './api/adminApi';
 
+// Soul Waitlist API
+export { useJoinSoulWaitlistMutation } from './api/soulApi';
+
 // Legacy alias: some code may still reference `api` directly
 export { baseApi as api } from './api/baseApi';

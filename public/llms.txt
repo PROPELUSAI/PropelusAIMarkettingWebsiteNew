@@ -1,0 +1,129 @@
+# PropelusAI
+
+> PropelusAI is a global AI company that builds websites, CRM systems, SaaS platforms, mobile apps, and subscription based AI products for businesses worldwide.
+
+## Company Information
+
+- Website: https://www.propelusai.com
+- Email: support@propelusai.com
+- Founded: 2024
+- Headquarters: Phoenix, Arizona, USA
+- Engineering Offices: Surat, Gujarat, India and Kolkata, West Bengal, India
+- US Entity: BETH and friends LLC
+- India Entity: RBSS Ventures (Propelus by RBSS), GSTIN: 19ABMFR6144D1ZZ
+- Industries Served: SaaS, fintech, healthcare, e-commerce, manufacturing, consulting, education, logistics, media, retail, and professional services
+- Support Hours: 9:00 AM to 12:00 AM IST (GMT+5:30), Monday through Friday
+
+## Key Results
+
+- 150+ products and services delivered globally
+- 42% faster sales cycles achieved for clients
+- 3.1x average pipeline growth for clients
+- 24/5 global support coverage
+- 4x organic traffic growth in 120 days for content clients
+- 78% operational efficiency improvement through automation
+- 5.2x ROAS achieved for Meta advertising clients
+- 92% accuracy in AI lead scoring for enterprise clients
+- 2,400+ qualified LinkedIn connections generated in 90 days
+
+## AI Products (Monthly Subscriptions)
+
+PropelusAI offers 21 subscription based AI products:
+
+1. AI Driven LinkedIn Advertising — managed monthly LinkedIn ads with predictive targeting and conversion tracking
+2. LinkedIn Content Engine — 20 AI assisted posts per month to grow authority and visibility
+3. AI Assisted Cold Calling and Prospect Prioritization — human plus AI calling with priority based prospect lists
+4. AI Based Meta and Google Advertising — managed Meta and Google campaigns with AI creative optimization
+5. AI Powered CRM, Analytics and Lead Management — hosted CRM with predictive lead scoring and pipeline analytics
+6. AI Powered Content Creation — platform specific content with SEO driven workflows
+7. LinkedIn Thought Leadership Content Program — 20 posts plus 4 articles per month for personal branding
+8. Multi Platform Content Calendar Management — 40 to 60 social media posts across all platforms
+9. WhatsApp Business Messaging and Automation — automated broadcast campaigns and chatbot flows
+10. AI Based Instagram and Facebook Advertising — full funnel Meta ads with AI audience targeting
+11. AI Based LinkedIn Targeting and Lead Segmentation — precision prospecting from millions of LinkedIn profiles
+12. AI Based Lead Generation and Management — multi channel lead capture with AI scoring and routing
+13. Social Media Reels and Short Form Video Production — 8 to 12 platform optimized videos per month
+14. AI Enhanced Copywriting and Messaging Strategy — landing pages, emails, ads with A/B testing
+15. Funnel Tracking and CRO Analytics — conversion rate optimization dashboards and reporting
+16. AI Powered Email Marketing and Automation — email campaigns with AI personalization and segmentation
+17. Performance Dashboard Subscription — real time business analytics across all channels
+18. AI Powered Sales Enablement Suite — sales team tools, AI coaching, and pipeline intelligence
+19. AI Brand Monitoring and Reputation Management — brand tracking, sentiment analysis, and alerts
+20. AI Podcast Production and Distribution — end to end podcast management and distribution
+21. AI Event Marketing and Webinar Management — event promotion, registration, and follow up automation
+
+## AI Services (One Time Projects)
+
+PropelusAI offers one time project services:
+
+1. AI Website Development — premium Next.js websites with AI features, typical timeline 2 to 4 weeks
+2. SaaS Development — full stack SaaS platforms with AI integration
+3. Mobile App Development — iOS and Android apps, typical timeline 8 to 12 weeks
+4. Custom CRM Development — tailored CRM systems with white label and non white label options
+5. Domain and Email Setup — professional domain and email configuration
+6. Cybersecurity Audits — NIST, SOC 2, GDPR, HIPAA, PCI DSS, and ISO 27001 compliance
+7. Marketing Automation Implementation — workflow automation setup and configuration
+8. Funnel Buildouts — sales funnel design, implementation, and tracking
+9. Technical Integrations — API integration and third party service connections
+
+## Soul AI Engine
+
+Soul is PropelusAI's proprietary AI execution engine currently in development. Soul goes beyond reasoning to take autonomous action for businesses. It represents the next generation of AI that is not just intelligent but operational. Soul is available for pre-registration at https://www.propelusai.com/soul
+
+## Frequently Asked Questions
+
+Q: What is the difference between PropelusAI Products and Services?
+A: Services are one time upfront engagements like website development or CRM builds. Products are subscription based with recurring monthly access like LinkedIn advertising or content creation.
+
+Q: Which industries does PropelusAI work with?
+A: PropelusAI works with all industries including SaaS, fintech, healthcare, e-commerce, manufacturing, consulting, education, logistics, and professional services.
+
+Q: Does PropelusAI work globally?
+A: Yes. PropelusAI supports clients globally with offices in Phoenix Arizona USA, Surat India, and Kolkata India.
+
+Q: How long does a website project take?
+A: Most AI powered websites take 2 to 4 weeks depending on the number of pages and complexity.
+
+Q: How long does a mobile app take?
+A: Typical mobile app builds take 8 to 12 weeks plus 2 weeks for app store approvals.
+
+Q: How do subscription products work?
+A: Each product is a monthly or quarterly recurring plan that includes ongoing optimization, analytics, reporting, and dedicated support. Plans can be adjusted at the end of each billing cycle.
+
+Q: Does PropelusAI manage LinkedIn and Meta ads fully?
+A: Yes. PropelusAI handles creative, targeting, optimization, reporting, testing, automation, and funnel tracking. Ad spend is billed directly to the client ad platform.
+
+Q: What compliance frameworks does PropelusAI support for cybersecurity?
+A: PropelusAI supports NIST, SOC 2, GDPR, HIPAA, PCI DSS, and ISO 27001 compliance requirements.
+
+## Client Testimonials
+
+- A manufacturing company achieved 3.1x pipeline growth and closed their biggest enterprise deal within six weeks
+- A SaaS platform reduced their sales cycle by 42% after CRM and automation implementation
+- A healthcare organization maintained zero critical security incidents over 12 months
+- An education company grew organic traffic 4x in 120 days through AI content engines
+- A consulting firm improved operational efficiency by 78% through workflow automation
+- A fintech startup increased mobile app engagement by 70% with AI personalization
+- A B2B marketing agency generated 2,400+ qualified LinkedIn connections in 90 days
+- An e-commerce brand increased conversions by 2.3x and reduced bounce rate to under 20%
+- A consumer app improved ROAS from 1.8x to 5.2x in two months with Meta ads optimization
+
+## Pages
+
+- Homepage: https://www.propelusai.com
+- Services: https://www.propelusai.com/services
+- Products: https://www.propelusai.com/products
+- About: https://www.propelusai.com/about
+- Contact: https://www.propelusai.com/contact
+- Testimonials: https://www.propelusai.com/testimonials
+- Blog: https://www.propelusai.com/blogs
+- FAQ: https://www.propelusai.com/faq
+- Soul AI: https://www.propelusai.com/soul
+- Affiliate: https://www.propelusai.com/affiliate
+
+## Contact
+
+For business inquiries: https://www.propelusai.com/contact
+Email: support@propelusai.com
+WhatsApp India: +91 9477466514
+WhatsApp US: +1 6232357330

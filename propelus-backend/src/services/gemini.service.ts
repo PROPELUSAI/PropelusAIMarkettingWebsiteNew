@@ -13,7 +13,7 @@ interface ChatMessage {
   content: string;
 }
 
-const SYSTEM_PROMPT = `You are "Propel" — PropelusAI's dedicated website assistant. You exist SOLELY to help visitors understand PropelusAI and convert them into leads. Follow every rule below with zero exceptions.
+const SYSTEM_PROMPT = `You are "PropelusAI" — PropelusAI's dedicated website assistant. You exist SOLELY to help visitors understand PropelusAI and convert them into leads. Follow every rule below with zero exceptions.
 
 ═══════════════════════════════════════
   ABSOLUTE RULES (NEVER BREAK THESE)
@@ -21,7 +21,7 @@ const SYSTEM_PROMPT = `You are "Propel" — PropelusAI's dedicated website assis
 
 1. SCOPE LOCK: You ONLY discuss PropelusAI — its services, products, pricing approach, company info, team, and how to get started. Nothing else. Ever.
 2. OFF-TOPIC BLOCK: If someone asks about ANYTHING unrelated to PropelusAI (coding, math, news, weather, other companies, personal advice, jokes, trivia, recipes, politics, sports, etc.), respond ONLY with: "I appreciate your curiosity! However, I'm exclusively here to help you with PropelusAI's services and solutions. What can I tell you about how we can grow your business with AI?"
-3. IDENTITY: You are "Propel", PropelusAI's assistant. NEVER say you're an AI model, ChatGPT, Gemini, or any other AI. If asked, say: "I'm Propel, your dedicated PropelusAI assistant!"
+3. IDENTITY: You are "PropelusAI", PropelusAI's assistant. NEVER say you're an AI model, ChatGPT, Gemini, or any other AI. If asked, say: "I'm PropelusAI, your dedicated PropelusAI assistant!"
 4. LENGTH: Keep every response under 150 words. Be punchy, professional, and value-driven. If the user asks for detailed info about a specific service or product, you may go up to 200 words to cover key details (headline, description, deliverables, investment range, timeline).
 5. CTA FOCUS: End EVERY response by guiding toward action — either visiting /contact to book a free consultation, or exploring /services or /products.
 6. TONE: Confident, warm, professional. Speak like a knowledgeable sales consultant, not a generic chatbot.
@@ -36,7 +36,7 @@ const SYSTEM_PROMPT = `You are "Propel" — PropelusAI's dedicated website assis
   RESPONSE STRATEGY
 ═══════════════════════════════════════
 
-When greeting: Welcome warmly, introduce yourself as Propel, and ask what they're looking for.
+When greeting: Welcome warmly, introduce yourself as PropelusAI, and ask what they're looking for.
 
 When asked about a SPECIFIC service: Provide headline, investment range, key deliverables, and timeline from the knowledge base. End with CTA to /contact.
 
@@ -60,12 +60,12 @@ ${KNOWLEDGE_BASE}
   RESPONSE EXAMPLES
 ═══════════════════════════════════════
 
-When greeted: "Hey {name}! Welcome to PropelusAI 👋 I'm Propel, your AI assistant. Whether you're looking to build an AI-powered website, automate your sales pipeline, or scale with LinkedIn ads — I've got you covered. What are you interested in?"
+When greeted: "Hey {name}! Welcome to PropelusAI 👋 I'm PropelusAI, your AI assistant. Whether you're looking to build an AI-powered website, automate your sales pipeline, or scale with LinkedIn ads — I've got you covered. What are you interested in?"
 
 When asked about a specific service (e.g., "tell me about your website building service"):
 "Great choice! Here's what you get with our AI-Based Website Building & Hosting:
 
-• Enterprise-grade corporate experiences without the overhead.
+• Enterprise grade corporate experiences without the overhead.
 • Investment: $67,600 – $169,000
 • Timeline: 2–4 weeks build + managed hosting
 • Deliverables: Custom AI-powered website, Domain + SSL, Hosting + CDN, Performance optimization, SEO foundation
@@ -92,7 +92,7 @@ export async function generateResponse(
     // Build conversation context
     const context = conversationHistory
       .slice(-10) // Last 10 messages for context
-      .map((m) => `${m.role === 'user' ? 'User' : 'Propel'}: ${m.content}`)
+      .map((m) => `${m.role === 'user' ? 'User' : 'PropelusAI'}: ${m.content}`)
       .join('\n');
 
     const nameContext = userName ? `\n\nIMPORTANT: The visitor's name is "${userName}". Use it naturally in your response.` : '';
@@ -139,7 +139,7 @@ export async function qualifyLead(
 
 function greet(name?: string): string {
   const n = name ? `, ${name}` : '';
-  return `Hey${n}! Welcome to PropelusAI 👋 I'm Propel, your AI assistant. Whether you need an AI-powered website, CRM automation, or growth marketing — I'm here to help. What are you looking for today?`;
+  return `Hey${n}! Welcome to PropelusAI 👋 I'm PropelusAI, your AI assistant. Whether you need an AI-powered website, CRM automation, or growth marketing — I'm here to help. What are you looking for today?`;
 }
 
 function getRuleBasedResponse(message: string, userName?: string): string {
@@ -155,7 +155,7 @@ function getRuleBasedResponse(message: string, userName?: string): string {
 
   // Website
   if (/\b(website|web development|web build|site build)\b/.test(lower)) {
-    return `Great choice${n}! Our AI-Based Website Building & Hosting delivers enterprise-grade websites without the overhead.\n\n• Investment: $67,600 – $169,000\n• Timeline: 2–4 weeks build + managed hosting\n• Deliverables: Custom AI-powered website, Domain + SSL, Hosting + CDN, Performance optimization, SEO foundation\n\nWe pair strategic UX with AI-assisted design. Visit /contact to get a custom quote!`;
+    return `Great choice${n}! Our AI-Based Website Building & Hosting delivers Enterprise grade websites without the overhead.\n\n• Investment: $67,600 – $169,000\n• Timeline: 2–4 weeks build + managed hosting\n• Deliverables: Custom AI-powered website, Domain + SSL, Hosting + CDN, Performance optimization, SEO foundation\n\nWe pair strategic UX with AI-assisted design. Visit /contact to get a custom quote!`;
   }
 
   // Mobile App
@@ -190,12 +190,12 @@ function getRuleBasedResponse(message: string, userName?: string): string {
 
   // Security
   if (/\b(security|cybersecurity|data protection|email domain|email setup)\b/.test(lower)) {
-    return `We protect your business${n}!\n\n• Custom Email Domain Setup: $169–$507\n• Cybersecurity & Data Protection: $8,450–$25,350\n\nFrom DNS configuration to enterprise-grade security. Visit /contact for details!`;
+    return `We protect your business${n}!\n\n• Custom Email Domain Setup: $169–$507\n• Cybersecurity & Data Protection: $8,450–$25,350\n\nFrom DNS configuration to Enterprise grade security. Visit /contact for details!`;
   }
 
   // Content / Marketing
   if (/\b(content|blog|seo|content market|content creat|copywriting)\b/.test(lower)) {
-    return `We have AI-powered content solutions${n}!\n\n• Content Creation & Marketing (service): $3,380–$8,450/month\n• Content Creation (product): Monthly subscription\n• Multi-Platform Content Calendar: 40-60 posts/month\n\n10+ SEO-optimized assets per month. Visit /products or /contact!`;
+    return `We have AI-powered content solutions${n}!\n\n• Content Creation & Marketing (service): $3,380–$8,450/month\n• Content Creation (product): Monthly subscription\n• Multi-Platform Content Calendar: 40-60 posts/month\n\n10+ SEO optimized assets per month. Visit /products or /contact!`;
   }
 
   // Cold Calling
@@ -263,7 +263,7 @@ function getRuleBasedResponse(message: string, userName?: string): string {
     return `Reach us at support@propelusai.com or WhatsApp: +1 6232357330 (US) / +91 9477466514 (India). Visit /contact to book a free consultation. Our global team responds within 24 hours${n}!`;
   }
   if (/\b(about|who|company|team|mission|founded|office|location|where)\b/.test(lower)) {
-    return `PropelusAI is a global AI-first growth company (founded 2023)${n}!\n\n• HQ: Phoenix, Arizona, USA\n• India: Surat, Gujarat & Kolkata, West Bengal\n• Stats: 150+ projects, 3.1× pipeline growth, 42% faster sales cycles\n• Values: Precision, Product-Grade Engineering, AI at the Core, Outcome-First Thinking\n\nLearn more at /about!`;
+    return `PropelusAI is a global AI-first growth company (founded 2023)${n}!\n\n• HQ: Phoenix, Arizona, USA\n• India: Surat, Gujarat & Kolkata, West Bengal\n• Stats: 150+ projects, 3.1× pipeline growth, 42% faster sales cycles\n• Values: Precision, Product-Grade Engineering, AI at the Core, Outcome first Thinking\n\nLearn more at /about!`;
   }
   if (/\b(testimonial|review|client|success|result|case study|proof)\b/.test(lower)) {
     return `Our clients see incredible results${n}!\n\n• 3.1× pipeline growth (Manufacturing COO)\n• 42% faster sales cycles (SaaS VP Growth)\n• 4× organic traffic in 120 days (Education Director)\n• 78% efficiency improvement (Consulting Partner)\n• ROAS from 1.8× to 5.2× (Consumer App Growth Lead)\n\nRead all 16 testimonials at /testimonials!`;

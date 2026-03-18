@@ -7,6 +7,8 @@ export interface IContactSubmission extends Document {
   country: string;
   mobileNumber?: string | null;
   interest?: string | null;
+  linkedinUrl?: string | null;
+  teamSize?: string | null;
   scheduledTime: Date;
   description?: string | null;
   promoCode?: string | null;
@@ -33,6 +35,8 @@ const contactSubmissionSchema = new Schema<IContactSubmission>(
     country: { type: String, required: true },
     mobileNumber: { type: String, default: null },
     interest: { type: String, default: null },
+    linkedinUrl: { type: String, default: null },
+    teamSize: { type: String, default: null },
     scheduledTime: { type: Date, required: true },
     description: { type: String, default: null },
     promoCode: { type: String, default: null },

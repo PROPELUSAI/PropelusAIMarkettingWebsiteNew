@@ -7,7 +7,7 @@
 
 import Link from 'next/link';
 import PageHero from '@/components/PageHero';
-import { StaggerContainer, StaggerItem } from '@/components/AnimatedSection';
+import AnimatedSection, { StaggerContainer, StaggerItem } from '@/components/AnimatedSection';
 import CTASection from '@/components/CTASection';
 import { products } from '@/lib/data';
 import { slugify } from '@/lib/slugify';
@@ -38,6 +38,37 @@ export default function ProductsClient() {
         title="AI Products Designed for Predictable, Compounding Growth"
         description="High performance AI systems that work for you. Our AI Products are recurring, subscription based systems designed to deliver consistent growth across your pipeline, content, CRM, ads, and funnel analytics. Built for global teams, each Product includes ongoing optimization, monthly reporting, and continuous AI driven improvements."
       />
+
+      {/* How Subscriptions Work */}
+      <section className="section-padding section-light border-b border-surface-100">
+        <div className="container-main max-w-3xl">
+          <AnimatedSection>
+            <h2 className="text-2xl font-medium mb-5">How Our Subscription Model Works</h2>
+            <p className="text-surface-600 leading-relaxed mb-5">
+              Unlike one time projects, our AI products run on monthly or quarterly subscriptions. You get a dedicated
+              team that optimizes your campaigns, content, or systems every month, not a handoff and a goodbye. Each
+              subscription includes ongoing AI optimization, monthly performance reports, and direct access to your
+              account manager. Plans can be adjusted, upgraded, or paused at the end of any billing cycle.
+            </p>
+            <p className="text-surface-500 leading-relaxed mb-5">
+              The value compounds over time. LinkedIn ad campaigns get sharper targeting each month as AI learns your
+              audience. Content engines build topical authority that grows organic traffic quarter over quarter. CRM
+              analytics surfaces patterns in your pipeline that manual review would miss. This is not a set-it-and-forget-it
+              service. It is a system that improves the longer it runs.
+            </p>
+            <p className="text-surface-500 leading-relaxed mb-5">
+              Our products are built for three types of teams. Startups use them to establish a marketing presence without
+              hiring a full in-house team. SMBs use them to scale what is already working, taking a manual LinkedIn
+              outreach process and turning it into an AI driven pipeline. Enterprise teams use them to augment internal
+              marketing with specialized AI capabilities like predictive lead scoring and automated content production.
+            </p>
+            <p className="text-surface-500 leading-relaxed">
+              Every product listed below includes a detailed breakdown of monthly deliverables, use cases, and FAQ
+              answers. Click through to see exactly what you receive each month and how the AI optimization works.
+            </p>
+          </AnimatedSection>
+        </div>
+      </section>
 
       <section className="section-padding section-light">
         <div className="container-main">

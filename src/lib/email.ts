@@ -154,9 +154,9 @@ export async function sendNewsletterWelcome(email: string): Promise<boolean> {
             <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:28px">
               <tr><td style="padding:12px 16px;background:#f8f7ff;border-left:3px solid #635bff;border-radius:0 8px 8px 0;margin-bottom:8px"><p style="margin:0;color:#1a1a2e;font-size:14px"><strong>AI Growth Strategies</strong> - Actionable insights to scale your business</p></td></tr>
               <tr><td style="height:8px"></td></tr>
-              <tr><td style="padding:12px 16px;background:#f8f7ff;border-left:3px solid #635bff;border-radius:0 8px 8px 0"><p style="margin:0;color:#1a1a2e;font-size:14px"><strong>Product Updates</strong> - New features and AI-powered tools</p></td></tr>
+              <tr><td style="padding:12px 16px;background:#f8f7ff;border-left:3px solid #635bff;border-radius:0 8px 8px 0"><p style="margin:0;color:#1a1a2e;font-size:14px"><strong>Product Updates</strong> - New features and AI powered tools</p></td></tr>
               <tr><td style="height:8px"></td></tr>
-              <tr><td style="padding:12px 16px;background:#f8f7ff;border-left:3px solid #635bff;border-radius:0 8px 8px 0"><p style="margin:0;color:#1a1a2e;font-size:14px"><strong>Industry Trends</strong> - Stay ahead of the AI-marketing curve</p></td></tr>
+              <tr><td style="padding:12px 16px;background:#f8f7ff;border-left:3px solid #635bff;border-radius:0 8px 8px 0"><p style="margin:0;color:#1a1a2e;font-size:14px"><strong>Industry Trends</strong> - Stay ahead of the AI marketing curve</p></td></tr>
               <tr><td style="height:8px"></td></tr>
               <tr><td style="padding:12px 16px;background:#f8f7ff;border-left:3px solid #635bff;border-radius:0 8px 8px 0"><p style="margin:0;color:#1a1a2e;font-size:14px"><strong>Exclusive Offers</strong> - Early access and subscriber-only perks</p></td></tr>
             </table>
@@ -217,6 +217,42 @@ export async function sendAffiliateConfirmation(
   });
 }
 
+export async function sendChatNotification(data: {
+  userName: string;
+  userEmail: string;
+  message: string;
+  sessionId: string;
+  pageUrl?: string;
+}): Promise<boolean> {
+  return sendEmail({
+    to: EMAIL_TO,
+    subject: `New Chat | ${data.userName} via Chatbot`,
+    html: `
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"></head>
+<body style="margin:0;padding:24px;background:#f5f5f7;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif">
+  <table width="600" cellpadding="0" cellspacing="0" style="background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,0.06)">
+    <tr><td style="background:#0d0d1a;padding:24px 32px"><h2 style="margin:0;color:#fff;font-size:20px">New Chatbot Conversation</h2></td></tr>
+    <tr><td style="padding:28px 32px">
+      <table width="100%" cellpadding="6" cellspacing="0" style="font-size:14px;color:#1a1a2e">
+        <tr><td style="color:#6b6b7b;width:140px">Name</td><td><strong>${data.userName}</strong></td></tr>
+        <tr><td style="color:#6b6b7b">Email</td><td><a href="mailto:${data.userEmail}" style="color:#635bff">${data.userEmail}</a></td></tr>
+        <tr><td style="color:#6b6b7b">Page</td><td>${data.pageUrl || 'N/A'}</td></tr>
+        <tr><td style="color:#6b6b7b">Session</td><td style="font-size:12px;color:#9ca3af">${data.sessionId}</td></tr>
+        <tr><td style="color:#6b6b7b;vertical-align:top">First Message</td><td style="background:#f8f7ff;border-radius:8px;padding:12px">${data.message}</td></tr>
+      </table>
+    </td></tr>
+    <tr>
+      <td style="padding:16px 32px;background:#fafafa;border-top:1px solid #e8e8ed;text-align:center">
+        <p style="margin:0;color:#9ca3af;font-size:11px">PropelusAI Chatbot Notification</p>
+      </td>
+    </tr>
+  </table>
+</body></html>`,
+    text: `New chatbot conversation from ${data.userName} (${data.userEmail}). Message: ${data.message}. Page: ${data.pageUrl || 'N/A'}`,
+  });
+}
+
 export async function sendCampaignEmail(
   recipients: string[],
   subject: string,
@@ -249,4 +285,5 @@ export const emailService = {
   sendNewsletterWelcome,
   sendAffiliateConfirmation,
   sendCampaignEmail,
+  sendChatNotification,
 };
