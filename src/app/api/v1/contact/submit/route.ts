@@ -17,6 +17,8 @@ export async function POST(request: NextRequest) {
       country: data.country,
       mobileNumber: data.mobile_number || null,
       interest: data.interest || null,
+      linkedinUrl: data.linkedin_url || null,
+      teamSize: data.team_size || null,
       scheduledTime: new Date(data.scheduled_time),
       description: data.description || null,
       promoCode: data.promo_code || null,

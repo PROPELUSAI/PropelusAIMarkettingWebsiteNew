@@ -72,6 +72,7 @@ export const POST = withAuth(async (request: NextRequest) => {
       cta_type: body.cta_type || '',
       cta_button_text: body.cta_button_text || '',
       cta_link: body.cta_link || '',
+      cta_description: body.cta_description || '',
       status: body.status || 'draft',
       is_featured: body.is_featured || false,
       publish_date: body.status === 'published' ? new Date() : null,

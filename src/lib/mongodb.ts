@@ -35,11 +35,16 @@ export async function connectDB(): Promise<typeof mongoose> {
       .connect(MONGODB_URI as string, {
         dbName: MONGODB_DB_NAME,
         maxPoolSize: 10,
-        serverSelectionTimeoutMS: 5000,
+        serverSelectionTimeoutMS: 10000,
         socketTimeoutMS: 45000,
       })
       .then((m) => {
         return m;
+      })
+      .catch((err) => {
+        cached.promise = null;
+        cached.conn = null;
+        throw err;
       });
   }
 

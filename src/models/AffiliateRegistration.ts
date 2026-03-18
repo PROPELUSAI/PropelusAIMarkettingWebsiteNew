@@ -12,6 +12,10 @@ export interface IAffiliateRegistration extends Document {
   adminNotes?: string | null;
   commissionRate?: number | null;
   affiliateCode?: string | null;
+  hasNetwork?: string | null;
+  networkType?: string | null;
+  industry?: string | null;
+  interestedServices?: string[] | null;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -29,6 +33,10 @@ const affiliateRegistrationSchema = new Schema<IAffiliateRegistration>(
     adminNotes: { type: String, default: null },
     commissionRate: { type: Number, default: null },
     affiliateCode: { type: String, default: null, unique: true, sparse: true },
+    hasNetwork: { type: String, default: null },
+    networkType: { type: String, default: null },
+    industry: { type: String, default: null },
+    interestedServices: [{ type: String }],
   },
   { timestamps: true }
 );

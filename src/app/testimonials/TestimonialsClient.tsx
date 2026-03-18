@@ -11,8 +11,10 @@ import { useState, useMemo, useEffect } from 'react';
 import Image from 'next/image';
 import PageHero from '@/components/PageHero';
 import AnimatedSection from '@/components/AnimatedSection';
+import CTASection from '@/components/CTASection';
 import { testimonials as staticTestimonials } from '@/lib/data';
 import { useGetTestimonialsQuery, useSubmitTestimonialMutation, Testimonial } from '@/store';
+import FormField from '@/components/ui/FormField';
 
 /** Rotating avatar background colors for testimonial initials */
 const avatarColors = [
@@ -34,10 +36,13 @@ function getInitials(name?: string) {
 
 /** Renders testimonials grid, "Show All" toggle, and submission form */
 export default function TestimonialsClient() {
-  const [formData, setFormData] = useState({ name: '', email: '', phone: '', testimonial: '' });
+  const [formData, setFormData] = useState({ name: '', email: '', phone: '', testimonial: '', designation: '', company: '', industry: '', city: '' });
+  const [imageFile, setImageFile] = useState<File | null>(null);
+  const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [showAll, setShowAll] = useState(false);
   
   const { data: apiTestimonials, isLoading: isFetching } = useGetTestimonialsQuery();
+  const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
   const [submitTestimonial, { isLoading: isSubmitting, isSuccess, isError, error, reset: resetMutation }] = useSubmitTestimonialMutation();
 
   // Auto-reset form after 5 seconds on success
@@ -54,24 +59,67 @@ export default function TestimonialsClient() {
     const apiData = apiTestimonials?.data || [];
     const formattedApiData = apiData.map((t: Testimonial) => ({
       quote: t.testimonial || '',
-      role: t.fullName || 'Anonymous',
-      company: '',
-      industry: 'Business',
+      name: t.fullName || 'Anonymous',
+      designation: t.designation || '',
+      company: t.company || '',
+      industry: t.industry || 'Business',
+      imageUrl: t.imageUrl || null,
     }));
     return [...formattedApiData, ...staticTestimonials];
   }, [apiTestimonials]);
 
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setImageFile(file);
+    const reader = new FileReader();
+    reader.onload = () => setImagePreview(reader.result as string);
+    reader.readAsDataURL(file);
+  };
+
+  const clearErr = (field: string) => {
+    if (fieldErrors[field]) setFieldErrors((p) => { const { [field]: _, ...rest } = p; return rest; });
+  };
+
+  const validate = () => {
+    const errs: Record<string, string> = {};
+    if (!formData.name.trim()) errs.name = 'Please enter your full name';
+    if (!formData.email.trim()) errs.email = 'Please enter your email address';
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) errs.email = 'Please enter a valid email address';
+    if (!formData.testimonial.trim()) errs.testimonial = 'Please write your testimonial';
+    else if (formData.testimonial.trim().length < 20) errs.testimonial = 'Please write at least 20 characters';
+    setFieldErrors(errs);
+    return Object.keys(errs).length === 0;
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!validate()) return;
     try {
+      let imageUrl: string | null = null;
+      if (imageFile) {
+        const uploadData = new FormData();
+        uploadData.append('image', imageFile);
+        const res = await fetch('/api/v1/upload/image', { method: 'POST', body: uploadData });
+        const json = await res.json();
+        if (json.success) imageUrl = json.data.url;
+      }
+
       await submitTestimonial({
         full_name: formData.name,
         email: formData.email,
         mobile_number: formData.phone || null,
         testimonial: formData.testimonial,
+        designation: formData.designation || null,
+        company: formData.company || null,
+        industry: formData.industry || null,
+        city: formData.city || null,
+        image_url: imageUrl,
       }).unwrap();
-      
-      setFormData({ name: '', email: '', phone: '', testimonial: '' });
+
+      setFormData({ name: '', email: '', phone: '', testimonial: '', designation: '', company: '', industry: '', city: '' });
+      setImageFile(null);
+      setImagePreview(null);
     } catch (err) {
       console.error('Testimonial submission failed:', err);
     }
@@ -93,6 +141,26 @@ export default function TestimonialsClient() {
         description="Real outcomes. Real experiences. AI powered success stories. We support businesses globally with premium AI systems built for measurable growth."
       />
 
+      {/* Intro */}
+      <section className="py-12 section-light border-b border-surface-100">
+        <div className="container-main max-w-3xl">
+          <AnimatedSection>
+            <h2 className="text-2xl font-medium mb-5">Real Results From Real Projects</h2>
+            <p className="text-surface-600 leading-relaxed mb-5">
+              Every testimonial below comes from a verified client engagement. We work across website development,
+              CRM builds, SaaS platforms, LinkedIn advertising, marketing automation, cybersecurity, and content
+              production. The results our clients share reflect actual project outcomes including pipeline growth, conversion
+              improvements, cost savings, and operational efficiency gains.
+            </p>
+            <p className="text-surface-500 leading-relaxed">
+              We keep client identities anonymized by default to protect confidential business relationships. Where
+              clients have given permission, we include their role, industry, and company context. If you are a
+              current client and would like to share your experience, use the form at the bottom of this page.
+            </p>
+          </AnimatedSection>
+        </div>
+      </section>
+
       {/* Testimonials Grid */}
       <section className="py-12 lg:py-16 section-light">
         <div className="container-main">
@@ -110,15 +178,21 @@ export default function TestimonialsClient() {
                   <AnimatedSection key={i} delay={Math.min(i * 0.05, 0.3)}>
                     <div className="card h-full !p-5">
                       <div className="flex items-center gap-3 mb-3">
-                        <div className={`w-9 h-9 rounded-full flex items-center justify-center text-xs font-semibold shrink-0 ${avatarColors[i % avatarColors.length]}`}>
-                          {getInitials(t.role)}
-                        </div>
+                        {t.imageUrl ? (
+                          <img src={t.imageUrl} alt={t.name} className="w-10 h-10 rounded-full object-cover shrink-0" />
+                        ) : (
+                          <div className={`w-10 h-10 rounded-full flex items-center justify-center text-xs font-semibold shrink-0 ${avatarColors[i % avatarColors.length]}`}>
+                            {getInitials(t.name)}
+                          </div>
+                        )}
                         <div className="min-w-0 flex-1">
                           <div className="flex items-center justify-between gap-2">
-                            <p className="text-sm font-medium text-surface-800 truncate">{(t.role ?? '').split(',')[0] || t.role}</p>
-                            <span className="text-[0.6875rem] px-2 py-0.5 rounded-full bg-surface-50 text-surface-400 shrink-0">{t.industry ?? ''}</span>
+                            <p className="text-sm font-medium text-surface-800 truncate">{t.name}</p>
+                            <span className="text-[0.6875rem] px-2 py-0.5 rounded-full bg-surface-50 text-surface-400 shrink-0">{t.industry}</span>
                           </div>
-                          <p className="text-xs text-surface-400">{(t.role ?? '').split(',').slice(1).join(',').trim()}</p>
+                          <p className="text-xs text-surface-400">
+                            {[t.designation, t.company].filter(Boolean).join(', ')}
+                          </p>
                         </div>
                       </div>
                       <blockquote className="text-sm leading-relaxed text-surface-600">
@@ -150,7 +224,7 @@ export default function TestimonialsClient() {
             <p className="text-surface-500">Worked with us? We&apos;d love to hear about your experience and results.</p>
           </AnimatedSection>
 
-          <div className="grid lg:grid-cols-2 gap-8 max-w-5xl mx-auto items-center">
+          <div className="grid lg:grid-cols-2 gap-8 max-w-5xl mx-auto items-start">
             <AnimatedSection delay={0.1}>
               <div className="relative rounded-2xl overflow-hidden aspect-[4/3] bg-surface-100">
                 <Image src="/testimonial.png" alt="Client success stories" fill className="object-cover" />
@@ -160,33 +234,62 @@ export default function TestimonialsClient() {
             <AnimatedSection delay={0.2}>
               {isSuccess ? (
                 <div className="card bg-brand-50 border-brand-100 text-center py-12">
-                  <div className="text-4xl mb-4"></div>
+                  <div className="w-12 h-12 rounded-full bg-status-success/10 flex items-center justify-center mx-auto mb-4">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-status-success"><path d="M5 13l4 4L19 7" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                  </div>
                   <h3 className="text-lg font-medium text-brand-700 mb-2">Thank you!</h3>
                   <p className="text-brand-600 text-sm">Your testimonial has been submitted for review.</p>
                 </div>
               ) : (
-                <form onSubmit={handleSubmit} className="space-y-3">
+                <form onSubmit={handleSubmit} noValidate className="space-y-3">
                   {isError && (
                     <div className="p-3 bg-red-50 border border-red-200 rounded-lg text-red-600 text-sm">
                       {(error as { data?: { message?: string } })?.data?.message || 'Failed to submit. Please try again.'}
                     </div>
                   )}
-                  <div>
-                    {label('Full Name', true)}
-                    <input type="text" placeholder="John Smith" required value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} className="form-input" disabled={isSubmitting} />
+                  <FormField label="Full Name" required error={fieldErrors.name}>
+                    <input type="text" placeholder="John Smith" value={formData.name} onChange={(e) => { setFormData({ ...formData, name: e.target.value }); clearErr('name'); }} className={`form-input ${fieldErrors.name ? 'border-red-400' : ''}`} disabled={isSubmitting} />
+                  </FormField>
+                  <FormField label="Email Address" required error={fieldErrors.email}>
+                    <input type="email" placeholder="john@company.com" value={formData.email} onChange={(e) => { setFormData({ ...formData, email: e.target.value }); clearErr('email'); }} className={`form-input ${fieldErrors.email ? 'border-red-400' : ''}`} disabled={isSubmitting} />
+                  </FormField>
+                  <div className="grid grid-cols-2 gap-3">
+                    <div>
+                      {label('Designation / Job Title')}
+                      <input type="text" placeholder="e.g. CEO, VP Growth" value={formData.designation} onChange={(e) => setFormData({ ...formData, designation: e.target.value })} className="form-input" disabled={isSubmitting} />
+                    </div>
+                    <div>
+                      {label('Company')}
+                      <input type="text" placeholder="Company name" value={formData.company} onChange={(e) => setFormData({ ...formData, company: e.target.value })} className="form-input" disabled={isSubmitting} />
+                    </div>
                   </div>
-                  <div>
-                    {label('Email Address', true)}
-                    <input type="email" placeholder="john@company.com" required value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} className="form-input" disabled={isSubmitting} />
+                  <div className="grid grid-cols-2 gap-3">
+                    <div>
+                      {label('Industry')}
+                      <input type="text" placeholder="e.g. SaaS, Healthcare" value={formData.industry} onChange={(e) => setFormData({ ...formData, industry: e.target.value })} className="form-input" disabled={isSubmitting} />
+                    </div>
+                    <div>
+                      {label('City')}
+                      <input type="text" placeholder="e.g. New York" value={formData.city} onChange={(e) => setFormData({ ...formData, city: e.target.value })} className="form-input" disabled={isSubmitting} />
+                    </div>
                   </div>
                   <div>
                     {label('Mobile Number')}
                     <input type="tel" placeholder="+1 (555) 000-0000 (Optional)" value={formData.phone} onChange={(e) => setFormData({ ...formData, phone: e.target.value })} className="form-input" disabled={isSubmitting} />
                   </div>
                   <div>
-                    {label('Your Testimonial', true)}
-                    <textarea placeholder="Share your experience working with PropelusAI... (min 20 characters)" required rows={4} minLength={20} maxLength={350} value={formData.testimonial} onChange={(e) => setFormData({ ...formData, testimonial: e.target.value })} className="form-input resize-none" disabled={isSubmitting} />
+                    {label('Your Photo')}
+                    <div className="flex items-center gap-3">
+                      {imagePreview && (
+                        <img src={imagePreview} alt="Preview" className="w-10 h-10 rounded-full object-cover border border-surface-200" />
+                      )}
+                      <input type="file" accept="image/jpeg,image/jpg,image/png,image/webp" onChange={handleImageChange} className="text-sm text-surface-500 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-medium file:bg-brand-50 file:text-brand-600 hover:file:bg-brand-100 file:cursor-pointer" disabled={isSubmitting} />
+                    </div>
+                    <p className="text-xs text-surface-400 mt-1">JPG, PNG, or WebP. Max 5MB.</p>
                   </div>
+                  <FormField label="Your Testimonial" required error={fieldErrors.testimonial}>
+                    <textarea placeholder="Share your experience working with PropelusAI... (min 20 characters)" rows={4} maxLength={350} value={formData.testimonial} onChange={(e) => { setFormData({ ...formData, testimonial: e.target.value }); clearErr('testimonial'); }} className={`form-input resize-none ${fieldErrors.testimonial ? 'border-red-400' : ''}`} disabled={isSubmitting} />
+                  </FormField>
                   <div className="flex items-center justify-between">
                     <p className="text-xs text-surface-400">{formData.testimonial.length}/350</p>
                     <button type="submit" className="btn-primary" disabled={isSubmitting}>
@@ -209,6 +312,16 @@ export default function TestimonialsClient() {
           </div>
         </div>
       </section>
+
+      <CTASection
+        tag="Ready to Build?"
+        title="Start your AI powered growth journey today."
+        description="Join the businesses already achieving measurable results with PropelusAI. From custom websites to full funnel automation, we build systems that deliver."
+        primaryLabel="Start Your Project"
+        primaryHref="/contact"
+        secondaryLabel="Explore Services"
+        secondaryHref="/services"
+      />
     </>
   );
 }

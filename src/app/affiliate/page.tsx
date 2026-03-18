@@ -2,9 +2,9 @@ import type { Metadata } from 'next';
 import AffiliateClient from './AffiliateClient';
 
 export const metadata: Metadata = {
-  title: 'Become an Affiliate Partner - Join PropelusAI Affiliate Program',
+  title: 'Affiliate Program | Earn Commissions',
   description:
-    'Join the PropelusAI affiliate program and earn commissions by promoting our AI powered solutions. Partner with us to help businesses transform with cutting edge AI technology.',
+    'Join the PropelusAI affiliate program. Earn commissions by referring clients to our AI services and products.',
   openGraph: {
     title: 'PropelusAI Affiliate Program',
     description:

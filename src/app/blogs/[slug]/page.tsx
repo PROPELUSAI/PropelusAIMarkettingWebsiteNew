@@ -24,6 +24,7 @@ interface Blog {
   cta_type?: string;
   cta_button_text?: string;
   cta_link?: string;
+  cta_description?: string;
 }
 
 async function fetchBlog(slug: string): Promise<Blog | null> {
@@ -75,9 +76,42 @@ export default async function BlogDetailPage({ params }: Props) {
     ],
   };
 
+  const articleSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: blog.title,
+    description: blog.meta_description || blog.subtitle || '',
+    url: `https://www.propelusai.com/blogs/${blog.slug}`,
+    datePublished: blog.publish_date || blog.created_at || new Date().toISOString(),
+    dateModified: blog.publish_date || blog.created_at || new Date().toISOString(),
+    author: {
+      '@type': 'Organization',
+      name: 'PropelusAI',
+      url: 'https://www.propelusai.com',
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'PropelusAI',
+      logo: {
+        '@type': 'ImageObject',
+        url: 'https://www.propelusai.com/propelus-favicon-512.png',
+        width: 512,
+        height: 512,
+      },
+    },
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': `https://www.propelusai.com/blogs/${blog.slug}`,
+    },
+    ...(blog.featured_image ? { image: { '@type': 'ImageObject', url: blog.featured_image } } : {}),
+    ...(blog.category ? { articleSection: blog.category } : {}),
+    ...(blog.tags?.length ? { keywords: blog.tags.join(', ') } : {}),
+  };
+
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
       <BlogDetailClient blog={blog} />
     </>
   );

@@ -34,6 +34,10 @@ export async function POST(request: NextRequest) {
       email: data.email.trim().toLowerCase(),
       mobileNumber: data.mobile_number.trim(),
       description: data.description.trim(),
+      hasNetwork: data.has_network || null,
+      networkType: data.network_type || null,
+      industry: data.industry || null,
+      interestedServices: data.interested_services || [],
       status: 'pending',
       affiliateCode: generateAffiliateCode(),
     });

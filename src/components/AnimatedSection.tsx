@@ -1,8 +1,7 @@
 /**
  * AnimatedSection.tsx — Reusable scroll-triggered animation wrappers.
- * Exports: AnimatedSection (single element fade+slide), StaggerContainer
- * (parent that staggers children), and StaggerItem (child with reveal animation).
- * All use Framer Motion whileInView with viewport-once triggers.
+ * Content is ALWAYS visible in initial HTML for crawlability.
+ * Animations enhance the experience but do not gate content visibility.
  */
 'use client';
 
@@ -17,14 +16,14 @@ interface AnimatedSectionProps {
 }
 
 const directionMap = {
-  up: { y: 40, x: 0 },
-  down: { y: -40, x: 0 },
-  left: { x: 40, y: 0 },
-  right: { x: -40, y: 0 },
+  up: { y: 30, x: 0 },
+  down: { y: -30, x: 0 },
+  left: { x: 30, y: 0 },
+  right: { x: -30, y: 0 },
   none: { x: 0, y: 0 },
 };
 
-/** Animates a single section into view with configurable direction and delay */
+/** Animates a section into view. Content is visible by default in SSR HTML. */
 export default function AnimatedSection({
   children,
   className = '',
@@ -35,17 +34,19 @@ export default function AnimatedSection({
 
   return (
     <motion.div
-      initial={{ opacity: 0, ...offset }}
+      initial={{ opacity: 1, x: 0, y: 0 }}
       whileInView={{ opacity: 1, x: 0, y: 0 }}
       viewport={{ once: true, margin: '-60px' }}
       transition={{ duration: 0.6, delay, ease: [0.21, 0.47, 0.32, 0.98] }}
       className={className}
+      style={{ willChange: 'transform' }}
     >
       {children}
     </motion.div>
   );
 }
-/** Parent container that staggers child StaggerItem animations sequentially */
+
+/** Parent container that staggers child StaggerItem animations */
 export function StaggerContainer({
   children,
   className = '',
@@ -57,7 +58,7 @@ export function StaggerContainer({
 }) {
   return (
     <motion.div
-      initial="hidden"
+      initial="visible"
       whileInView="visible"
       viewport={{ once: true, margin: '-40px' }}
       variants={{
@@ -72,7 +73,7 @@ export function StaggerContainer({
   );
 }
 
-/** Individual stagger child — fades up when parent container triggers */
+/** Individual stagger child — always visible in initial HTML */
 export function StaggerItem({
   children,
   className = '',
@@ -83,7 +84,7 @@ export function StaggerItem({
   return (
     <motion.div
       variants={{
-        hidden: { opacity: 0, y: 24 },
+        hidden: { opacity: 1, y: 0 },
         visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.21, 0.47, 0.32, 0.98] } },
       }}
       className={className}

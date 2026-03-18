@@ -9,6 +9,8 @@ export const contactSchema = z.object({
   country: z.string().min(1, 'Country is required').max(100),
   mobile_number: z.string().max(50).optional().nullable(),
   interest: z.string().max(100).optional().nullable(),
+  linkedin_url: z.string().max(500).optional().nullable(),
+  team_size: z.string().max(50).optional().nullable(),
   scheduled_time: z.string().refine(
     (val) => {
       const date = new Date(val);
@@ -69,6 +71,10 @@ export const affiliateSchema = z.object({
   email: z.string().email('Invalid email format'),
   mobile_number: z.string().min(1, 'Mobile number is required').max(50),
   description: z.string().min(50, 'Description must be at least 50 characters'),
+  has_network: z.enum(['yes', 'no']).optional().nullable(),
+  network_type: z.enum(['b2b', 'b2c', 'both']).optional().nullable(),
+  industry: z.string().max(100).optional().nullable(),
+  interested_services: z.array(z.string()).optional().nullable(),
 });
 
 export type AffiliateInput = z.infer<typeof affiliateSchema>;
@@ -84,6 +90,11 @@ export const testimonialSchema = z.object({
     .max(350, 'Testimonial must not exceed 350 characters'),
   mobile_number: z.string().max(50).optional().nullable(),
   rating: z.number().int().min(1).max(5).optional(),
+  designation: z.string().max(100).optional().nullable(),
+  company: z.string().max(255).optional().nullable(),
+  industry: z.string().max(100).optional().nullable(),
+  city: z.string().max(100).optional().nullable(),
+  image_url: z.string().max(500).optional().nullable(),
 });
 
 export type TestimonialInput = z.infer<typeof testimonialSchema>;
@@ -103,6 +114,19 @@ export const chatMessageSchema = z
   });
 
 export type ChatMessageInput = z.infer<typeof chatMessageSchema>;
+
+// ── Soul Waitlist ──
+
+export const soulWaitlistSchema = z.object({
+  name: z.string().min(1, 'Name is required').max(255),
+  email: z.string().email('Invalid email format'),
+  mobile_number: z.string().max(50).optional().nullable(),
+  purpose: z.string().max(500).optional().nullable(),
+  industry: z.string().max(100).optional().nullable(),
+  current_tools: z.string().max(500).optional().nullable(),
+});
+
+export type SoulWaitlistInput = z.infer<typeof soulWaitlistSchema>;
 
 // ── Auth ──
 

@@ -16,7 +16,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const product = getProductBySlug(slug);
   if (!product) return {};
 
-  const title = `${product.title} - AI Subscription Products | PropelusAI`;
+  const title = `${product.title} | AI Subscription Products | PropelusAI`;
   const description = product.subtitle;
 
   return {
@@ -37,6 +37,9 @@ export default async function ProductDetailPage({ params }: Props) {
   const product = getProductBySlug(slug);
   if (!product) notFound();
 
+  const priceMatch = product.startingPrice.match(/\$([\d,]+)/);
+  const priceValue = priceMatch ? priceMatch[1].replace(/,/g, '') : undefined;
+
   const productSchema = {
     '@context': 'https://schema.org',
     '@type': 'Product',
@@ -44,7 +47,26 @@ export default async function ProductDetailPage({ params }: Props) {
     description: product.subtitle,
     brand: { '@type': 'Organization', name: 'PropelusAI' },
     url: `https://www.propelusai.com/products/${slug}`,
+    category: 'AI Subscription Products',
+    offers: {
+      '@type': 'Offer',
+      availability: 'https://schema.org/InStock',
+      priceCurrency: 'USD',
+      url: `https://www.propelusai.com/products/${slug}`,
+      seller: { '@type': 'Organization', name: 'PropelusAI' },
+      ...(priceValue ? { price: priceValue, priceValidUntil: '2027-12-31' } : {}),
+    },
   };
+
+  const faqSchema = product.faqs.length > 0 ? {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: product.faqs.map((faq) => ({
+      '@type': 'Question',
+      name: faq.question,
+      acceptedAnswer: { '@type': 'Answer', text: faq.answer },
+    })),
+  } : null;
 
   const breadcrumbSchema = {
     '@context': 'https://schema.org',
@@ -60,6 +82,7 @@ export default async function ProductDetailPage({ params }: Props) {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
+      {faqSchema && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />}
       <ProductDetailClient product={product} />
     </>
   );

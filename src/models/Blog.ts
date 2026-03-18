@@ -16,6 +16,7 @@ export interface IBlog extends Document {
   cta_type?: string;
   cta_button_text?: string;
   cta_link?: string;
+  cta_description?: string;
   status: 'draft' | 'published' | 'archived';
   is_featured: boolean;
   publish_date?: Date | null;
@@ -43,6 +44,7 @@ const blogSchema = new Schema<IBlog>(
     cta_type: { type: String, default: '' },
     cta_button_text: { type: String, default: '' },
     cta_link: { type: String, default: '' },
+    cta_description: { type: String, default: '' },
     status: { type: String, enum: ['draft', 'published', 'archived'], default: 'draft' },
     is_featured: { type: Boolean, default: false },
     publish_date: { type: Date, default: null },

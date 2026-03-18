@@ -52,12 +52,21 @@ export interface AdminBlog {
 export interface CreateBlogData {
   title: string;
   slug: string;
-  excerpt: string;
-  content: string;
+  excerpt?: string;
+  content?: string;
+  content_raw?: string;
+  content_html?: string;
   coverImage?: string;
+  featured_image?: string;
   author?: string;
   tags?: string[];
+  category?: string;
   status?: 'draft' | 'published';
+  cta_button_text?: string;
+  cta_link?: string;
+  cta_description?: string;
+  read_time?: number;
+  [key: string]: unknown;
 }
 
 export interface UpdateBlogData extends Partial<CreateBlogData> {

@@ -1,14 +1,15 @@
 import type { Metadata } from 'next';
 import ServicesClient from './ServicesClient';
+import { allServiceDetails } from '@/lib/serviceDetails';
 
 export const metadata: Metadata = {
-  title: 'One Time Services - AI Powered Business Solutions | PropelusAI',
+  title: 'AI Services | Web, CRM, SaaS & Automation',
   description:
-    'PropelusAI: 22 AI powered one time services including web development, CRM systems, video production, brand identity, and creative strategy. Enterprise quality at 45% below market rates.',
+    'One-time AI services: website development, SaaS, CRM, mobile apps, cybersecurity, and marketing automation. Starting from $2,500.',
   openGraph: {
-    title: 'PropelusAI One Time Services',
+    title: 'PropelusAI AI Services',
     description:
-      'PropelusAI: 22 AI powered one time services including web development, CRM systems, video production, brand identity, and creative strategy. Enterprise quality at 45% below market rates.',
+      'One-time AI services: website development, SaaS, CRM, mobile apps, cybersecurity, and marketing automation.',
   },
   alternates: { canonical: 'https://www.propelusai.com/services' },
 };
@@ -22,10 +23,28 @@ const breadcrumb = {
   ],
 };
 
+const collectionSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: 'AI Services by PropelusAI',
+  description: 'One-time AI powered services including website development, CRM systems, SaaS development, mobile apps, and automation.',
+  url: 'https://www.propelusai.com/services',
+  mainEntity: {
+    '@type': 'ItemList',
+    itemListElement: allServiceDetails.map((service, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: service.title,
+      url: `https://www.propelusai.com/services/${service.slug}`,
+    })),
+  },
+};
+
 export default function ServicesPage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionSchema) }} />
       <ServicesClient />
     </>
   );

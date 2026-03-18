@@ -2,42 +2,73 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import PageHero from '@/components/PageHero';
 import AnimatedSection from '@/components/AnimatedSection';
 import CTASection from '@/components/CTASection';
 import { serviceCategories } from '@/lib/data';
 import { slugify } from '@/lib/slugify';
 
-/* ServicesClient — Displays all service categories with tabbed navigation.
-   Users select a category tab → services for that category render below.
-   Each service card shows: title, summary, description, timeline, deliverables, and CTA buttons. */
+/* ServicesClient — Displays all service categories.
+   ALL categories and ALL service cards are always in the DOM for crawlability.
+   Tab switching uses CSS visibility, not conditional rendering. */
 export default function ServicesClient() {
   const [activeCategory, setActiveCategory] = useState(serviceCategories[0].id);
-  const activeCat = serviceCategories.find((c) => c.id === activeCategory) || serviceCategories[0];
 
   return (
     <>
       <PageHero
         tag="One Time Payment Based Services"
-        title="AI powered services, meticulously designed for modern businesses"
-        description="Every service ships with dual-theme UI systems, bespoke components, micro-interactions, and measurable business outcomes. No gradients. Only premium build quality. Each engagement includes a dedicated account manager and technical pod, weekly executive-ready status reports, light and dark mode parity, plus comprehensive launch, enablement, and optimization support."
+        title="AI powered services built for modern businesses"
+        description="From website development and SaaS platforms to CRM systems and marketing automation, every service includes a dedicated account manager, weekly status reports, and post launch support."
       />
+
+      {/* Service Methodology Intro */}
+      <section className="section-padding section-light border-b border-surface-100">
+        <div className="container-main max-w-3xl">
+          <AnimatedSection>
+            <h2 className="text-2xl font-medium mb-5">How Our Services Work</h2>
+            <p className="text-surface-600 leading-relaxed mb-5">
+              Every PropelusAI service follows a structured four phase process: discovery, strategy, build, and launch.
+              During discovery, we audit your current systems, map your goals, and identify the highest impact opportunities.
+              In strategy, we produce a detailed scope document with architecture decisions, timelines, and milestones.
+              The build phase runs in weekly sprints with status updates every Friday. After launch, you receive a
+              post-delivery support window for fixes, adjustments, and training.
+            </p>
+            <p className="text-surface-500 leading-relaxed mb-5">
+              We build on modern infrastructure including <a href="https://nextjs.org" target="_blank" rel="noopener noreferrer" className="text-brand-500 hover:underline">Next.js</a> and React for frontends, Node.js and Python for backends,
+              <a href="https://www.mongodb.com" target="_blank" rel="noopener noreferrer" className="text-brand-500 hover:underline">MongoDB</a> and PostgreSQL for data, and AWS or Vercel for deployment. AI capabilities are integrated at the
+              architecture level, not added after the fact. That means your website, CRM, or SaaS platform ships
+              with intelligent features from day one: personalization, predictive analytics, automated workflows, and
+              real time reporting.
+            </p>
+            <p className="text-surface-500 leading-relaxed mb-5">
+              Clients choose PropelusAI for three reasons. First, speed. Most website projects deliver in 2 to 4 weeks,
+              not 2 to 4 months. Second, technical depth. Our engineers build the same architecture used by funded SaaS
+              companies, not template based sites. Third, end to end ownership. We handle design, development, deployment,
+              and post launch optimization under one roof, so you never coordinate between multiple vendors.
+            </p>
+            <p className="text-surface-500 leading-relaxed">
+              We have delivered 150+ projects across SaaS, fintech, healthcare, e commerce, manufacturing, education,
+              consulting, and professional services. Every engagement includes a dedicated account manager, weekly
+              status reports, and comprehensive launch support.
+            </p>
+          </AnimatedSection>
+        </div>
+      </section>
 
       {/* Included features bar */}
       <section className="py-8 border-b border-surface-100 section-light">
         <div className="container-main">
-          <AnimatedSection>
-            <div className="flex flex-wrap items-center gap-x-8 gap-y-2 text-sm text-surface-500 justify-center">
-              <span>Included with every engagement:</span>
-              {['Dedicated account manager', 'Weekly status reports', 'Launch & optimization support'].map((f) => (
-                <span key={f} className="flex items-center gap-1.5">
-                  <span className="w-1 h-1 rounded-full bg-brand-500" />
-                  {f}
-                </span>
-              ))}
-            </div>
-          </AnimatedSection>
+          <div className="flex flex-wrap items-center gap-x-8 gap-y-2 text-sm text-surface-500 justify-center">
+            <span>Included with every engagement:</span>
+            {['Dedicated account manager', 'Weekly status reports', 'Launch & optimization support'].map((f) => (
+              <span key={f} className="flex items-center gap-1.5">
+                <span className="w-1 h-1 rounded-full bg-brand-500" />
+                {f}
+              </span>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -62,39 +93,34 @@ export default function ServicesClient() {
         </div>
       </section>
 
-      {/* Services List */}
+      {/* ALL Services — every category rendered in DOM, CSS toggles visibility */}
       <section className="section-padding section-light">
         <div className="container-main">
-          <AnimatedSection className="mb-12">
-            <h2 className="text-2xl font-medium mb-2">{activeCat.title}</h2>
-            <p className="text-surface-500">{activeCat.subtitle}</p>
-            {activeCat.description && (
-              <p className="text-sm text-surface-400 mt-1 max-w-3xl">{activeCat.description}</p>
-            )}
-            <p className="text-xs text-surface-400 mt-2">{activeCat.services.length} Services</p>
-          </AnimatedSection>
+          {serviceCategories.map((cat) => (
+            <div key={cat.id} className={activeCategory === cat.id ? 'block' : 'hidden'}>
+              <div className="mb-12">
+                <h2 className="text-2xl font-medium mb-2">{cat.title}</h2>
+                <p className="text-surface-500">{cat.subtitle}</p>
+                {cat.description && (
+                  <p className="text-sm text-surface-400 mt-1 max-w-3xl">{cat.description}</p>
+                )}
+                <p className="text-xs text-surface-400 mt-2">{cat.services.length} Services</p>
+              </div>
 
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={activeCategory}
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -8 }}
-              transition={{ duration: 0.35 }}
-              className="space-y-6"
-            >
-              {activeCat.services.map((service, idx) => (
-                <ServiceCard key={service.title} service={service} index={idx} />
-              ))}
-            </motion.div>
-          </AnimatePresence>
+              <div className="space-y-6">
+                {cat.services.map((service, idx) => (
+                  <ServiceCard key={service.title} service={service} index={idx} />
+                ))}
+              </div>
+            </div>
+          ))}
         </div>
       </section>
 
       <CTASection
         tag="Need Help Prioritizing?"
         title="Book a service mapping session and decide in under 45 minutes."
-        description="We assess maturity, budget, and impact to craft a roadmap that feels both premium and practical."
+        description="We assess your goals, budget, and timeline to build a roadmap that fits."
         primaryLabel="Schedule Consultation"
         secondaryLabel="Get Custom Quote"
         secondaryHref="/contact"
@@ -103,17 +129,15 @@ export default function ServicesClient() {
   );
 }
 
-/* ServiceCard — Individual service card with animated entry.
-   Renders headline, title, summary, description, timeline, deliverables grid, and contact CTAs. */
+/* ServiceCard — Individual service card. Content always in DOM. */
 function ServiceCard({ service, index }: { service: (typeof serviceCategories)[0]['services'][0]; index: number }) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: index * 0.08 }}
+      initial={{ opacity: 1 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
       className="card"
     >
-      {/* Headline eyebrow */}
       {service.headline && (
         <p className="text-xs uppercase tracking-widest text-brand-500 font-medium mb-2">{service.headline}</p>
       )}
@@ -125,7 +149,6 @@ function ServiceCard({ service, index }: { service: (typeof serviceCategories)[0
         </div>
       </div>
 
-      {/* Description paragraph */}
       {service.description && (
         <p className="text-sm text-surface-500 leading-relaxed mb-4">{service.description}</p>
       )}
@@ -137,7 +160,6 @@ function ServiceCard({ service, index }: { service: (typeof serviceCategories)[0
         </span>
       </div>
 
-      {/* Deliverables section */}
       <div className="pt-4 border-t border-surface-100">
         <p className="text-xs uppercase tracking-widest text-surface-400 font-semibold mb-3">Deliverables:</p>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-2 mb-5">

@@ -10,9 +10,11 @@ import Image from 'next/image';
 import { StaggerContainer, StaggerItem } from '@/components/AnimatedSection';
 import CTASection from '@/components/CTASection';
 import PageHero from '@/components/PageHero';
+import BlogSubscribe from '@/components/BlogSubscribe';
+import { seedBlogPosts } from '@/lib/blogSeedData';
 
 export const metadata: Metadata = {
-  title: 'Blogs & Insights - AI Growth Strategies | PropelusAI',
+  title: 'Blogs & Insights | AI Growth Strategies | PropelusAI',
   description:
     'AI Driven Perspectives on Growth, Automation, SaaS, and Modern IT Systems. Learn how to scale your business with intelligent automation.',
   openGraph: {
@@ -32,8 +34,32 @@ interface Blog {
   featured_image?: string;
   is_featured: boolean;
   meta_description?: string;
+  excerpt?: string;
+  content_raw?: string;
+  content_html?: string;
   publish_date?: string | null;
   created_at: string;
+}
+
+/** Returns seed blog posts as fallback when API is unavailable */
+function fallbackBlogs(): Blog[] {
+  return seedBlogPosts.map((p, i) => {
+    const plainText = p.content_html.replace(/<[^>]*>/g, '').replace(/&nbsp;/g, ' ').replace(/\s+/g, ' ').trim();
+    return {
+      _id: `seed-${i}`,
+      title: p.title,
+      subtitle: p.subtitle,
+      slug: p.slug,
+      category: p.category,
+      tags: p.tags,
+      featured_image: p.featured_image,
+      is_featured: false,
+      meta_description: p.meta_description,
+      excerpt: p.meta_description || plainText.slice(0, 200),
+      publish_date: p.publish_date,
+      created_at: p.publish_date,
+    };
+  });
 }
 
 /** Fetches blog posts from the internal Next.js API; returns empty array on failure */
@@ -43,11 +69,12 @@ async function fetchBlogs(): Promise<Blog[]> {
     const res = await fetch(`${siteUrl}/api/v1/blogs?limit=50`, {
       next: { revalidate: 60 },
     });
-    if (!res.ok) return [];
+    if (!res.ok) throw new Error('API unavailable');
     const json = await res.json();
-    return json.data?.blogs ?? json.data ?? [];
+    const blogs = json.data?.blogs ?? json.data ?? [];
+    return blogs.length > 0 ? blogs : fallbackBlogs();
   } catch {
-    return [];
+    return fallbackBlogs();
   }
 }
 /** Formats an ISO date string to "Mon DD, YYYY" display format */
@@ -59,6 +86,22 @@ function formatDate(dateStr: string | null | undefined): string {
     day: 'numeric',
   });
 }
+/** Returns a short text preview for the blog card (3-5 lines) */
+function getContentPreview(blog: Blog, maxLength = 200): string {
+  // Try structured fields first
+  let text = blog.excerpt || blog.subtitle || blog.meta_description || '';
+  // Fall back to stripping content
+  if (!text && blog.content_html) {
+    text = blog.content_html.replace(/<[^>]*>/g, '').replace(/&nbsp;/g, ' ').replace(/\s+/g, ' ').trim();
+  }
+  if (!text && blog.content_raw) {
+    text = blog.content_raw.replace(/\s+/g, ' ').trim();
+  }
+  if (!text) return '';
+  if (text.length > maxLength) return text.slice(0, maxLength).replace(/\s\S*$/, '') + '...';
+  return text;
+}
+
 const breadcrumb = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
@@ -72,14 +115,41 @@ const breadcrumb = {
 export default async function BlogsPage() {
   const blogs = await fetchBlogs();
 
+  const collectionSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: 'PropelusAI Blog | AI Growth Strategies & Insights',
+    description: 'AI driven perspectives on growth, automation, SaaS, and modern IT systems.',
+    url: 'https://www.propelusai.com/blogs',
+    mainEntity: {
+      '@type': 'ItemList',
+      itemListElement: blogs.map((blog, i) => ({
+        '@type': 'ListItem',
+        position: i + 1,
+        name: blog.title,
+        url: `https://www.propelusai.com/blogs/${blog.slug}`,
+      })),
+    },
+  };
+
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionSchema) }} />
       <PageHero
         tag="Insights & Perspectives"
         title="Blogs & Insights"
         description="AI driven perspectives on growth, automation, SaaS, and modern IT systems."
       />
+
+      {/* Newsletter Subscribe Banner */}
+      <section className="py-8 section-warm border-b border-surface-100">
+        <div className="container-main max-w-2xl text-center">
+          <h2 className="text-lg font-medium mb-2">Get weekly insights on AI, development, and growth strategies</h2>
+          <p className="text-sm text-surface-500 mb-4">Join our newsletter for practical guides, industry analysis, and product updates.</p>
+          <BlogSubscribe />
+        </div>
+      </section>
 
       <section className="section-padding section-light">
         <div className="container-main">
@@ -91,7 +161,7 @@ export default async function BlogsPage() {
                 </svg>
               </div>
               <h3 className="text-lg font-medium text-surface-700 mb-2">No posts yet</h3>
-              <p className="text-sm text-surface-400">Check back soon — new insights are on the way.</p>
+              <p className="text-sm text-surface-400">Check back soon, new insights are on the way.</p>
             </div>
           ) : (
             <StaggerContainer className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -107,6 +177,7 @@ export default async function BlogsPage() {
                             src={blog.featured_image}
                             alt={blog.title}
                             fill
+                            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                             className="object-cover group-hover:scale-105 transition-transform duration-500"
                           />
                         ) : (
@@ -141,19 +212,14 @@ export default async function BlogsPage() {
                           {blog.title}
                         </h3>
 
-                        {(blog.subtitle || blog.meta_description) && (
-                          <p className="text-sm text-surface-500 leading-relaxed line-clamp-2">
-                            {blog.subtitle || blog.meta_description}
-                          </p>
-                        )}
+                        <p className="text-sm text-surface-500 leading-relaxed line-clamp-3">
+                          {getContentPreview(blog)}
+                        </p>
 
+                        {/* Tags kept for SEO but hidden from display */}
                         {blog.tags?.length > 0 && (
-                          <div className="flex flex-wrap gap-1.5 mt-3">
-                            {blog.tags.slice(0, 3).map((tag) => (
-                              <span key={tag} className="text-xs text-surface-400 bg-surface-50 border border-surface-100 px-2 py-0.5 rounded-full">
-                                #{tag}
-                              </span>
-                            ))}
+                          <div className="sr-only" aria-hidden="true">
+                            {blog.tags.map((tag) => <span key={tag}>#{tag}</span>)}
                           </div>
                         )}
 

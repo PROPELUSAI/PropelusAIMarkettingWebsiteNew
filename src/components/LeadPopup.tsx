@@ -14,6 +14,34 @@ import 'react-phone-number-input/style.css';
 import { useSubmitContactMutation } from '@/store';
 import EmbeddedCalendar from '@/components/EmbeddedCalendar';
 import { countries } from '@/lib/countries';
+import FormSelect, { SelectOption } from '@/components/ui/FormSelect';
+import FormField from '@/components/ui/FormField';
+
+const countryOptions: SelectOption[] = countries.map((c) => ({ value: c, label: c }));
+const serviceSelectOptions: SelectOption[] = [
+  { value: 'ai-website', label: 'AI Website Building' },
+  { value: 'mobile-app', label: 'Mobile Application Development' },
+  { value: 'crm-building', label: 'CRM Building & Integration' },
+  { value: 'linkedin-ads', label: 'LinkedIn Advertising' },
+  { value: 'meta-google-ads', label: 'Meta & Google Ads' },
+  { value: 'content-marketing', label: 'Content Creation & Marketing' },
+  { value: 'lead-generation', label: 'Lead Generation & Management' },
+  { value: 'marketing-automation', label: 'Marketing Automation' },
+  { value: 'saas-development', label: 'SaaS Development' },
+  { value: 'cybersecurity', label: 'Cybersecurity & Data Protection' },
+  { value: 'mediaworks', label: 'MediaWorks (Video, Branding, Design)' },
+  { value: 'email-domain', label: 'Email & Domain Setup' },
+  { value: 'full-suite', label: 'Full AI Growth Suite' },
+  { value: 'other', label: 'Other / Not Sure Yet' },
+];
+const teamSizeSelectOptions: SelectOption[] = [
+  { value: 'Just me', label: 'Just me' },
+  { value: '2-10', label: '2-10' },
+  { value: '11-50', label: '11-50' },
+  { value: '51-100', label: '51-100' },
+  { value: '101-500', label: '101-500' },
+  { value: '501+', label: '501+' },
+];
 
 /** Delay before popup appears on first visit (milliseconds) */
 const POPUP_DELAY_MS = 3000;
@@ -29,9 +57,9 @@ const stats = [
 
 const highlights = [
   'AI native engineering across every solution',
-  'Enterprise-grade websites, CRMs & automation',
-  'Full funnel marketing — LinkedIn, Meta & Google Ads',
-  'Outcome-first approach with measurable ROI',
+  'Enterprise grade websites, CRMs & automation',
+  'Full funnel marketing across LinkedIn, Meta & Google Ads',
+  'Outcome first approach with measurable ROI',
 ];
 
 /** Renders the full-screen modal popup with lead capture form */
@@ -48,8 +76,11 @@ export default function LeadPopup() {
     promo: '',
     description: '',
     scheduledTime: '',
+    linkedinUrl: '',
+    teamSize: '',
   });
 
+  const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
   const [submitLead, { isLoading, isSuccess }] = useSubmitContactMutation();
 
   useEffect(() => {
@@ -68,8 +99,22 @@ export default function LeadPopup() {
     localStorage.setItem(LOCAL_KEY, 'true');
   }, []);
 
+  const clearErr = (field: string) => {
+    if (fieldErrors[field]) setFieldErrors((p) => { const { [field]: _, ...rest } = p; return rest; });
+  };
+
+  const validate = () => {
+    const errs: Record<string, string> = {};
+    if (!formData.name.trim()) errs.name = 'Please enter your full name';
+    if (!formData.email.trim()) errs.email = 'Please enter your email address';
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) errs.email = 'Please enter a valid email address';
+    setFieldErrors(errs);
+    return Object.keys(errs).length === 0;
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!validate()) return;
     try {
       const scheduledTime = formData.scheduledTime
         ? new Date(formData.scheduledTime).toISOString()
@@ -79,7 +124,7 @@ export default function LeadPopup() {
       const fullDescription = [
         formData.interest === 'other' && formData.otherInterest ? `[Interest: ${formData.otherInterest}]` : '',
         formData.description || '',
-      ].filter(Boolean).join(' — ') || null;
+      ].filter(Boolean).join(' | ') || null;
 
       await submitLead({
         full_name: formData.name,
@@ -87,6 +132,8 @@ export default function LeadPopup() {
         country: formData.country || 'Not specified',
         mobile_number: phone || null,
         interest: formData.interest || null,
+        linkedin_url: formData.linkedinUrl || null,
+        team_size: formData.teamSize || null,
         scheduled_time: scheduledTime,
         company_name: formData.company || null,
         description: fullDescription,
@@ -181,7 +228,7 @@ export default function LeadPopup() {
                     className="text-sm text-white/60 leading-relaxed mb-6"
                     initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4, delay: 0.45 }}
                   >
-                    Join industry leaders achieving measurable results with our AI first solutions. Get a custom growth roadmap — tailored to your business goals.
+                    Join industry leaders achieving measurable results with our AI first solutions. Get a custom growth roadmap, tailored to your business goals.
                   </motion.p>
                   <motion.div
                     className="grid grid-cols-3 gap-3 mb-6"
@@ -244,64 +291,51 @@ export default function LeadPopup() {
                   </motion.div>
                 ) : (
                   <>
-                    <h3 className="text-lg font-semibold text-surface-800 mb-1">Get Your Free Proposal</h3>
+                    <h3 className="text-lg font-semibold text-surface-800 mb-1">Your Custom Growth Roadmap Awaits</h3>
                     <p className="text-sm text-surface-400 mb-5">
-                      Fill in a few details and we&apos;ll craft a custom AI growth strategy for you.
+                      Tell us your goals and we will design an AI strategy built specifically for your business. No templates. No guesswork.
                     </p>
 
-                    <form onSubmit={handleSubmit} className="space-y-3.5">
-                      <div>
-                        {lbl('Full Name', true)}
-                        <input type="text" placeholder="John Smith" required value={formData.name} onChange={(e) => update('name', e.target.value)} className="form-input !py-2.5" disabled={isLoading} />
-                      </div>
+                    <form onSubmit={handleSubmit} noValidate className="space-y-3.5">
+                      <FormField label="Full Name" required error={fieldErrors.name}>
+                        <input type="text" placeholder="John Smith" value={formData.name} onChange={(e) => { update('name', e.target.value); clearErr('name'); }} className={`form-input !py-2.5 ${fieldErrors.name ? 'border-red-400' : ''}`} disabled={isLoading} />
+                      </FormField>
 
-                      <div>
-                        {lbl('Work Email', true)}
-                        <input type="email" placeholder="john@company.com" required value={formData.email} onChange={(e) => update('email', e.target.value)} className="form-input !py-2.5" disabled={isLoading} />
-                      </div>
+                      <FormField label="Work Email" required error={fieldErrors.email}>
+                        <input type="email" placeholder="john@company.com" value={formData.email} onChange={(e) => { update('email', e.target.value); clearErr('email'); }} className={`form-input !py-2.5 ${fieldErrors.email ? 'border-red-400' : ''}`} disabled={isLoading} />
+                      </FormField>
 
                       <div className="grid grid-cols-2 gap-3">
-                        <div>
-                          {lbl('Company Name')}
+                        <FormField label="Company Name">
                           <input type="text" placeholder="Acme Inc." value={formData.company} onChange={(e) => update('company', e.target.value)} className="form-input !py-2.5" disabled={isLoading} />
-                        </div>
-                        <div>
-                          {lbl('Country')}
-                          <select value={formData.country} onChange={(e) => update('country', e.target.value)} className="form-input !py-2.5" disabled={isLoading}>
-                            <option value="">Select country...</option>
-                            {countries.map((c) => (
-                              <option key={c} value={c}>{c}</option>
-                            ))}
-                          </select>
-                        </div>
+                        </FormField>
+                        <FormField label="Country">
+                          <FormSelect options={countryOptions} value={formData.country} onChange={(v) => update('country', v)} placeholder="Select country..." disabled={isLoading} />
+                        </FormField>
                       </div>
 
-                      <div>
-                        {lbl('Phone Number')}
+                      <FormField label="Phone Number">
                         <PhoneInput international defaultCountry="US" value={phone} onChange={setPhone} disabled={isLoading} className="phone-input-wrapper" />
-                      </div>
+                      </FormField>
 
-                      <div>
-                        {lbl('What are you interested in?')}
-                        <select value={formData.interest} onChange={(e) => update('interest', e.target.value)} className="form-input !py-2.5" disabled={isLoading}>
-                          <option value="">Select a service...</option>
-                          <option value="ai-website">AI Powered Website</option>
-                          <option value="crm">CRM &amp; Lead Management</option>
-                          <option value="linkedin-ads">LinkedIn Advertising</option>
-                          <option value="meta-google-ads">Meta &amp; Google Ads</option>
-                          <option value="content-marketing">Content Marketing</option>
-                          <option value="automation">Marketing Automation</option>
-                          <option value="full-suite">Full AI Growth Suite</option>
-                          <option value="other">Other / Not Sure Yet</option>
-                        </select>
-                      </div>
+                      <FormField label="What are you interested in?">
+                        <FormSelect options={serviceSelectOptions} value={formData.interest} onChange={(v) => update('interest', v)} placeholder="Select a service..." disabled={isLoading} />
+                      </FormField>
 
                       {formData.interest === 'other' && (
-                        <div>
-                          {lbl('Please describe what you\'re looking for')}
-                          <textarea placeholder="Tell us what you have in mind — specific goals, challenges, or ideas..." rows={3} value={formData.otherInterest} onChange={(e) => update('otherInterest', e.target.value)} className="form-input resize-none !py-2.5" disabled={isLoading} />
-                        </div>
+                        <FormField label="Please describe what you're looking for">
+                          <textarea placeholder="Tell us what you have in mind, specific goals, challenges, or ideas..." rows={3} value={formData.otherInterest} onChange={(e) => update('otherInterest', e.target.value)} className="form-input resize-none !py-2.5" disabled={isLoading} />
+                        </FormField>
                       )}
+
+                      <div className="grid grid-cols-2 gap-3">
+                        <FormField label="LinkedIn URL">
+                          <input type="url" placeholder="linkedin.com/in/..." value={formData.linkedinUrl} onChange={(e) => update('linkedinUrl', e.target.value)} className="form-input !py-2.5" disabled={isLoading} />
+                        </FormField>
+                        <FormField label="Team Size">
+                          <FormSelect options={teamSizeSelectOptions} value={formData.teamSize} onChange={(v) => update('teamSize', v)} placeholder="Select..." disabled={isLoading} />
+                        </FormField>
+                      </div>
 
                       <div>
                         {lbl('Promo Code')}
@@ -343,7 +377,7 @@ export default function LeadPopup() {
 
                     <p className="text-[0.7rem] text-surface-400 mt-3 text-center leading-relaxed">
                       By submitting, you agree to our{' '}
-                      <a href="/privacy" className="text-brand-500 hover:underline">privacy policy</a>. No spam — ever.
+                      <a href="/privacy" className="text-brand-500 hover:underline">privacy policy</a>. No spam, ever.
                     </p>
                   </>
                 )}

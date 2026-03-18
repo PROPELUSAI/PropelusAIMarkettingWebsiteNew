@@ -1,14 +1,15 @@
 import type { Metadata } from 'next';
 import ProductsClient from './ProductsClient';
+import { allProductDetails } from '@/lib/productDetails';
 
 export const metadata: Metadata = {
-  title: 'AI Products - Subscription-Based AI Growth Systems | PropelusAI',
+  title: 'AI Products | Monthly Subscriptions',
   description:
-    '21 monthly AI powered products: marketing automation, content production, social media management, and ongoing creative support. Scale your growth with flexible subscriptions at 45% savings.',
+    '21 AI subscription products: LinkedIn ads, content engines, CRM analytics, lead generation, and marketing automation. From $149/month.',
   openGraph: {
     title: 'PropelusAI AI Products',
     description:
-      '21 monthly AI powered products: marketing automation, content production, social media management, and ongoing creative support. Scale your growth with flexible subscriptions at 45% savings.',
+      'Monthly AI subscription products: LinkedIn ads, content engines, CRM, lead generation, and marketing automation.',
   },
   alternates: { canonical: 'https://www.propelusai.com/products' },
 };
@@ -22,10 +23,28 @@ const breadcrumb = {
   ],
 };
 
+const collectionSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: 'AI Products by PropelusAI',
+  description: 'Monthly subscription AI products for LinkedIn advertising, content creation, CRM, lead generation, and marketing automation.',
+  url: 'https://www.propelusai.com/products',
+  mainEntity: {
+    '@type': 'ItemList',
+    itemListElement: allProductDetails.map((product, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: product.title,
+      url: `https://www.propelusai.com/products/${product.slug}`,
+    })),
+  },
+};
+
 export default function ProductsPage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionSchema) }} />
       <ProductsClient />
     </>
   );

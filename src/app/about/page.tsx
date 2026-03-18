@@ -2,13 +2,13 @@ import type { Metadata } from 'next';
 import AboutClient from './AboutClient';
 
 export const metadata: Metadata = {
-  title: 'About Us - PropelusAI | AI Powered Growth for Modern Businesses',
+  title: 'About Us | AI Company in Phoenix & India',
   description:
-    'Learn about PropelusAI, a global AI driven company specializing in enterprise grade websites, CRM systems, automation, and subscription based AI products. Discover our mission, values, leadership, and commitment to precision built digital experiences.',
+    'PropelusAI specializes in AI automation, website development, SaaS development, CRM development, and custom software. Global team in Phoenix, Arizona and India.',
   openGraph: {
     title: 'About PropelusAI',
     description:
-      'The global AI company behind premium, ROI-driven digital transformations.',
+      'Global AI company specializing in website development, CRM systems, SaaS, and AI automation for modern businesses.',
   },
   alternates: { canonical: 'https://www.propelusai.com/about' },
 };
@@ -22,10 +22,25 @@ const breadcrumb = {
   ],
 };
 
+const aboutPageSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'AboutPage',
+  name: 'About PropelusAI',
+  description:
+    'Learn about PropelusAI, a global AI driven company specializing in enterprise grade websites, CRM systems, automation, and subscription based AI products.',
+  url: 'https://www.propelusai.com/about',
+  mainEntity: {
+    '@type': 'Organization',
+    name: 'PropelusAI',
+    url: 'https://www.propelusai.com',
+  },
+};
+
 export default function AboutPage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(aboutPageSchema) }} />
       <AboutClient />
     </>
   );

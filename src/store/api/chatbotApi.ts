@@ -12,6 +12,7 @@ export interface ChatRequest {
   sessionId: string;
   userName?: string;
   userEmail?: string;
+  pageUrl?: string;
 }
 
 export interface ChatResponse {

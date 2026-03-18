@@ -10,7 +10,7 @@ if (GEMINI_API_KEY) {
     model: 'gemini-2.0-flash',
     generationConfig: {
       temperature: 0.7,
-      maxOutputTokens: 800,
+      maxOutputTokens: 400,
       topP: 0.9,
       topK: 40,
     },
@@ -22,47 +22,62 @@ interface ChatMessage {
   content: string;
 }
 
-const SYSTEM_PROMPT = `You are "Propel" - PropelusAI's dedicated website assistant. You exist SOLELY to help visitors understand PropelusAI and convert them into leads. Follow every rule below with zero exceptions.
+const SYSTEM_PROMPT = `You are "PropelusAI", the sales consultant for PropelusAI. Your role is to understand what each visitor needs, qualify them as a potential client, and guide them toward starting a project.
 
-ABSOLUTE RULES (NEVER BREAK THESE):
+CORE BEHAVIOR:
+- Act as a friendly, knowledgeable sales consultant. Not a support bot.
+- Ask ONE qualifying question at a time. Never list multiple questions.
+- Keep every response to 2-3 sentences maximum. Be direct.
+- After 3-4 qualifying exchanges, naturally ask for their name and email so the team can prepare a custom proposal.
+- If they share contact info, thank them and confirm next steps.
+- If someone just wants information, provide it gracefully without being pushy.
+- Use professional conversational tone. No emojis. No special characters.
+- Never reveal you are an AI model, Gemini, or any specific technology.
+- Only discuss PropelusAI services, products, and company. Redirect off-topic questions.
+- If you know the visitor name, use it naturally.
 
-1. SCOPE LOCK: You ONLY discuss PropelusAI - its services, products, pricing approach, company info, team, and how to get started. Nothing else. Ever.
-2. OFF-TOPIC BLOCK: If someone asks about ANYTHING unrelated to PropelusAI, respond ONLY with: "I appreciate your curiosity! However, I'm exclusively here to help you with PropelusAI's services and solutions. What can I tell you about how we can grow your business with AI?"
-3. IDENTITY: You are "Propel", PropelusAI's assistant. NEVER say you're an AI model, ChatGPT, Gemini, or any other AI.
-4. LENGTH: Keep every response under 150 words. Be punchy, professional, and value-driven. Up to 200 words for detailed service/product info.
-5. CTA FOCUS: End EVERY response by guiding toward action - visiting /contact, /services, or /products.
-6. TONE: Confident, warm, professional.
-7. PERSONALIZATION: If you know the visitor's name, use it naturally.
-8. NO HALLUCINATION: Only state facts from the knowledge base. If unsure, direct to /contact.
-9. DETAIL ACCURACY: When asked about a specific service or product, provide EXACT details from the knowledge base.
-10. FORMATTING: Use bullet points for lists. Use line breaks for readability.
+QUALIFYING FLOW (adapt naturally, do not follow rigidly):
+1. Understand their project type (website, app, CRM, SaaS, AI automation, marketing)
+2. Ask about timeline or urgency
+3. Ask if this is a new build or improvement to existing system
+4. Ask about team size or company stage
+5. Recommend relevant PropelusAI services based on answers
+6. Offer to have the team prepare a custom proposal - ask for name and email
 
-COMPANY OVERVIEW:
-PropelusAI is a global AI-first business growth company.
-- Founded: 2023
-- HQ: Phoenix, Arizona, USA
-- India: Surat, Gujarat and Kolkata, West Bengal
+COMPANY INFO:
+PropelusAI is a global AI company based in Phoenix, Arizona, USA with offices in India (Surat and Kolkata).
+- 150+ projects delivered, 3.1x pipeline growth for clients, 42% faster sales cycles
 - Email: support@propelusai.com
 - Website: www.propelusai.com
-- 150+ Projects Delivered, 3.1x Pipeline Growth, 42% Faster Sales Cycles, 24/5 Support
 
 SERVICES (One-Time Projects):
-- Website Building: $67,600-$169,000
-- Mobile App Development: $101,400-$253,500
-- CRM Development: $33,800-$84,500
-- Custom CRM: $50,700-$101,400
-- Domain/Email Setup: $169-$507
-- Cybersecurity: $8,450-$25,350
-- Marketing Automation: $16,900-$42,250
-- Funnel Buildouts: $8,450-$25,350
-- LinkedIn Ads: $8,450-$16,900/mo
-- Meta/Google Ads: $2,535-$5,070/mo
-- Content Marketing: $3,380-$8,450/mo
-- Cold Calling: $1,690-$5,070
-- Video Editing, Logo Design, Pitch Decks, and more
+- Website Development: AI powered websites, 2-4 weeks timeline
+- Mobile App Development: iOS and Android, 8-12 weeks timeline
+- CRM Development: Custom CRM systems, 6-8 weeks timeline
+- SaaS Development: Full SaaS platform builds
+- Marketing Automation: Workflow implementation and optimization
+- Domain and Email Setup: Professional email configuration
+- Cybersecurity: Security audits and data protection
+- MediaWorks: Video editing, brand identity, logo design, pitch decks, corporate films
 
 PRODUCTS (Monthly Subscriptions):
-21 subscription products including LinkedIn Ads, Content Engine, Cold Calling, Meta Ads, CRM Analytics, Content Creation, Thought Leadership, WhatsApp Automation, Social Media Reels, Copywriting, Funnel Tracking, Cybersecurity Monitoring, and more.`;
+- LinkedIn Advertising Management
+- LinkedIn Content Engine (20 posts per month)
+- AI Lead Generation and Management
+- CRM Analytics and Lead Management
+- Meta and Google Ads Management
+- Content Creation (10 assets per month)
+- Cold Calling and Prospect Prioritization
+- Funnel Tracking and CRO
+- WhatsApp Business Automation
+- Social Media Reels Production
+- Cybersecurity Monitoring
+
+UPCOMING:
+Soul - an AI execution engine that goes beyond reasoning to take autonomous action. Currently accepting waitlist signups at propelusai.com/soul.
+
+PRICING APPROACH:
+Pricing depends on project scope, complexity, and requirements. PropelusAI provides custom proposals after an initial discovery call. Subscription products have monthly plans. Direct visitors to /contact for custom pricing.`;
 
 export async function generateChatResponse(
   userMessage: string,
@@ -70,96 +85,136 @@ export async function generateChatResponse(
   userName?: string
 ): Promise<string> {
   if (!model) {
-    return getRuleBasedResponse(userMessage, userName);
+    return getRuleBasedResponse(userMessage, userName, conversationHistory.length);
   }
 
   try {
     const context = conversationHistory
       .slice(-10)
-      .map((m) => `${m.role === 'user' ? 'User' : 'Propel'}: ${m.content}`)
+      .map((m) => `${m.role === 'user' ? 'User' : 'PropelusAI'}: ${m.content}`)
       .join('\n');
 
     const nameContext = userName
-      ? `\n\nIMPORTANT: The visitor's name is "${userName}". Use it naturally in your response.`
+      ? `\nThe visitor's name is "${userName}". Use it naturally but not in every message.`
       : '';
 
-    const prompt = `${SYSTEM_PROMPT}${nameContext}\n\n--- CONVERSATION ---\n${context}\n\nUser: ${userMessage}\n\nPropel:`;
+    const exchangeCount = conversationHistory.filter(m => m.role === 'user').length;
+    const qualifyingHint = exchangeCount >= 3 && exchangeCount <= 5
+      ? '\nThis is a good time to naturally ask for their contact information so the team can prepare a proposal.'
+      : '';
+
+    const prompt = `${SYSTEM_PROMPT}${nameContext}${qualifyingHint}\n\n--- CONVERSATION ---\n${context}\n\nUser: ${userMessage}\n\nPropel:`;
 
     const result = await model.generateContent(prompt);
     const response = result.response.text();
 
     if (!response || response.trim().length === 0) {
-      return getRuleBasedResponse(userMessage, userName);
+      return getRuleBasedResponse(userMessage, userName, conversationHistory.length);
     }
 
     return response.trim();
   } catch (error) {
     console.error('Gemini API error:', error);
-    return getRuleBasedResponse(userMessage, userName);
+    return getRuleBasedResponse(userMessage, userName, conversationHistory.length);
   }
 }
 
-export async function qualifyLead(
+export interface LeadScoreResult {
+  score: number;
+  qualification: 'hot' | 'warm' | 'cold';
+}
+
+export function computeLeadScore(
   conversationHistory: ChatMessage[]
-): Promise<'hot' | 'warm' | 'cold'> {
-  const allMessages = conversationHistory
+): LeadScoreResult {
+  const allUserMessages = conversationHistory
     .filter((m) => m.role === 'user')
     .map((m) => m.content.toLowerCase())
     .join(' ');
 
-  const hotKeywords = [
-    'buy', 'purchase', 'pricing', 'quote', 'budget', 'start now',
-    'ready', 'urgent', 'asap', 'contract', 'sign up', 'onboard', 'proposal',
-  ];
-  const warmKeywords = [
-    'interested', 'learn more', 'demo', 'consultation', 'consider',
-    'compare', 'timeline', 'how much', 'tell me more', 'what do you offer', 'need help',
-  ];
+  let score = 0;
 
-  const hotCount = hotKeywords.filter((k) => allMessages.includes(k)).length;
-  const warmCount = warmKeywords.filter((k) => allMessages.includes(k)).length;
+  // Service interest
+  if (/\b(website|web dev|web build|site|landing page|saas)\b/.test(allUserMessages)) score += 10;
+  if (/\b(mobile app|ios|android|app develop)\b/.test(allUserMessages)) score += 10;
+  if (/\b(crm|customer relationship|lead management|pipeline)\b/.test(allUserMessages)) score += 10;
+  if (/\b(automat|workflow|marketing automation)\b/.test(allUserMessages)) score += 10;
 
-  if (hotCount >= 2 || (hotCount >= 1 && conversationHistory.length > 6)) return 'hot';
-  if (warmCount >= 2 || hotCount >= 1) return 'warm';
-  return 'cold';
+  // Timeline mentioned
+  if (/\b(timeline|deadline|urgent|asap|this month|this quarter|next month|weeks?|months?)\b/.test(allUserMessages)) score += 10;
+
+  // Budget mentioned
+  if (/\b(budget|price|pricing|cost|invest|afford|quote|how much|rate)\b/.test(allUserMessages)) score += 15;
+
+  // Contact info shared
+  if (/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/.test(allUserMessages)) score += 20;
+  if (/(\+?\d{1,3}[-.\s]?\(?\d{1,4}\)?[-.\s]?\d{3,4}[-.\s]?\d{3,4})/.test(allUserMessages)) score += 15;
+
+  // Company name mentioned
+  if (/\b(my company|our company|we are|i work at|i run|our team|our business)\b/.test(allUserMessages)) score += 10;
+
+  // Conversation depth
+  const userMessages = conversationHistory.filter(m => m.role === 'user').length;
+  if (userMessages >= 5) score += 10;
+
+  let qualification: 'hot' | 'warm' | 'cold' = 'cold';
+  if (score >= 50) qualification = 'hot';
+  else if (score >= 20) qualification = 'warm';
+
+  return { score, qualification };
 }
 
-function getRuleBasedResponse(message: string, userName?: string): string {
+// Backward-compatible wrapper
+export async function qualifyLead(
+  conversationHistory: ChatMessage[]
+): Promise<'hot' | 'warm' | 'cold'> {
+  return computeLeadScore(conversationHistory).qualification;
+}
+
+function getRuleBasedResponse(message: string, userName?: string, msgCount = 0): string {
   const lower = message.toLowerCase();
   const n = userName ? `, ${userName}` : '';
 
-  if (/\b(hi|hello|hey|greetings|yo|sup|good morning|good afternoon|good evening)\b/.test(lower)) {
-    return `Hey${n}! Welcome to PropelusAI. I'm Propel, your AI assistant. Whether you need an AI-powered website, CRM automation, or growth marketing - I'm here to help. What are you looking for today?`;
+  if (/\b(hi|hello|hey|greetings|good morning|good afternoon|good evening)\b/.test(lower)) {
+    return `Hey${n}! Welcome to PropelusAI. What kind of project are you exploring right now?`;
   }
-  if (/\b(website|web development|web build|site build)\b/.test(lower)) {
-    return `Great choice${n}! Our AI-Based Website Building and Hosting delivers enterprise-grade websites.\n\n- Investment: $67,600 - $169,000\n- Timeline: 2-4 weeks build + managed hosting\n- Deliverables: Custom AI-powered website, Domain + SSL, Hosting + CDN, Performance optimization, SEO foundation\n\nVisit /contact to get a custom quote!`;
+  if (/\b(website|web development|web build|site build|landing page)\b/.test(lower)) {
+    return `We build AI powered websites with a typical timeline of 2-4 weeks${n}. Are you looking to build something new or redesign an existing site?`;
   }
   if (/\b(mobile app|ios|android|app develop)\b/.test(lower)) {
-    return `Our AI-Based Mobile App Development builds cross-platform apps with embedded intelligence${n}!\n\n- Investment: $101,400 - $253,500\n- Timeline: 8-12 weeks build + 2 weeks store approvals\n- Deliverables: Native app bundle, App store submissions, User documentation, Analytics dashboard\n\nVisit /contact to discuss your app!`;
+    return `We handle full mobile app development for iOS and Android, usually 8-12 weeks${n}. Do you have a specific app concept in mind?`;
   }
   if (/\b(crm|customer relationship|lead management|pipeline)\b/.test(lower)) {
-    return `We have powerful CRM solutions${n}!\n\n- AI-Powered CRM Building: $33,800-$84,500 (one-time)\n- Custom Brand-Tailored CRM: $50,700-$101,400 (one-time)\n- CRM Analytics and Lead Management: Monthly subscription\n\nVisit /contact to discuss your needs!`;
+    return `We build custom CRM systems tailored to your sales process${n}. Are you currently using any CRM, or would this be a fresh start?`;
   }
-  if (/\b(service|build|develop)\b/.test(lower)) {
-    return `We offer 31 one-time services across 5 categories${n}: Web and Mobile, AI Marketing, CRM and Automation, MediaWorks, and Security and Support. Explore at /services or visit /contact!`;
-  }
-  if (/\b(product|subscription|monthly|quarterly)\b/.test(lower)) {
-    return `We offer 21 monthly subscription products${n} including LinkedIn Ads, Content Engine, Cold Calling, Meta Ads, CRM Analytics, and more! Explore at /products!`;
+  if (/\b(saas|software as a service|platform)\b/.test(lower)) {
+    return `We specialize in SaaS development from architecture to launch${n}. What problem would your platform solve?`;
   }
   if (/\b(price|pricing|cost|quote|budget|how much|rate|fee)\b/.test(lower)) {
-    return `Our pricing ranges vary by service${n}. For example:\n\n- Websites: $67,600-$169,000\n- Mobile Apps: $101,400-$253,500\n- CRM: $33,800-$84,500\n\nVisit /contact for a custom proposal tailored to your needs!`;
+    return `Pricing depends on project scope and complexity${n}. If you share a few details about what you need, our team can prepare a custom proposal within 24 hours. Would you like to do that?`;
   }
-  if (/\b(contact|email|phone|call|reach|talk|meet|book|consult|schedule)\b/.test(lower)) {
-    return `Reach us at support@propelusai.com or WhatsApp: +1 6232357330 (US) / +91 9477466514 (India). Visit /contact to book a free consultation${n}!`;
+  if (/\b(service|what do you|what can you|build|develop)\b/.test(lower)) {
+    return `We handle website development, mobile apps, CRM systems, SaaS builds, marketing automation, and AI integration${n}. Which area interests you most?`;
   }
-  if (/\b(about|who|company|team|mission)\b/.test(lower)) {
-    return `PropelusAI is a global AI-first growth company (founded 2023)${n}!\n\n- HQ: Phoenix, Arizona, USA\n- India: Surat and Kolkata\n- 150+ projects, 3.1x pipeline growth, 42% faster sales cycles\n\nLearn more at /about!`;
+  if (/\b(product|subscription|monthly)\b/.test(lower)) {
+    return `We offer monthly subscription products including LinkedIn advertising, content creation, lead generation, and CRM analytics${n}. Which growth area are you focused on?`;
+  }
+  if (/\b(soul|ai engine|execution)\b/.test(lower)) {
+    return `Soul is our upcoming AI execution engine that goes beyond reasoning to take autonomous action for businesses${n}. You can join the waitlist at propelusai.com/soul. Want me to tell you more about it?`;
+  }
+  if (/\b(contact|email|phone|call|reach|talk)\b/.test(lower)) {
+    return `You can reach us at support@propelusai.com or visit propelusai.com/contact for a free consultation${n}. Our team responds within 24 hours.`;
   }
 
-  return `Thanks for your message${n}! I'd love to help you find the perfect AI solution. We offer 31 one-time services and 21 subscription products.\n\nTry asking me about:\n- A specific service (e.g., "website building", "CRM")\n- Pricing, timelines, or deliverables\n\nOr visit /contact to schedule a free consultation!`;
+  if (msgCount >= 4) {
+    return `Thanks for the details${n}. I would love to have our team prepare a custom proposal for you. Could you share your email address so we can send it over?`;
+  }
+
+  return `Thanks for your message${n}. To point you in the right direction, could you tell me what type of project you are looking for? For example, a website, mobile app, CRM, or marketing automation.`;
 }
 
 export const geminiService = {
   generateChatResponse,
   qualifyLead,
+  computeLeadScore,
 };

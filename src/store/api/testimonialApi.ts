@@ -7,6 +7,11 @@ export interface TestimonialFormData {
   testimonial: string;
   mobile_number?: string | null;
   rating?: number;
+  designation?: string | null;
+  company?: string | null;
+  industry?: string | null;
+  city?: string | null;
+  image_url?: string | null;
 }
 
 export interface Testimonial {
@@ -16,6 +21,11 @@ export interface Testimonial {
   testimonial: string;
   mobile_number?: string;
   rating?: number;
+  designation?: string | null;
+  company?: string | null;
+  industry?: string | null;
+  city?: string | null;
+  imageUrl?: string | null;
   status: 'pending' | 'approved' | 'rejected';
   createdAt: string;
 }
