@@ -19,7 +19,7 @@ jobs:
           script: |
             cd /var/www/propelusai-website
             git pull origin main
-            npm install --production
+            npm install
             npm run build
             pm2 restart propelusai-website
             echo "Deployment completed at $(date)"
