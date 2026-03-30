@@ -16,7 +16,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const product = getProductBySlug(slug);
   if (!product) return {};
 
-  const title = `${product.title} | AI Subscription Products | PropelusAI`;
+  const title = `${product.title} | AI Subscription Products`;
   const description = product.subtitle;
 
   return {
@@ -24,10 +24,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     description,
     alternates: { canonical: `https://www.propelusai.com/products/${slug}` },
     openGraph: {
-      title,
+      title: `${product.title} | AI Subscription Products | PropelusAI`,
       description,
       type: 'website',
       url: `https://www.propelusai.com/products/${slug}`,
+      images: [{ url: 'https://www.propelusai.com/propelus-favicon-1200.png', width: 1200, height: 630, alt: product.title }],
     },
   };
 }
@@ -48,6 +49,12 @@ export default async function ProductDetailPage({ params }: Props) {
     brand: { '@type': 'Organization', name: 'PropelusAI' },
     url: `https://www.propelusai.com/products/${slug}`,
     category: 'AI Subscription Products',
+    image: {
+      '@type': 'ImageObject',
+      url: 'https://www.propelusai.com/propelus-favicon-1200.png',
+      width: 1200,
+      height: 630,
+    },
     offers: {
       '@type': 'Offer',
       availability: 'https://schema.org/InStock',

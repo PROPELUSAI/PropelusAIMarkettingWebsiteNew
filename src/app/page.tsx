@@ -14,6 +14,7 @@ export const metadata: Metadata = {
       'We build premium AI driven websites, CRM systems, and subscription based growth engines with enterprise level precision.',
     url: 'https://www.propelusai.com',
     type: 'website',
+    images: [{ url: 'https://www.propelusai.com/propelus-favicon-1200.png', width: 1200, height: 630, alt: 'PropelusAI - AI Powered Growth' }],
   },
 };
 

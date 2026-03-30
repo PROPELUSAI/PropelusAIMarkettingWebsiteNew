@@ -2,13 +2,16 @@ import type { Metadata } from 'next';
 import AboutClient from './AboutClient';
 
 export const metadata: Metadata = {
-  title: 'About Us | AI Company in Phoenix & India',
+  title: 'About PropelusAI | AI Services Company in Phoenix & India',
   description:
     'PropelusAI specializes in AI automation, website development, SaaS development, CRM development, and custom software. Global team in Phoenix, Arizona and India.',
   openGraph: {
     title: 'About PropelusAI',
     description:
       'Global AI company specializing in website development, CRM systems, SaaS, and AI automation for modern businesses.',
+    url: 'https://www.propelusai.com/about',
+    type: 'website',
+    images: [{ url: 'https://www.propelusai.com/propelus-favicon-1200.png', width: 1200, height: 630, alt: 'About PropelusAI' }],
   },
   alternates: { canonical: 'https://www.propelusai.com/about' },
 };

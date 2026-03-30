@@ -178,13 +178,9 @@ export default function TestimonialsClient() {
                   <AnimatedSection key={i} delay={Math.min(i * 0.05, 0.3)}>
                     <div className="card h-full !p-5">
                       <div className="flex items-center gap-3 mb-3">
-                        {t.imageUrl ? (
-                          <img src={t.imageUrl} alt={t.name} className="w-10 h-10 rounded-full object-cover shrink-0" />
-                        ) : (
-                          <div className={`w-10 h-10 rounded-full flex items-center justify-center text-xs font-semibold shrink-0 ${avatarColors[i % avatarColors.length]}`}>
-                            {getInitials(t.name)}
-                          </div>
-                        )}
+                        <div className={`w-10 h-10 rounded-full flex items-center justify-center text-xs font-semibold shrink-0 ${avatarColors[i % avatarColors.length]}`}>
+                          {getInitials(t.name)}
+                        </div>
                         <div className="min-w-0 flex-1">
                           <div className="flex items-center justify-between gap-2">
                             <p className="text-sm font-medium text-surface-800 truncate">{t.name}</p>

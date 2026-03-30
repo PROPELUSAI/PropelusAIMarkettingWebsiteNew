@@ -3,13 +3,16 @@ import ServicesClient from './ServicesClient';
 import { allServiceDetails } from '@/lib/serviceDetails';
 
 export const metadata: Metadata = {
-  title: 'AI Services | Web, CRM, SaaS & Automation',
+  title: 'AI Services | Web, CRM, SaaS & Marketing Automation',
   description:
     'One-time AI services: website development, SaaS, CRM, mobile apps, cybersecurity, and marketing automation. Starting from $2,500.',
   openGraph: {
     title: 'PropelusAI AI Services',
     description:
       'One-time AI services: website development, SaaS, CRM, mobile apps, cybersecurity, and marketing automation.',
+    url: 'https://www.propelusai.com/services',
+    type: 'website',
+    images: [{ url: 'https://www.propelusai.com/propelus-favicon-1200.png', width: 1200, height: 630, alt: 'PropelusAI AI Services' }],
   },
   alternates: { canonical: 'https://www.propelusai.com/services' },
 };

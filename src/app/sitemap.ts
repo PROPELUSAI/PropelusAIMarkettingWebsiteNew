@@ -11,7 +11,7 @@ interface ApiBlog {
 async function fetchBlogEntries(): Promise<Array<{ slug: string; lastmod: string }>> {
   try {
     const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
-    const res = await fetch(`${siteUrl}/api/v1/blogs?limit=100`, { next: { revalidate: 300 } });
+    const res = await fetch(`${siteUrl}/api/v1/blogs?limit=10000`, { next: { revalidate: 300 } });
     if (!res.ok) throw new Error('API unavailable');
     const json = await res.json();
     const blogs: ApiBlog[] = json.data?.blogs ?? json.data ?? [];

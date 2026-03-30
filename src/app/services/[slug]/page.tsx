@@ -16,7 +16,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const service = getServiceBySlug(slug);
   if (!service) return {};
 
-  const title = `${service.title} | Professional ${service.categoryTitle} | PropelusAI`;
+  const title = `${service.title} | ${service.categoryTitle}`;
   const description = service.summary;
 
   return {
@@ -24,10 +24,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     description,
     alternates: { canonical: `https://www.propelusai.com/services/${slug}` },
     openGraph: {
-      title,
+      title: `${service.title} | ${service.categoryTitle} | PropelusAI`,
       description,
       type: 'website',
       url: `https://www.propelusai.com/services/${slug}`,
+      images: [{ url: 'https://www.propelusai.com/propelus-favicon-1200.png', width: 1200, height: 630, alt: service.title }],
     },
   };
 }
