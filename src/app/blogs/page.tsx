@@ -14,7 +14,7 @@ import BlogSubscribe from '@/components/BlogSubscribe';
 import { seedBlogPosts } from '@/lib/blogSeedData';
 
 export const metadata: Metadata = {
-  title: 'Blogs & Insights | AI Growth Strategies | PropelusAI',
+  title: 'Blogs & Insights | AI Growth Strategies',
   description:
     'AI Driven Perspectives on Growth, Automation, SaaS, and Modern IT Systems. Learn how to scale your business with intelligent automation.',
   openGraph: {

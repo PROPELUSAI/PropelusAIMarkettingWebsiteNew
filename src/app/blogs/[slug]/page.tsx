@@ -103,7 +103,9 @@ export default async function BlogDetailPage({ params }: Props) {
       '@type': 'WebPage',
       '@id': `https://www.propelusai.com/blogs/${blog.slug}`,
     },
-    ...(blog.featured_image ? { image: { '@type': 'ImageObject', url: blog.featured_image } } : {}),
+    image: blog.featured_image
+      ? { '@type': 'ImageObject', url: blog.featured_image }
+      : { '@type': 'ImageObject', url: 'https://www.propelusai.com/propelus-favicon-1200.png', width: 1200, height: 630 },
     ...(blog.category ? { articleSection: blog.category } : {}),
     ...(blog.tags?.length ? { keywords: blog.tags.join(', ') } : {}),
   };

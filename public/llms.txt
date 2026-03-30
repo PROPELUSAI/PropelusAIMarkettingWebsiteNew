@@ -2,12 +2,22 @@
 
 > PropelusAI is a global AI company that builds websites, CRM systems, SaaS platforms, mobile apps, and subscription based AI products for businesses worldwide.
 
+Updated: 2026-03-28
+
 ## Company Information
 
 - Website: https://www.propelusai.com
 - Email: support@propelusai.com
+- Phone: +1-623-235-7330
 - Founded: 2024
 - Headquarters: Phoenix, Arizona, USA
+- Technology Stack: Next.js, React, TypeScript, Node.js, Python, MongoDB, PostgreSQL, AWS, Vercel
+
+## Pricing
+
+- AI Services (one-time projects): Starting from $2,500
+- AI Subscription Products: Starting from $149/month
+- Custom enterprise solutions: Contact for pricing
 - Engineering Offices: Surat, Gujarat, India and Kolkata, West Bengal, India
 - US Entity: BETH and friends LLC
 - India Entity: RBSS Ventures (Propelus by RBSS), GSTIN: 19ABMFR6144D1ZZ

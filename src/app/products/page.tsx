@@ -3,13 +3,16 @@ import ProductsClient from './ProductsClient';
 import { allProductDetails } from '@/lib/productDetails';
 
 export const metadata: Metadata = {
-  title: 'AI Products | Monthly Subscriptions',
+  title: 'AI Products | Monthly AI Subscriptions for Growth',
   description:
     '21 AI subscription products: LinkedIn ads, content engines, CRM analytics, lead generation, and marketing automation. From $149/month.',
   openGraph: {
     title: 'PropelusAI AI Products',
     description:
       'Monthly AI subscription products: LinkedIn ads, content engines, CRM, lead generation, and marketing automation.',
+    url: 'https://www.propelusai.com/products',
+    type: 'website',
+    images: [{ url: 'https://www.propelusai.com/propelus-favicon-1200.png', width: 1200, height: 630, alt: 'PropelusAI AI Products' }],
   },
   alternates: { canonical: 'https://www.propelusai.com/products' },
 };

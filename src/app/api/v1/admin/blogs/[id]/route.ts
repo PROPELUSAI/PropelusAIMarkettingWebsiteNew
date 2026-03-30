@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { connectDB } from '@/lib/mongodb';
 import { Blog } from '@/models/Blog';
 import { withAuth, type JwtPayload } from '@/lib/auth';
+import { submitToIndexNow } from '@/lib/indexnow';
 
 export const GET = withAuth(
   async (_request: NextRequest, _user: JwtPayload, context?: { params: Record<string, string> }) => {
@@ -37,6 +38,11 @@ export const PUT = withAuth(
       if (!updated) {
         return NextResponse.json({ success: false, message: 'Blog not found' }, { status: 404 });
       }
+      // Notify search engines when published blog is updated
+      if (updated.status === 'published' && updated.slug) {
+        submitToIndexNow(`/blogs/${updated.slug}`).catch(() => {});
+      }
+
       return NextResponse.json({ success: true, data: updated, message: 'Blog updated' });
     } catch (error) {
       console.error('Update blog error:', error);

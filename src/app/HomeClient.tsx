@@ -49,7 +49,7 @@ function Hero() {
             </span>
           </div>
 
-          <h1 className="text-white mb-5 leading-[1.1] animate-[fadeInUp_0.6s_ease-out_0.15s_both]">
+          <h1 className="text-white mb-5 leading-[1.1] animate-[fadeInUp_0.6s_ease-out_both]">
             AI Powered Growth for Modern Businesses
           </h1>
 
@@ -294,15 +294,11 @@ function TestimonialHighlight() {
             transition={{ duration: 0.5, ease: 'easeInOut' }}
             className="max-w-2xl mx-auto"
           >
-            {/* Avatar + Info */}
+            {/* Avatar + Info — using initials for authenticity */}
             <div className="flex items-center justify-center gap-3 mb-5">
-              {t.imageUrl ? (
-                <img src={t.imageUrl} alt={t.name} className="w-14 h-14 rounded-full object-cover border border-brand-500/30" />
-              ) : (
-                <div className="w-14 h-14 rounded-full bg-brand-500/20 border border-brand-500/30 flex items-center justify-center text-base font-semibold text-brand-400">
-                  {initials}
-                </div>
-              )}
+              <div className="w-14 h-14 rounded-full bg-brand-500/20 border border-brand-500/30 flex items-center justify-center text-base font-semibold text-brand-400">
+                {initials}
+              </div>
               <div className="text-left">
                 <p className="text-sm font-medium text-white/90">{t.name}</p>
                 <p className="text-xs text-white/60">{[t.designation, t.company].filter(Boolean).join(', ')}</p>
@@ -326,6 +322,17 @@ export default function HomeClient() {
     <>
       <Hero />
       <StatsBar />
+
+      {/* What is PropelusAI? — server-visible answer block for AI citation */}
+      <section className="section-light py-16 border-b border-surface-100">
+        <div className="container-main max-w-3xl mx-auto text-center">
+          <h2 className="text-heading-2 font-semibold mb-6 text-surface-900">What does PropelusAI do?</h2>
+          <p className="text-body-lg text-surface-600 leading-relaxed">
+            PropelusAI is a global AI services and products company that builds enterprise-grade websites, CRM systems, SaaS platforms, and mobile applications for businesses worldwide. Founded in 2024 and operating from Phoenix, Arizona and India, PropelusAI combines AI native engineering with full funnel marketing to deliver measurable growth. The company offers 31 one-time project services starting from $2,500 and 21 monthly subscription products starting from $149 per month. Key specializations include AI powered website development, custom CRM building and integration, LinkedIn advertising and lead generation, marketing automation, and cybersecurity. PropelusAI has delivered over 150 projects across 12 industries, achieving an average 3.1x pipeline growth and 42 percent faster sales cycles for B2B clients.
+          </p>
+        </div>
+      </section>
+
       <Marquee />
       <Pathways />
       <Features />

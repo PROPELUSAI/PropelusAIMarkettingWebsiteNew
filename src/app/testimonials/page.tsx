@@ -3,13 +3,16 @@ import TestimonialsClient from './TestimonialsClient';
 import { testimonials } from '@/lib/data';
 
 export const metadata: Metadata = {
-  title: 'Client Testimonials & Results',
+  title: 'Client Testimonials & AI Project Results | PropelusAI',
   description:
     'Client testimonials from website development, CRM, AI automation, and marketing projects. Real outcomes with measurable results.',
   openGraph: {
     title: 'PropelusAI Client Testimonials',
     description:
       'Real feedback from global businesses powered by AI transformation.',
+    url: 'https://www.propelusai.com/testimonials',
+    type: 'website',
+    images: [{ url: 'https://www.propelusai.com/propelus-favicon-1200.png', width: 1200, height: 630, alt: 'PropelusAI Client Testimonials' }],
   },
   alternates: { canonical: 'https://www.propelusai.com/testimonials' },
 };

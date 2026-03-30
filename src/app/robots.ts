@@ -59,6 +59,12 @@ export default function robots(): MetadataRoute.Robots {
         allow: '/',
         disallow: ['/api/', '/admin/', '/@propelusaiadminpanel279', '/propelusaiadmin279'],
       },
+      // Allow OpenAI dedicated search crawler
+      {
+        userAgent: 'OAI-SearchBot',
+        allow: '/',
+        disallow: ['/api/', '/admin/', '/@propelusaiadminpanel279', '/propelusaiadmin279'],
+      },
       // Block training-only scrapers
       {
         userAgent: 'CCBot',
@@ -66,6 +72,14 @@ export default function robots(): MetadataRoute.Robots {
       },
       {
         userAgent: 'Bytespider',
+        disallow: '/',
+      },
+      {
+        userAgent: 'anthropic-ai',
+        disallow: '/',
+      },
+      {
+        userAgent: 'cohere-ai',
         disallow: '/',
       },
     ],

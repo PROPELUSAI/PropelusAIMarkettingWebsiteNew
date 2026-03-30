@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { connectDB } from '@/lib/mongodb';
 import { Blog } from '@/models/Blog';
 import { withAuth } from '@/lib/auth';
+import { submitToIndexNow } from '@/lib/indexnow';
 
 export const GET = withAuth(async (request: NextRequest) => {
   try {
@@ -79,6 +80,11 @@ export const POST = withAuth(async (request: NextRequest) => {
       author: body.author || 'PropelusAI Team',
       read_time: body.read_time || 0,
     });
+
+    // Notify search engines via IndexNow when blog is published
+    if (blog.status === 'published' && blog.slug) {
+      submitToIndexNow(`/blogs/${blog.slug}`).catch(() => {});
+    }
 
     return NextResponse.json({ success: true, data: blog, message: 'Blog created' }, { status: 201 });
   } catch (error) {

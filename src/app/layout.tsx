@@ -45,6 +45,7 @@ const organizationSchema = {
   '@id': 'https://www.propelusai.com/#organization',
   foundingDate: '2024-01-01',
   email: 'support@propelusai.com',
+  telephone: '+1-623-235-7330',
   sameAs: [
     'https://www.linkedin.com/company/propelusai',
     'https://twitter.com/propelusai',
@@ -52,21 +53,27 @@ const organizationSchema = {
   address: [
     {
       '@type': 'PostalAddress',
+      streetAddress: 'West Hide Trail',
       addressLocality: 'Phoenix',
       addressRegion: 'Arizona',
-      addressCountry: 'US',
+      postalCode: '85085',
+      addressCountry: { '@type': 'Country', name: 'US' },
     },
     {
       '@type': 'PostalAddress',
+      streetAddress: 'Surat',
       addressLocality: 'Surat',
       addressRegion: 'Gujarat',
-      addressCountry: 'IN',
+      postalCode: '395007',
+      addressCountry: { '@type': 'Country', name: 'IN' },
     },
     {
       '@type': 'PostalAddress',
+      streetAddress: 'Kolkata',
       addressLocality: 'Kolkata',
       addressRegion: 'West Bengal',
-      addressCountry: 'IN',
+      postalCode: '700001',
+      addressCountry: { '@type': 'Country', name: 'IN' },
     },
   ],
   contactPoint: [
@@ -99,14 +106,7 @@ const websiteSchema = {
   description: 'AI powered growth systems designed for global teams',
   inLanguage: 'en-US',
   publisher: {
-    '@type': 'Organization',
-    name: 'PropelusAI',
-    logo: {
-      '@type': 'ImageObject',
-      url: 'https://www.propelusai.com/propelus-favicon-512.png',
-      width: 512,
-      height: 512,
-    },
+    '@id': 'https://www.propelusai.com/#organization',
   },
   potentialAction: {
     '@type': 'SearchAction',
@@ -169,6 +169,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
+    site: '@propelusai',
     title: 'PropelusAI - Premium AI Services & Products',
     description: 'AI powered growth systems designed for global teams.',
     images: ['/propelus-favicon-1200.png'],
@@ -205,6 +206,22 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 })(window,document,'script','dataLayer','${process.env.NEXT_PUBLIC_GTM_ID}');`}
         </Script>
 
+        {/* Google Analytics 4 (gtag.js) */}
+        {process.env.NEXT_PUBLIC_GA4_ID && (
+          <>
+            <Script
+              src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA4_ID}`}
+              strategy="afterInteractive"
+            />
+            <Script id="ga4-script" strategy="afterInteractive">
+              {`window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', '${process.env.NEXT_PUBLIC_GA4_ID}');`}
+            </Script>
+          </>
+        )}
+
         {/* Meta Pixel Code */}
         <Script id="meta-pixel" strategy="afterInteractive">
           {`!function(f,b,e,v,n,t,s)
@@ -223,6 +240,9 @@ fbq('track', 'PageView');`}
         <Script id="zoho-pagesense" strategy="lazyOnload">
           {`(function(w,s){var e=document.createElement("script");e.type="text/javascript";e.async=true;e.src="https://cdn-in.pagesense.io/js/60065896954/f226d04c18114c509d24d2b42411990d.js";var x=document.getElementsByTagName("script")[0];x.parentNode.insertBefore(e,x);})(window,"script");`}
         </Script>
+
+        {/* Preload hero poster for LCP performance */}
+        <link rel="preload" as="image" href="/hero-poster.webp" type="image/webp" />
 
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />

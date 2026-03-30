@@ -258,7 +258,7 @@ export default function ContactClient() {
                       <textarea placeholder="Tell us about your project, goals, or any questions..." rows={5} value={formData.description} onChange={(e) => update('description', e.target.value)} className="form-input resize-none" disabled={isLoading} />
                     </FormField>
 
-                    {/* <p className="text-xs text-surface-400">By submitting, you agree to our privacy policy.</p> */}
+                    <p className="text-xs text-surface-400">By submitting, you agree to our <a href="/privacy" className="text-brand-500 hover:underline">privacy policy</a>. No spam, ever.</p>
                     <button type="submit" className="btn-primary w-full sm:w-auto justify-center" disabled={isLoading}>
                       {isLoading ? (
                         <>

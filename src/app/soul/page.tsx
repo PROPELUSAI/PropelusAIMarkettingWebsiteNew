@@ -2,9 +2,9 @@ import type { Metadata } from 'next';
 import SoulClient from './SoulClient';
 
 export const metadata: Metadata = {
-  title: 'Soul by PropelusAI | AI Execution Engine for Sales, Marketing & Operations',
+  title: 'Soul | AI Execution Engine for Business Operations',
   description:
-    'Soul is an autonomous AI execution engine that researches your market, qualifies leads, runs campaigns, and orchestrates workflows across your entire business stack. Not a chatbot. Not a copilot. An execution engine.',
+    'Soul by PropelusAI is an autonomous AI execution engine that researches markets, qualifies leads, runs campaigns, and orchestrates workflows. Not a chatbot. An execution engine.',
   keywords: [
     'AI execution engine',
     'autonomous AI for business',
@@ -16,11 +16,12 @@ export const metadata: Metadata = {
     'autonomous AI agent',
   ],
   openGraph: {
-    title: 'Soul by PropelusAI | AI Execution Engine for Sales, Marketing & Operations',
+    title: 'Soul | AI Execution Engine for Business Operations',
     description:
-      'Soul is an autonomous AI execution engine that researches your market, qualifies leads, runs campaigns, and orchestrates workflows across your entire business stack.',
+      'Soul by PropelusAI is an autonomous AI execution engine that researches markets, qualifies leads, runs campaigns, and orchestrates workflows.',
     url: 'https://www.propelusai.com/soul',
     type: 'website',
+    images: [{ url: 'https://www.propelusai.com/propelus-favicon-1200.png', width: 1200, height: 630, alt: 'Soul by PropelusAI' }],
   },
   robots: { index: true, follow: true },
   alternates: { canonical: 'https://www.propelusai.com/soul' },
