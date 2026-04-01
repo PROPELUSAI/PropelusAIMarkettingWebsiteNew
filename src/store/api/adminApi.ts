@@ -84,6 +84,14 @@ export interface AdminTestimonial {
   createdAt: string;
 }
 
+export interface AdminAffiliateNote {
+  _id: string;
+  text: string;
+  createdBy: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
 export interface AdminAffiliate {
   _id: string;
   fullName: string;
@@ -92,6 +100,7 @@ export interface AdminAffiliate {
   description: string;
   affiliateCode: string;
   status: string;
+  adminNotes: AdminAffiliateNote[];
   createdAt: string;
   updatedAt: string;
 }
@@ -270,6 +279,30 @@ const adminApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ['Affiliate'],
     }),
+    addAffiliateNote: builder.mutation<ApiResponse, { id: string; text: string }>({
+      query: ({ id, text }) => ({
+        url: `/admin/affiliates/${id}`,
+        method: 'PATCH',
+        body: { action: 'add_note', text },
+      }),
+      invalidatesTags: ['Affiliate'],
+    }),
+    updateAffiliateNote: builder.mutation<ApiResponse, { id: string; noteId: string; text: string }>({
+      query: ({ id, noteId, text }) => ({
+        url: `/admin/affiliates/${id}`,
+        method: 'PATCH',
+        body: { action: 'update_note', noteId, text },
+      }),
+      invalidatesTags: ['Affiliate'],
+    }),
+    deleteAffiliateNote: builder.mutation<ApiResponse, { id: string; noteId: string }>({
+      query: ({ id, noteId }) => ({
+        url: `/admin/affiliates/${id}`,
+        method: 'PATCH',
+        body: { action: 'delete_note', noteId },
+      }),
+      invalidatesTags: ['Affiliate'],
+    }),
 
     // Newsletter
     getSubscribers: builder.query<ApiResponse<AdminSubscriber[]>, void>({
@@ -325,6 +358,9 @@ export const {
   useGetAffiliatesQuery,
   useUpdateAffiliateStatusMutation,
   useDeleteAffiliateMutation,
+  useAddAffiliateNoteMutation,
+  useUpdateAffiliateNoteMutation,
+  useDeleteAffiliateNoteMutation,
   useGetSubscribersQuery,
   useGetCampaignsQuery,
   useCreateCampaignMutation,

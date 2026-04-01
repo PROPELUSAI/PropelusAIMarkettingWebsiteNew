@@ -27,9 +27,55 @@ export const PATCH = withAuth(
       const id = context?.params?.id;
       const body = await request.json();
 
+      // Migrate legacy null adminNotes to empty array
+      await AffiliateRegistration.updateOne(
+        { _id: id, adminNotes: null },
+        { $set: { adminNotes: [] } }
+      );
+
+      // Note operations
+      if (body.action === 'add_note') {
+        if (!body.text?.trim()) {
+          return NextResponse.json({ success: false, message: 'Note text is required' }, { status: 400 });
+        }
+        const updated = await AffiliateRegistration.findByIdAndUpdate(
+          id,
+          { $push: { adminNotes: { text: body.text.trim(), createdBy: user.email, createdAt: new Date(), updatedAt: new Date() } } },
+          { new: true }
+        ).lean();
+        if (!updated) return NextResponse.json({ success: false, message: 'Affiliate not found' }, { status: 404 });
+        return NextResponse.json({ success: true, data: updated, message: 'Note added' });
+      }
+
+      if (body.action === 'update_note') {
+        if (!body.noteId || !body.text?.trim()) {
+          return NextResponse.json({ success: false, message: 'Note ID and text are required' }, { status: 400 });
+        }
+        const updated = await AffiliateRegistration.findOneAndUpdate(
+          { _id: id, 'adminNotes._id': body.noteId },
+          { $set: { 'adminNotes.$.text': body.text.trim(), 'adminNotes.$.updatedAt': new Date() } },
+          { new: true }
+        ).lean();
+        if (!updated) return NextResponse.json({ success: false, message: 'Affiliate or note not found' }, { status: 404 });
+        return NextResponse.json({ success: true, data: updated, message: 'Note updated' });
+      }
+
+      if (body.action === 'delete_note') {
+        if (!body.noteId) {
+          return NextResponse.json({ success: false, message: 'Note ID is required' }, { status: 400 });
+        }
+        const updated = await AffiliateRegistration.findByIdAndUpdate(
+          id,
+          { $pull: { adminNotes: { _id: body.noteId } } },
+          { new: true }
+        ).lean();
+        if (!updated) return NextResponse.json({ success: false, message: 'Affiliate not found' }, { status: 404 });
+        return NextResponse.json({ success: true, data: updated, message: 'Note deleted' });
+      }
+
+      // Status/general update
       const updateData: Record<string, unknown> = {};
       if (body.status) updateData.status = body.status;
-      if (body.admin_notes !== undefined) updateData.adminNotes = body.admin_notes;
       if (body.commission_rate !== undefined) updateData.commissionRate = body.commission_rate;
       updateData.reviewedAt = new Date();
       updateData.reviewedBy = user.email;
